@@ -5,7 +5,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-// import { Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import {
   Container,
@@ -36,6 +36,11 @@ class VenueScreen extends Component {
             <Title>{venueDetails.name || "unknown"}</Title>
           </Body>
         </Header>
+
+        <Content>
+          <Text>{venueDetails.name}</Text>
+          <Text>{venueDetails.address.address}</Text>
+        </Content>
       </Container>
     );
   }
