@@ -56,8 +56,12 @@ class VenuesScreen extends Component {
                 </View>
                 <View style={{ flex: 11 }}>
                   <Text style={{ fontSize: 18 }}>{item.name}</Text>
-                  <Text numberOfLines={2} note style={{fontSize: 14, color: "darkgrey"}}>
-                    {item.address.addressLine}
+                  <Text
+                    numberOfLines={2}
+                    note
+                    style={{ fontSize: 14, color: "darkgrey" }}
+                  >
+                    {item.styles.join(", ")}
                   </Text>
                 </View>
                 <View style={{ flex: 1 }}>

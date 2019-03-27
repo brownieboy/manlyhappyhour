@@ -28,6 +28,8 @@ class VenueScreen extends Component {
   render() {
     const { navigation, venueDetails } = this.props;
     const { id, parentList } = navigation.state.params;
+    const imageWidth = Dimensions.get("window").width;
+    const imageHeight = imageWidth / 1.6;
     return (
       <Container>
         <Header>
@@ -45,12 +47,14 @@ class VenueScreen extends Component {
         <Content>
           <FastImage
             style={{
-              width: Dimensions.get("window").width,
-              height: 200
+              width: imageWidth,
+              height: imageHeight
               // flex: 1
             }}
             source={{ uri: venueDetails.cardFullUrl }}
           />
+        </Content>
+        <Content padder style={{marginTop: 5}}>
           <Text>{venueDetails.name}</Text>
           <Text>{venueDetails.address.fullAddressLine}</Text>
         </Content>
