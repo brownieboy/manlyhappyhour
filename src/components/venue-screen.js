@@ -5,9 +5,11 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Text, View } from "react-native";
+import { Dimensions, Text, View } from "react-native";
+import FastImage from "react-native-fast-image";
 
 import {
+  CardItem,
   Container,
   Icon,
   Header,
@@ -29,17 +31,28 @@ class VenueScreen extends Component {
     return (
       <Container>
         <Header>
-          <Left>
+          <Left style={{ flex: 2 }}>
             <HeaderBackArrow navCallback={navigation.goBack} />
           </Left>
-          <Body>
-            <Title>{venueDetails.name || "unknown"}</Title>
-          </Body>
+          <Right style={{ flex: 11 }}>
+            <Title>
+              {`${venueDetails.name}, ${venueDetails.address.town}` ||
+                "unknown"}
+            </Title>
+          </Right>
         </Header>
 
         <Content>
+          <FastImage
+            style={{
+              width: Dimensions.get("window").width,
+              height: 200
+              // flex: 1
+            }}
+            source={{ uri: venueDetails.cardFullUrl }}
+          />
           <Text>{venueDetails.name}</Text>
-          <Text>{venueDetails.address.address}</Text>
+          <Text>{venueDetails.address.fullAddressLine}</Text>
         </Content>
       </Container>
     );

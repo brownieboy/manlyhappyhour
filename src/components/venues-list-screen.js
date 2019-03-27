@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import FastImage from "react-native-fast-image";
 
 import { FlatList, Text, View } from "react-native";
 
@@ -47,8 +48,17 @@ class VenuesScreen extends Component {
                   })
                 }
               >
+                <View style={{ flex: 3 }}>
+                  <FastImage
+                    source={{ uri: item.thumbFullUrl }}
+                    style={{ width: 55, height: 55, borderRadius: 27.5 }}
+                  />
+                </View>
                 <View style={{ flex: 11 }}>
-                  <Text>{item.name}</Text>
+                  <Text style={{ fontSize: 18 }}>{item.name}</Text>
+                  <Text numberOfLines={2} note style={{fontSize: 14, color: "darkgrey"}}>
+                    {item.address.addressLine}
+                  </Text>
                 </View>
                 <View style={{ flex: 1 }}>
                   <Icon

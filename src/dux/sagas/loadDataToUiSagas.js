@@ -1,5 +1,6 @@
 import { all, fork, put, take, takeLatest } from "redux-saga/effects";
-import { AsyncStorage } from "react-native";
+// import { AsyncStorage } from "react-native";
+import FastImage from "react-native-fast-image";
 
 // import preloadRNICimages from "../../helper-functions/preload-rnic-images.js";
 
@@ -9,6 +10,14 @@ import {
   setFetchVenuesFailed,
   setFetchVenuesRequest
 } from "../venuesReducer.js";
+
+const preloadImages = imageUrlsArray => {
+  const uriObjArray = imageUrlsArray.map(url => ({ uri: url }));
+  // console.log("uriObjArray");
+  // console.log(uriObjArray);
+  FastImage.preload(uriObjArray);
+};
+
 
 // Worker Saga: will be fired on LOAD_BANDS_NOW actions, and gets all
 // data, not just bands
@@ -43,20 +52,22 @@ function* loadDataGen() {
       // down from Firebase
       // console.log("imageUrls");
       // console.log(JSON.stringify(imageUrls, null, 2));
-      const venuesArray = dataNormalised.venuesArray;
+      const venuesArray = dataNormalised.publishedData.venuesArray;
+      const imageUrls = dataNormalised.publishedData.imageUrls;
+
       // yield console.log("loadBandsGen, about to yield all with loaded data");
       yield all([put(setFetchVenuesSucceeded(venuesArray))]);
       // yield console.log("loadBandsGen, finished yield all with loaded data");
 
       // console.log("Have restored preloadImage here");
       // preloadImages([...bandsArray, ...stagesArray]);
-      // yield preloadRNICimages(imageUrls);
+      yield preloadImages(imageUrls);
       // yield;
     } else {
       console.log("Local storage returned null");
     }
   } catch (e) {
-    console.log("loadBandsGen error=" + e);
+    console.log("loadDataGen error=" + e);
     yield all([put(setFetchVenuesFailed(e))]);
   }
 }
