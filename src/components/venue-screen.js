@@ -23,6 +23,7 @@ import {
 } from "native-base";
 // import { Button } from "native-base";
 import HeaderBackArrow from "./header-back-arrow.js";
+import appColours from "../styles/appColours.js";
 
 class VenueScreen extends Component {
   render() {
@@ -32,12 +33,21 @@ class VenueScreen extends Component {
     const imageHeight = imageWidth / 1.6;
     return (
       <Container>
-        <Header>
+        <Header
+          style={{
+            backgroundColor: appColours.panelBackgroundColor,
+            color: appColours.panelTextColor
+          }}
+        >
           <Left style={{ flex: 2 }}>
             <HeaderBackArrow navCallback={navigation.goBack} />
           </Left>
           <Right style={{ flex: 11 }}>
-            <Title>
+            <Title
+              style={{
+                color: appColours.panelTextColor
+              }}
+            >
               {`${venueDetails.name}, ${venueDetails.address.town}` ||
                 "unknown"}
             </Title>
@@ -53,10 +63,9 @@ class VenueScreen extends Component {
             }}
             source={{ uri: venueDetails.cardFullUrl }}
           />
-        </Content>
-        <Content padder style={{marginTop: 5}}>
-          <Text>{venueDetails.name}</Text>
-          <Text>{venueDetails.address.fullAddressLine}</Text>
+          <CardItem>
+            <Text>{venueDetails.address.fullAddressLine}</Text>
+          </CardItem>
         </Content>
       </Container>
     );

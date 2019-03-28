@@ -17,6 +17,8 @@ import {
   // Thumbnail
 } from "native-base";
 
+import appColours from "../styles/appColours.js";
+
 class VenuesScreen extends Component {
   componentDidMount() {
     const { loadVenuesNow, venuesList } = this.props;
@@ -27,10 +29,21 @@ class VenuesScreen extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header
+          style={{
+            backgroundColor: appColours.panelBackgroundColor,
+            color: appColours.panelTextColor
+          }}
+        >
           <Left />
           <Body>
-            <Title>Venues</Title>
+            <Title
+              style={{
+                color: appColours.panelTextColor
+              }}
+            >
+              Venues
+            </Title>
           </Body>
           <Right />
         </Header>

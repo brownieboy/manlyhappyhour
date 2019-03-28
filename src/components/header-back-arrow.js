@@ -3,11 +3,17 @@ import PropTypes from "prop-types";
 import { Platform, Text } from "react-native";
 import { Button, Icon } from "native-base";
 
-const backButtonTextStyle = { fontSize: 13, marginLeft: 5 };
-if (Platform.OS === "android") {
-  backButtonTextStyle.color = "white";
-  backButtonTextStyle.fontSize = 12;
-}
+import appColours from "../styles/appColours.js";
+
+const backButtonTextStyle = {
+  fontSize: 13,
+  marginLeft: 5,
+  color: appColours.panelTextColour
+};
+// if (Platform.OS === "android") {
+//   backButtonTextStyle.color = "white";
+//   backButtonTextStyle.fontSize = 12;
+// }
 
 const HeaderBackArrow = ({
   navCallback,
@@ -27,7 +33,7 @@ const HeaderBackArrow = ({
   }
   return (
     <Button transparent onPress={() => navCallback()}>
-      <Icon name="arrow-back" />
+      <Icon name="arrow-back" style={{ color: appColours.panelTextColor }} />
       <Text style={backButtonTextStyle}>{localText}</Text>
     </Button>
   );
