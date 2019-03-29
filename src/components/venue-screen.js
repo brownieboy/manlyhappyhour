@@ -26,6 +26,24 @@ import HeaderBackArrow from "./header-back-arrow.js";
 import appColours from "../styles/appColours.js";
 
 class VenueScreen extends Component {
+  getHoursText = hoursGroupedByDay => {
+    let hoursTextStringArray = [];
+    let currentDayItem;
+    Object.keys(hoursGroupedByDay).forEach(daysItem => {
+      // console.log(daysItem); // key
+      currentDayItem = hoursGroupedByDay[daysItem];
+      hoursTextStringArray = [
+        ...hoursTextStringArray,
+        `${daysItem}: ${currentDayItem[0].open}${
+          typeof currentDayItem[0].close !== "undefined"
+            ? `- ${currentDayItem[0].close}`
+            : ""
+        }`
+      ];
+    });
+    return hoursTextStringArray.join(", ");
+  };
+
   render() {
     const { navigation, venueDetails } = this.props;
     const { id, parentList } = navigation.state.params;
@@ -64,16 +82,42 @@ class VenueScreen extends Component {
           />
           <CardItem
             style={{
-              backgroundColor: appColours.panelBackgroundColor
+              backgroundColor: appColours.panelBackgroundColor,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start"
             }}
           >
-            <Text
-              style={{
-                color: appColours.panelTextColor
-              }}
-            >
-              {venueDetails.address.fullAddressLine}
-            </Text>
+            <View>
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <Text
+                  style={{
+                    color: appColours.panelTextColor,
+                    fontSize: 17,
+                    fontWeight: "bold"
+                  }}
+                >
+                  {venueDetails.name}
+                </Text>
+                <Text
+                  style={{
+                    color: appColours.panelTextColor,
+                    marginLeft: 5
+                  }}
+                >
+                  {venueDetails.address.addressLine}
+                </Text>
+              </View>
+            </View>
+            <View>
+              <Text
+                style={{
+                  color: appColours.panelTextColor
+                }}
+              >
+                {`Hours: ${this.getHoursText(venueDetails.hoursGroupedByDay)}`}
+              </Text>
+            </View>
           </CardItem>
         </Content>
       </Container>

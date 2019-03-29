@@ -67,7 +67,7 @@
           { "open": "17:00", "close": "21:00" }
         ],
         "Sunday": [{ "open": "17:00", "close": "21:00" }]
-      }
+      },
     }
   ],
   "publishedData": {
@@ -91,8 +91,14 @@
           "Friday": [{ "open": "12:00", "close": "01:00" }],
           "Saturday": [{ "open": "12:00", "close": "01:00" }],
           "Sunday": [{ "open": "12", "close": "24:00" }]
+        },
+        "hoursGroupedByDay": {
+          "Mon-Thu": [{ "open": "12:00", "close": "24:00" }],
+          "Fri-Sat": [{ "open": "12:00", "close": "01:00" }],
+          "Sun": [{ "open": "12:00", "close": "24:00" }]
         }
       },
+      
       {
         "id": "fourpines-manly",
         "thumbFullUrl": "https://pbs.twimg.com/profile_images/892185589264433153/Yr4NzFSF_400x400.jpg",
@@ -112,6 +118,9 @@
           "Friday": [{ "open": "11:00", "close": "24:00" }],
           "Saturday": [{ "open": "11:00", "close": "24:00" }],
           "Sunday": [{ "open": "11:00", "close": "24:00" }]
+        },
+        "hoursGroupedByDay": {
+          "Mon-Sun": [{ "open": "11:00", "close": "24:00" }]
         }
       },
       {
