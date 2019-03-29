@@ -130,15 +130,13 @@
           "Tuesday": [{ "open": "Closed" }],
           "Wednesday": [{ "open": "17:00", "close": "21:00" }],
           "Thursday": [{ "open": "17:00", "close": "21:00" }],
-          "Friday": [
-            { "open": "12:00", "close": "15:00" },
-            { "open": "17:00", "close": "21:00" }
-          ],
-          "Saturday": [
-            { "open": "12:00", "close": "15:00" },
-            { "open": "17:00", "close": "21:00" }
-          ],
+          "Friday": [{ "open": "12:00", "close": "21:00" }],
+          "Saturday": [{ "open": "12:00", "close": "21:00" }],
           "Sunday": [{ "open": "17:00", "close": "21:00" }]
+        },
+        "hoursGroupedByDay": {
+          "Mon-Tue": [{ "open": "Closed" }],
+          "Wed-Fri": [{ "open": "17:00", "close": "21:00" }]
         }
       }
     ],

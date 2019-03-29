@@ -35,8 +35,7 @@ class VenueScreen extends Component {
       <Container>
         <Header
           style={{
-            backgroundColor: appColours.panelBackgroundColor,
-            color: appColours.panelTextColor
+            backgroundColor: appColours.panelBackgroundColor
           }}
         >
           <Left style={{ flex: 2 }}>
@@ -63,8 +62,18 @@ class VenueScreen extends Component {
             }}
             source={{ uri: venueDetails.cardFullUrl }}
           />
-          <CardItem>
-            <Text>{venueDetails.address.fullAddressLine}</Text>
+          <CardItem
+            style={{
+              backgroundColor: appColours.panelBackgroundColor
+            }}
+          >
+            <Text
+              style={{
+                color: appColours.panelTextColor
+              }}
+            >
+              {venueDetails.address.fullAddressLine}
+            </Text>
           </CardItem>
         </Content>
       </Container>
