@@ -29,14 +29,14 @@ class VenueScreen extends Component {
   getHoursText = hoursGroupedByDay => {
     let hoursTextStringArray = [];
     let currentDayItem;
-    Object.keys(hoursGroupedByDay).forEach(daysItem => {
-      // console.log(daysItem); // key
-      currentDayItem = hoursGroupedByDay[daysItem];
+    Object.keys(hoursGroupedByDay).forEach(daysItemKey => {
+      // console.log(daysItemKey); // key
+      currentDayItem = hoursGroupedByDay[daysItemKey];
       hoursTextStringArray = [
         ...hoursTextStringArray,
-        `${daysItem}: ${currentDayItem[0].open}${
+        `${daysItemKey}: ${currentDayItem[0].open}${
           typeof currentDayItem[0].close !== "undefined"
-            ? `- ${currentDayItem[0].close}`
+            ? `-${currentDayItem[0].close}`
             : ""
         }`
       ];
@@ -44,11 +44,41 @@ class VenueScreen extends Component {
     return hoursTextStringArray.join(", ");
   };
 
+  getDealsText = dealsGroupedByDay => {
+    let dealsTextStringArray = [];
+    let currentDealsArray;
+    let currentDealString;
+    // console.log("getDealsText");
+    // console.log(dealsGroupedByDay);
+    Object.keys(dealsGroupedByDay).forEach(daysItemKey => {
+      // console.log(daysItemKey); // key
+      currentDealsArray = dealsGroupedByDay[daysItemKey];
+      currentDealString = currentDealsArray.map(currentDealObj => {
+        return `${daysItemKey} ${`${currentDealObj.open}${
+          typeof currentDealObj.close !== "undefined"
+            ? `-${currentDealObj.close}`
+            : ""
+        }`}: ${currentDealObj.dealDescription}`;
+      });
+      dealsTextStringArray = [...dealsTextStringArray, currentDealString.join("\n")];
+    });
+    console.log("dealsTextStringArray ");
+    console.log(dealsTextStringArray);
+
+    return dealsTextStringArray.join("\n");
+  };
+
   render() {
     const { navigation, venueDetails } = this.props;
     const { id, parentList } = navigation.state.params;
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
+    console.log("venueDetails:");
+    console.log(venueDetails);
+    const dealsText =
+      typeof venueDetails.dealsGroupedByDay !== "undefined"
+        ? this.getDealsText(venueDetails.dealsGroupedByDay)
+        : "No deals currently listed";
     return (
       <Container>
         <Header
@@ -89,11 +119,17 @@ class VenueScreen extends Component {
             }}
           >
             <View>
-              <View style={{ display: "flex", flexDirection: "row" }}>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "flex-end"
+                }}
+              >
                 <Text
                   style={{
                     color: appColours.panelTextColor,
-                    fontSize: 17,
+                    fontSize: 18,
                     fontWeight: "bold"
                   }}
                 >
@@ -109,14 +145,39 @@ class VenueScreen extends Component {
                 </Text>
               </View>
             </View>
-            <View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "flex-end"
+              }}
+            >
+              {/* <Text style={{ fontSize: 11, color: appColours.panelTextColor }}>
+                Hours:
+              </Text> */}
               <Text
                 style={{
+                  fontSize: 13,
                   color: appColours.panelTextColor
                 }}
               >
-                {`Hours: ${this.getHoursText(venueDetails.hoursGroupedByDay)}`}
+                {this.getHoursText(venueDetails.hoursGroupedByDay)}
               </Text>
+            </View>
+          </CardItem>
+          <CardItem padder>
+            <Text>{venueDetails.description}</Text>
+          </CardItem>
+          <CardItem padder>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start"
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Deals:</Text>
+              <Text>{dealsText}</Text>
             </View>
           </CardItem>
         </Content>

@@ -1,80 +1,10 @@
 {
-  "venuesArray": [
-    {
-      "id": "elcamino-manly",
-      "name": "El Camino",
-      "thumbFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Ffood%2Fthumbs%2FEl-Camino-Cantina-Frozen-Margaritas_thumb.jpg?alt=media&token=fad231b2-4ace-47ce-8b8b-3763a6ebeb30",
-      "cardFullUrl": "https://cdn.therockpoolfiles.com/rockpooldininggroup/wp-content/uploads/2018/10/24111529/ElCamino_TheRocks_credit_Kai-Leishman_005-1-386x386.jpg",
-      "address": {
-        "town": "Manly",
-        "fullAddressLine": "Manly Wharf, NSW 2095",
-        "addressLine": "Manly Wharf, NSW 2095"
-      },
-      "styles": ["Mexican"],
-      "hours": {
-        "Monday": [{ "open": "12:00", "close": "24:00" }],
-        "Tuesday": [{ "open": "12:00", "close": "24:00" }],
-        "Wednesday": [{ "open": "12:00", "close": "24:00" }],
-        "Thursday": [{ "open": "12:00", "close": "24:00" }],
-        "Friday": [{ "open": "12:00", "close": "01:00" }],
-        "Saturday": [{ "open": "12:00", "close": "01:00" }],
-        "Sunday": [{ "open": "12", "close": "24:00" }]
-      }
-    },
-    {
-      "id": "fourpines-manly",
-      "thumbFullUrl": "https://pbs.twimg.com/profile_images/892185589264433153/Yr4NzFSF_400x400.jpg",
-      "cardFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Fother%2Fcards%2F4pines-card.jpg?alt=media&token=ded8e4f3-0008-4b36-9ea5-fdcfe0da15f8",
-      "name": "4 Pines",
-      "address": {
-        "town": "Manly",
-        "fullAddressLine": "29/43-45 E Esplanade, Manly NSW 2095",
-        "addressLine": "29/43-45 E Esplanade, Manly NSW 2095"
-      },
-      "styles": ["Pub"],
-      "hours": {
-        "Monday": [{ "open": "11:00", "close": "24:00" }],
-        "Tuesday": [{ "open": "11:00", "close": "24:00" }],
-        "Wednesday": [{ "open": "11:00", "close": "24:00" }],
-        "Thursday": [{ "open": "11:00", "close": "24:00" }],
-        "Friday": [{ "open": "11:00", "close": "24:00" }],
-        "Saturday": [{ "open": "11:00", "close": "24:00" }],
-        "Sunday": [{ "open": "11:00", "close": "24:00" }]
-      }
-    },
-    {
-      "id": "burgersandbeers-manly",
-      "name": "Burgers and Beers",
-      "cardFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Fother%2Fcards%2Fburgers_and_beers-card.jpg?alt=media&token=736f457c-f6ea-4054-9120-3193c8a8cd1d",
-      "thumbFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Ffood%2Fthumbs%2Fburgers_and_beers-thumb.jpg?alt=media&token=8bd44a30-67f1-48b4-9c87-7588b7d08ffa",
-      "address": {
-        "town": "Manly",
-        "fullAddressLine": "26 Darley Road, Manly, NSW 2095",
-        "addressLine": "26 Darley Road, Manly, NSW 2095"
-      },
-      "styles": ["burgers", "beers"],
-      "hours": {
-        "Monday": [{ "open": "Closed" }],
-        "Tuesday": [{ "open": "Closed" }],
-        "Wednesday": [{ "open": "17:00", "close": "21:00" }],
-        "Thursday": [{ "open": "17:00", "close": "21:00" }],
-        "Friday": [
-          { "open": "12:00", "close": "15:00" },
-          { "open": "17:00", "close": "21:00" }
-        ],
-        "Saturday": [
-          { "open": "12:00", "close": "15:00" },
-          { "open": "17:00", "close": "21:00" }
-        ],
-        "Sunday": [{ "open": "17:00", "close": "21:00" }]
-      },
-    }
-  ],
   "publishedData": {
     "venuesArray": [
       {
         "id": "elcamino-manly",
         "name": "El Camino",
+        "description": "Margharitas!!!",
         "thumbFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Ffood%2Fthumbs%2FEl-Camino-Cantina-Frozen-Margaritas_thumb.jpg?alt=media&token=fad231b2-4ace-47ce-8b8b-3763a6ebeb30",
         "cardFullUrl": "https://cdn.therockpoolfiles.com/rockpooldininggroup/wp-content/uploads/2018/10/24111529/ElCamino_TheRocks_credit_Kai-Leishman_005-1-386x386.jpg",
         "address": {
@@ -96,14 +26,40 @@
           "Mon-Thu": [{ "open": "12:00", "close": "24:00" }],
           "Fri-Sat": [{ "open": "12:00", "close": "01:00" }],
           "Sun": [{ "open": "12:00", "close": "24:00" }]
+        },
+        "dealsGroupedByDay": {
+          "Mon-Fri": [
+            {
+              "open": "12:00",
+              "close": "15:00",
+              "dealDescription": "$15 Burrito & House Beer (300mL craft beer, house wine or soft drink).",
+              "dealUrl": "http://www.elcaminocantina.com.au/whats-on/happy-hour/",
+              "dealTypes": ["beer", "wine", "food"]
+            },
+            {
+              "open": "16:00",
+              "close": "18:00",
+              "dealDescription": "$7.50 margheritas, tequila, beer & wine.  Note: El Camino Amigos keyring holders get an extra hour on this deal.",
+              "dealUrl": "http://www.elcaminocantina.com.au/whats-on/half-priced-fajita-thursdays/",
+              "dealTypes": ["cocktails"]
+            }
+          ],
+          "Thu": [
+            {
+              "open": "All day",
+              "dealDescription": "Half-price fajitas.",
+              "dealUrl": "http://www.elcaminocantina.com.au/whats-on/half-priced-fajita-thursdays/",
+              "dealTypes": ["food"]
+            }
+          ]
         }
       },
-      
       {
         "id": "fourpines-manly",
         "thumbFullUrl": "https://pbs.twimg.com/profile_images/892185589264433153/Yr4NzFSF_400x400.jpg",
         "cardFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Fother%2Fcards%2F4pines-card.jpg?alt=media&token=ded8e4f3-0008-4b36-9ea5-fdcfe0da15f8",
         "name": "4 Pines",
+        "description": "Best pub in Manly!\n\nBrews its own beer.  The Pale is always a safe bet, and the ESB is even better, although it's a bit stronger tasting. Lots of speciality beers on tap too.  Food usually quite good too; go for the Manly Mega-burger if you're really hungry.\n\nGets very busy, especially on Thursday and Friday evenings.",
         "address": {
           "town": "Manly",
           "fullAddressLine": "29/43-45 E Esplanade, Manly NSW 2095",
@@ -126,6 +82,7 @@
       {
         "id": "burgersandbeers-manly",
         "name": "Burgers and Beers",
+        "description": "Burgers and Beers!",
         "cardFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Fother%2Fcards%2Fburgers_and_beers-card.jpg?alt=media&token=736f457c-f6ea-4054-9120-3193c8a8cd1d",
         "thumbFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Ffood%2Fthumbs%2Fburgers_and_beers-thumb.jpg?alt=media&token=8bd44a30-67f1-48b4-9c87-7588b7d08ffa",
         "address": {
