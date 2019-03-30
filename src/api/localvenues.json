@@ -77,6 +77,32 @@
         },
         "hoursGroupedByDay": {
           "Mon-Sun": [{ "open": "11:00", "close": "24:00" }]
+        },
+        "dealsGroupedByDay": {
+          "Mon": [
+            {
+              "open": "17:00",
+              "close": "24:00",
+              "dealDescription": "Our shout: free pint with any main meal.",
+              "dealTypes": ["beer", "food"]
+            }
+          ],
+          "Tue": [
+            {
+              "open": "17:00",
+              "close": "24:00",
+              "dealDescription": "$25 Parma and a pint.",
+              "dealTypes": ["beer", "food"]
+            }
+          ],
+          "Wed": [
+            {
+              "open": "17:00",
+              "close": "24:00",
+              "dealDescription": "$25 Ribs and a pint.",
+              "dealTypes": ["beer", "food"]
+            }
+          ]
         }
       },
       {
@@ -103,6 +129,16 @@
         "hoursGroupedByDay": {
           "Mon-Tue": [{ "open": "Closed" }],
           "Wed-Fri": [{ "open": "17:00", "close": "21:00" }]
+        },
+        "dealsGroupedByDay": {
+          "Wed-Sun": [
+            {
+              "open": "17:00",
+              "close": "19:00",
+              "dealDescription": "$20 Cali Burger + Fries & a bottle of BelgianIPA Bottle/Wine/Cider Can.",
+              "dealTypes": ["beer", "wine", "food"]
+            }
+          ]
         }
       }
     ],

@@ -76,7 +76,7 @@ class VenueScreen extends Component {
       return (
         <Text key={x}>
           <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
-          {dealObj.dealDescription}
+          <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
         </Text>
       );
     });
