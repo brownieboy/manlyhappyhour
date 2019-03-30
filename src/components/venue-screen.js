@@ -44,29 +44,57 @@ class VenueScreen extends Component {
     return hoursTextStringArray.join(", ");
   };
 
-  getDealsText = dealsGroupedByDay => {
-    let dealsTextStringArray = [];
+  getDealsTextItems = dealsGroupedByDay => {
+    let dealsObjArray = [];
     let currentDealsArray;
-    let currentDealString;
+    let currentDealObjArray;
     // console.log("getDealsText");
     // console.log(dealsGroupedByDay);
+    let dateTimeLabel;
+    let closeTimeString;
     Object.keys(dealsGroupedByDay).forEach(daysItemKey => {
       // console.log(daysItemKey); // key
       currentDealsArray = dealsGroupedByDay[daysItemKey];
-      currentDealString = currentDealsArray.map(currentDealObj => {
-        return `${daysItemKey} ${`${currentDealObj.open}${
-          typeof currentDealObj.close !== "undefined"
-            ? `-${currentDealObj.close}`
-            : ""
-        }`}: ${currentDealObj.dealDescription}`;
+      currentDealObjArray = currentDealsArray.map(currentDealObjArray => {
+        closeTimeString =
+          typeof currentDealObjArray.close !== "undefined"
+            ? `-${currentDealObjArray.close}`
+            : "";
+        dateTimeLabel = `${daysItemKey} ${
+          currentDealObjArray.open
+        }${closeTimeString}`;
+        return {
+          dateTimeLabel,
+          dealDescription: currentDealObjArray.dealDescription
+        };
       });
-      dealsTextStringArray = [...dealsTextStringArray, currentDealString.join("\n")];
+      dealsObjArray = [...dealsObjArray, ...currentDealObjArray];
     });
-    console.log("dealsTextStringArray ");
-    console.log(dealsTextStringArray);
+    let x = -1;
+    const dealTextItems = dealsObjArray.map(dealObj => {
+      x++;
+      return (
+        <Text key={x}>
+          <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
+          {dealObj.dealDescription}
+        </Text>
+      );
+    });
 
-    return dealsTextStringArray.join("\n");
+    return dealTextItems;
   };
+
+  /*
+      const dealTextItems = dealsObjArray.map(dealObj => {
+      x++;
+      return (
+        <Fragment>
+          <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}</Text>
+          <Text>{dealObj.dealDescription}</Text>
+        </Fragment>
+      );
+    });
+*/
 
   render() {
     const { navigation, venueDetails } = this.props;
@@ -75,10 +103,12 @@ class VenueScreen extends Component {
     const imageHeight = imageWidth / 1.6;
     console.log("venueDetails:");
     console.log(venueDetails);
-    const dealsText =
-      typeof venueDetails.dealsGroupedByDay !== "undefined"
-        ? this.getDealsText(venueDetails.dealsGroupedByDay)
-        : "No deals currently listed";
+    const dealsTextItems =
+      typeof venueDetails.dealsGroupedByDay !== "undefined" ? (
+        this.getDealsTextItems(venueDetails.dealsGroupedByDay)
+      ) : (
+        <Text>No deals currently listed</Text>
+      );
     return (
       <Container>
         <Header
@@ -177,7 +207,7 @@ class VenueScreen extends Component {
               }}
             >
               <Text style={{ fontWeight: "bold" }}>Deals:</Text>
-              <Text>{dealsText}</Text>
+              {dealsTextItems}
             </View>
           </CardItem>
         </Content>
