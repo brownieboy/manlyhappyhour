@@ -273,13 +273,6 @@
 			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
 			remoteInfo = "cxxreact-tvOS";
 		};
-		4A513722224F339A00F62AC3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FA6260AAD5AB4DB998C8C520 /* FastImage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A287971D1DE0C0A60081BDFA;
-			remoteInfo = FastImage;
-		};
 		4A7069522248A09300562932 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -654,14 +647,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4A51371F224F339A00F62AC3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4A513723224F339A00F62AC3 /* libFastImage.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4A70692C2248A09100562932 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,11 +940,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-<<<<<<< HEAD
-					ProductGroup = 4A51371F224F339A00F62AC3 /* Products */;
-=======
 					ProductGroup = 4AD14B89224F2B1400F20487 /* Products */;
->>>>>>> build
 					ProjectRef = FA6260AAD5AB4DB998C8C520 /* FastImage.xcodeproj */;
 				},
 				{
@@ -1224,13 +1205,6 @@
 			fileType = archive.ar;
 			path = libcxxreact.a;
 			remoteRef = 3DAD3EAA1DF850E9000B6D8A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4A513723224F339A00F62AC3 /* libFastImage.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libFastImage.a;
-			remoteRef = 4A513722224F339A00F62AC3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4A7069532248A09300562932 /* libjsi.a */ = {
