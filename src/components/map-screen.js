@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import { Button } from "native-base";
+import MapView from "react-native-maps";
 
 import { Text, View } from "react-native";
 class MapScreen extends Component {
@@ -12,9 +12,18 @@ class MapScreen extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>App Map Screen</Text>
-        {/* <Button onPress={() => this.props.navigation.navigate("Venues")}>
-          <Text>Go to Venues</Text>
-        </Button> */}
+        <MapView
+          initialRegion={{
+            latitude: -33.797474,
+            longitude: 151.286902,
+            // latitudeDelta: 0.0922,
+            // longitudeDelta: 0.0421
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.015
+          }}
+          width={300}
+          height={300}
+        />
       </View>
     );
   }
