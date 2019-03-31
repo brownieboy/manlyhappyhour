@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import MapView from "react-native-maps";
+import MapView,  { PROVIDER_GOOGLE }  from "react-native-maps";
 import { View } from "react-native";
 import {
   Body,
@@ -16,6 +16,7 @@ import {
   Title
 } from "native-base";
 import appColours from "../styles/appColours.js";
+import mapStyles from "../styles/map-styles.js";
 
 class MapScreen extends Component {
   render() {
@@ -50,6 +51,8 @@ class MapScreen extends Component {
             // width={300}
             // height={300}
             style={{ flex: 1 }}
+            provider={PROVIDER_GOOGLE}
+            customMapStyle={mapStyles}
           />
         </View>
         {/* </Content> */}
