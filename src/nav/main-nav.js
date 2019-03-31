@@ -8,6 +8,7 @@ import IconAntDesign from "react-native-vector-icons/AntDesign";
 
 import HomeScreen from "../components/home-screen.js";
 import VenuesListNav from "../nav/venues-nav.js";
+import MapScreen from "../components/map-screen.js";
 import VenueTabIcon from "../components/venue-tab-icon.js";
 
 // Styles
@@ -26,7 +27,8 @@ HomeScreen.navigationOptions = {
 
 const routes = {
   Home: HomeScreen,
-  Venues: VenuesListNav
+  Venues: VenuesListNav,
+  Maps: MapScreen
 };
 
 VenuesListNav.navigationOptions = {

@@ -108,10 +108,10 @@ SPEC CHECKSUMS:
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
-  React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
-  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
-  yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
+  React: 34a405ead72252839fdc4afc1f972a7ed984af84
+  react-native-maps: 9469741f77f270c605cafec603ce47327dc5b5f8
+  yoga: 8fb47f180b19b0dadb285a09e4c74c8a41721d3a
 
 PODFILE CHECKSUM: d667ec8f8803086e22f2153b38042b36988c40d7
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
