@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import MapView,  { PROVIDER_GOOGLE }  from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { View } from "react-native";
 import {
   Body,
@@ -53,7 +53,18 @@ class MapScreen extends Component {
             style={{ flex: 1 }}
             provider={PROVIDER_GOOGLE}
             customMapStyle={mapStyles}
-          />
+          >
+            <Marker
+              coordinate={{ latitude: -33.799389, longitude: 151.285254 }}
+              title={"4 Pines"}
+              description={"Best pub in the Southern Hempisphere!"}
+            />
+            <Marker
+              coordinate={{ latitude: -33.80040233, longitude: 151.287555 }}
+              title={"Burgers and Beers"}
+              description={"Dad and Dave's beer and gorgeous burgers"}
+            />
+          </MapView>
         </View>
         {/* </Content> */}
       </Container>

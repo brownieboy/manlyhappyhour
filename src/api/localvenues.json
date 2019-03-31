@@ -10,7 +10,9 @@
         "address": {
           "town": "Manly",
           "fullAddressLine": "Manly Wharf, NSW 2095",
-          "addressLine": "Manly Wharf"
+          "addressLine": "Manly Wharf",
+          "lat": "-33.799389",
+          "long": "151.285254"
         },
         "styles": ["Mexican"],
         "hours": {
