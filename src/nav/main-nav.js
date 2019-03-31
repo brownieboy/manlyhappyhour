@@ -10,6 +10,7 @@ import HomeScreen from "../components/home-screen.js";
 import VenuesListNav from "../nav/venues-nav.js";
 import MapScreen from "../components/map-screen.js";
 import VenueTabIcon from "../components/venue-tab-icon.js";
+import MapTabIcon from "../components/map-tab-icon.js";
 
 // Styles
 import tabNavStyles from "../styles/tab-navigator-styles.js";
@@ -34,6 +35,11 @@ const routes = {
 VenuesListNav.navigationOptions = {
   tabBarLabel: "Venues",
   tabBarIcon: ({ tintColor }) => <VenueTabIcon tintColor={tintColor} />
+};
+
+MapScreen.navigationOptions = {
+  tabBarLabel: "Map",
+  tabBarIcon: ({ tintColor }) => <MapTabIcon tintColor={tintColor} />
 };
 
 let TabNavigator;
