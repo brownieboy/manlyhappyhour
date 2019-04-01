@@ -52,7 +52,7 @@ class MapScreen extends Component {
             // height={300}
             style={{ flex: 1 }}
             provider={PROVIDER_GOOGLE}
-            customMapStyle={mapStyles}
+            // customMapStyle={mapStyles}
           >
             <Marker
               coordinate={{ latitude: -33.799389, longitude: 151.285254 }}
