@@ -425,6 +425,7 @@
 		4A6316732248A80400727C77 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		4A6316742248A80400727C77 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		4A6316752248A80400727C77 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		4A8241992251A22D00449830 /* manlyhappyhour.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = manlyhappyhour.entitlements; path = manlyhappyhour/manlyhappyhour.entitlements; sourceTree = "<group>"; };
 		564B562808004444AEDCE6C1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		59C59396E5DD42008932ED2B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		5C85B970FF41424D8C93EC3F /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
@@ -608,6 +609,7 @@
 		13B07FAE1A68108700A75B9A /* manlyhappyhour */ = {
 			isa = PBXGroup;
 			children = (
+				4A8241992251A22D00449830 /* manlyhappyhour.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -933,6 +935,14 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = P646GJR7QN;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;

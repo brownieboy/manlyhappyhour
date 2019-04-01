@@ -143,10 +143,10 @@ SPEC CHECKSUMS:
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   React: 34a405ead72252839fdc4afc1f972a7ed984af84
-  react-native-google-maps: 544d2208b09a7e2ec2c6112c8a97c4e7f921f74d
-  react-native-maps: 9469741f77f270c605cafec603ce47327dc5b5f8
+  react-native-google-maps: dd3cee2ea5d77ffba4f03b1fd64891e5113b3193
+  react-native-maps: 7525a32bcd025af8cf3b6c469af9b8758245db72
   yoga: 8fb47f180b19b0dadb285a09e4c74c8a41721d3a
 
-PODFILE CHECKSUM: fac81ff73d537820200cec64cbcc73e10c14766c
+PODFILE CHECKSUM: 540a6fb7731dd83e8169e84cd2932b462228d877
 
 COCOAPODS: 1.6.1
