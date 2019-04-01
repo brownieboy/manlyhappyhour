@@ -5,7 +5,7 @@
 
 import React, { Component } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import {
   Body,
   Container,
@@ -52,7 +52,7 @@ class MapScreen extends Component {
             // height={300}
             style={{ flex: 1 }}
             provider={PROVIDER_GOOGLE}
-            // customMapStyle={mapStyles}
+            customMapStyle={Platform.OS === "ios" ? mapStyles : null}
           >
             <Marker
               coordinate={{ latitude: -33.799389, longitude: 151.285254 }}
