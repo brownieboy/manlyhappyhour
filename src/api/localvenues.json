@@ -4,15 +4,16 @@
       {
         "id": "elcamino-manly",
         "name": "El Camino",
-        "description": "Margharitas!!!",
+        "shortDesc": "Margharitas and food.",
+        "description": "Margharitas, and lots of them!!!",
         "thumbFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Ffood%2Fthumbs%2FEl-Camino-Cantina-Frozen-Margaritas_thumb.jpg?alt=media&token=fad231b2-4ace-47ce-8b8b-3763a6ebeb30",
         "cardFullUrl": "https://cdn.therockpoolfiles.com/rockpooldininggroup/wp-content/uploads/2018/10/24111529/ElCamino_TheRocks_credit_Kai-Leishman_005-1-386x386.jpg",
         "address": {
           "town": "Manly",
           "fullAddressLine": "Manly Wharf, NSW 2095",
           "addressLine": "Manly Wharf",
-          "lat": "-33.799389",
-          "long": "151.285254"
+          "lat": -33.799746,
+          "long": 151.284831
         },
         "styles": ["Mexican"],
         "hours": {
@@ -61,11 +62,14 @@
         "thumbFullUrl": "https://pbs.twimg.com/profile_images/892185589264433153/Yr4NzFSF_400x400.jpg",
         "cardFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Fother%2Fcards%2F4pines-card.jpg?alt=media&token=ded8e4f3-0008-4b36-9ea5-fdcfe0da15f8",
         "name": "4 Pines",
+        "shortDesc": "Best pub in the Southern Hemisphere!",
         "description": "Best pub in Manly!\n\nBrews its own beer.  The Pale is always a safe bet, and the ESB is even better, although it's a bit stronger tasting. Lots of speciality beers on tap too.  Food usually quite good too; go for the Manly Mega-burger if you're really hungry.\n\nGets very busy, especially on Thursday and Friday evenings.",
         "address": {
           "town": "Manly",
           "fullAddressLine": "29/43-45 E Esplanade, Manly NSW 2095",
-          "addressLine": "29/43-45 E Esplanade, Manly"
+          "addressLine": "29/43-45 E Esplanade, Manly",
+          "lat": -33.799389,
+          "long": 151.285254
         },
         "styles": ["Pub"],
         "hours": {
@@ -111,12 +115,15 @@
         "id": "burgersandbeers-manly",
         "name": "Burgers and Beers",
         "description": "Burgers and Beers!",
+        "shortDesc": "Burgers and Beers!",
         "cardFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Fother%2Fcards%2Fburgers_and_beers-card.jpg?alt=media&token=736f457c-f6ea-4054-9120-3193c8a8cd1d",
         "thumbFullUrl": "https://firebasestorage.googleapis.com/v0/b/helstonbury-dev.appspot.com/o/img%2Ffood%2Fthumbs%2Fburgers_and_beers-thumb.jpg?alt=media&token=8bd44a30-67f1-48b4-9c87-7588b7d08ffa",
         "address": {
           "town": "Manly",
           "fullAddressLine": "26 Darley Road, Manly, NSW 2095",
-          "addressLine": "26 Darley Road, Manly"
+          "addressLine": "26 Darley Road, Manly",
+          "lat": -33.80040233,
+          "long": 151.287555
         },
         "styles": ["burgers", "beers"],
         "hours": {
