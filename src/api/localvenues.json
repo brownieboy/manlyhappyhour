@@ -2,6 +2,53 @@
   "publishedData": {
     "venuesArray": [
       {
+        "id": "bavarian-manly",
+        "name": "The Bavarian",
+        "shortDesc": "German beers and sausages",
+        "description": "Margharitas, and lots of them!!!",
+        "thumbFullUrl": "https://cdn.therockpoolfiles.com/therockpoolfiles/wp-content/uploads/sites/20/2018/04/17353301_1423316991046021_7761881186665126317_n1.jpg",
+        "cardFullUrl": "https://cdn.therockpoolfiles.com/therockpoolfiles/wp-content/uploads/sites/20/2018/03/BBC-MANLY-29th-of-july-2017-10.jpg",
+        "address": {
+          "town": "Manly",
+          "fullAddressLine": "Manly Wharf, NSW 2095",
+          "addressLine": "Manly Wharf",
+          "lat": -33.799565,
+          "long": 151.283915,
+          "mapIcon": "cocktail"
+        },
+        "styles": ["German"],
+        "hours": {
+          "Monday": [{ "open": "11:00", "close": "24:00" }],
+          "Tuesday": [{ "open": "11:00", "close": "24:00" }],
+          "Wednesday": [{ "open": "11:00", "close": "24:00" }],
+          "Thursday": [{ "open": "11:00", "close": "24:00" }],
+          "Friday": [{ "open": "11:00", "close": "24:00" }],
+          "Saturday": [{ "open": "09:00", "close": "24:00" }],
+          "Sunday": [{ "open": "09:00", "close": "24:00" }]
+        },
+        "hoursGroupedByDay": {
+          "Mon-Fri": [{ "open": "11:00", "close": "24:00" }],
+          "Sat-Sum": [{ "open": "09:00", "close": "01:00" }]
+        },
+        "dealsGroupedByDay": {
+          "Mon-Sun": [
+            {
+              "open": "All day",
+              "dealDescription": "$10 lunches (5 choices) beer, house wine and spirits",
+              "dealTypes": ["beer", "wine", "spirits"]
+            }
+          ],
+          "Mon-Thu": [
+            {
+              "open": "11:00",
+              "close": "16:00",
+              "dealDescription": "$10 lunches (5 options)",
+              "dealTypes": ["food"]
+            }
+          ]
+        }
+      },
+      {
         "id": "elcamino-manly",
         "name": "El Camino",
         "shortDesc": "Margharitas and food.",
@@ -24,7 +71,7 @@
           "Thursday": [{ "open": "12:00", "close": "24:00" }],
           "Friday": [{ "open": "12:00", "close": "01:00" }],
           "Saturday": [{ "open": "12:00", "close": "01:00" }],
-          "Sunday": [{ "open": "12", "close": "24:00" }]
+          "Sunday": [{ "open": "12:00", "close": "24:00" }]
         },
         "hoursGroupedByDay": {
           "Mon-Thu": [{ "open": "12:00", "close": "24:00" }],
