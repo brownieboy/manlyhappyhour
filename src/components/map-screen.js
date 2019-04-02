@@ -13,6 +13,8 @@ import {
 } from "native-base";
 import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
+import mapIcons from "../constants/map-icons.js";
+
 
 class MapScreen extends Component {
   addMarkers = venuesList =>
@@ -25,6 +27,7 @@ class MapScreen extends Component {
         }}
         title={venue.name}
         description={venue.shortDesc}
+        image={mapIcons[venue.address.mapIcon]}
       />
     ));
   render() {

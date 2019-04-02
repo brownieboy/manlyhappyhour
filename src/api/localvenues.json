@@ -13,7 +13,8 @@
           "fullAddressLine": "Manly Wharf, NSW 2095",
           "addressLine": "Manly Wharf",
           "lat": -33.799746,
-          "long": 151.284831
+          "long": 151.284831,
+          "mapIcon": "cocktail"
         },
         "styles": ["Mexican"],
         "hours": {
@@ -69,7 +70,8 @@
           "fullAddressLine": "29/43-45 E Esplanade, Manly NSW 2095",
           "addressLine": "29/43-45 E Esplanade, Manly",
           "lat": -33.799389,
-          "long": 151.285254
+          "long": 151.285254,
+          "mapIcon": "beer"
         },
         "styles": ["Pub"],
         "hours": {
@@ -123,7 +125,8 @@
           "fullAddressLine": "26 Darley Road, Manly, NSW 2095",
           "addressLine": "26 Darley Road, Manly",
           "lat": -33.80040233,
-          "long": 151.287555
+          "long": 151.287555,
+          "mapIcon": "burger"
         },
         "styles": ["burgers", "beers"],
         "hours": {
