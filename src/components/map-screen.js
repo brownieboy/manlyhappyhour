@@ -15,7 +15,6 @@ import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
 
-
 class MapScreen extends Component {
   addMarkers = venuesList =>
     venuesList.map(venue => (
@@ -28,6 +27,9 @@ class MapScreen extends Component {
         title={venue.name}
         description={venue.shortDesc}
         image={mapIcons[venue.address.mapIcon]}
+        // centerOffset={{ x: -42, y: -60 }}
+        // anchor={{ x: 0.84, y: 1 }}
+        // {...Platform.OS === "ios" && { image: mapIcons[venue.address.mapIcon] }}
       />
     ));
   render() {
