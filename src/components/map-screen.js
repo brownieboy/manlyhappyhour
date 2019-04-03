@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { Image, Platform, View } from "react-native";
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { Image, Platform, StyleSheet, Text, View } from "react-native";
 import {
   Body,
   Container,
@@ -14,6 +14,12 @@ import {
 import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
+
+const styles = StyleSheet.create({
+  plainView: {
+    width: 200
+  }
+});
 
 class MapScreen extends Component {
   constructor(props) {
@@ -42,10 +48,6 @@ class MapScreen extends Component {
         }}
         title={venue.name}
         description={venue.shortDesc}
-        // image={mapIcons[venue.address.mapIcon]}
-        // centerOffset={{ x: -42, y: -60 }}
-        // anchor={{ x: 0.84, y: 1 }}
-        // {...Platform.OS === "ios" && { image: mapIcons[venue.address.mapIcon] }}
       >
         <Image
           style={{
@@ -56,6 +58,14 @@ class MapScreen extends Component {
           }}
           source={mapIcons[venue.address.mapIcon]}
         />
+        <Callout style={styles.plainView}>
+          <View>
+            <Text>{venue.name}</Text>
+            <View>
+              <Text style={{ fontSize: 11 }}>{venue.shortDesc}</Text>
+            </View>
+          </View>
+        </Callout>
       </Marker>
     ));
   render() {
