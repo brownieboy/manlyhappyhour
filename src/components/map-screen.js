@@ -14,6 +14,7 @@ import {
 import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
+import { getDealTextObjArray } from "../helper-functions/deal-line-processing.js";
 
 const styles = StyleSheet.create({
   plainView: {
@@ -38,36 +39,57 @@ class MapScreen extends Component {
     }
   }
 
+  getDealsTextItems = dealsGroupedByDay => {
+    const dealsObjArray = getDealTextObjArray(dealsGroupedByDay);
+    let x = -1;
+    const dealTextItems = dealsObjArray.map(dealObj => {
+      x++;
+      return (
+        <Text key={x}>
+          <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
+          <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
+        </Text>
+      );
+    });
+    return dealTextItems;
+  };
+
   addMarkers = venuesList =>
-    venuesList.map(venue => (
-      <Marker
-        key={venue.id}
-        coordinate={{
-          latitude: venue.address.lat,
-          longitude: venue.address.long
-        }}
-        title={venue.name}
-        description={venue.shortDesc}
-      >
-        <Image
-          style={{
-            width: 32,
-            height: 32,
-            resizeMode: "contain"
-            // zIndex: 3
+    venuesList.map(venue => {
+      const dealsTextItems =
+        typeof venue.dealsGroupedByDay !== "undefined" ? (
+          this.getDealsTextItems(venue.dealsGroupedByDay)
+        ) : (
+          <Text>No deals currently listed</Text>
+        );
+      return (
+        <Marker
+          key={venue.id}
+          coordinate={{
+            latitude: venue.address.lat,
+            longitude: venue.address.long
           }}
-          source={mapIcons[venue.address.mapIcon]}
-        />
-        <Callout style={styles.plainView}>
-          <View>
-            <Text>{venue.name}</Text>
+          // title={venue.name}
+          // description={venue.shortDesc}
+        >
+          <Image
+            style={{
+              width: 32,
+              height: 32,
+              resizeMode: "contain"
+              // zIndex: 3
+            }}
+            source={mapIcons[venue.address.mapIcon]}
+          />
+          <Callout style={styles.plainView}>
             <View>
-              <Text style={{ fontSize: 11 }}>{venue.shortDesc}</Text>
+              <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
             </View>
-          </View>
-        </Callout>
-      </Marker>
-    ));
+            <View>{dealsTextItems}</View>
+          </Callout>
+        </Marker>
+      );
+    });
   render() {
     console.log("MapScreen..render()");
     const { venuesList } = this.props;
@@ -99,8 +121,6 @@ class MapScreen extends Component {
               latitudeDelta: 0.015,
               longitudeDelta: 0.015
             }}
-            // width={300}
-            // height={300}
             style={{ flex: 1 }}
             provider={PROVIDER_GOOGLE}
             // customMapStyle={Platform.OS === "ios" ? mapStyles : null}

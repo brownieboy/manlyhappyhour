@@ -13,7 +13,7 @@ const venuesReducer = (
     case FETCH_VENUES_REQUEST:
       return { ...state, fetchStatus: "loading" };
     case FETCH_VENUES_SUCCESS:
-    //   console.log("venuesReducer FETCH_VENUES_SUCCESS");
+      //   console.log("venuesReducer FETCH_VENUES_SUCCESS");
       return {
         ...state,
         fetchStatus: "",
@@ -26,6 +26,10 @@ const venuesReducer = (
   }
 };
 
+// getters, don't use reselect, so are run every time.  Beware of performance.
+
+
+// Actions
 export const loadVenuesNow = () => ({ type: LOAD_VENUES_NOW });
 // export const fetchVenuesSucceeded = () => ({ type: FETCH_VENUES_REQUEST });
 

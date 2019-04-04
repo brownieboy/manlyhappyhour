@@ -22,54 +22,35 @@ import {
   // Thumbnail
 } from "native-base";
 // import { Button } from "native-base";
+
 import HeaderBackArrow from "./header-back-arrow.js";
 import appColours from "../styles/appColours.js";
+import {
+  getDealTextObjArray,
+  getHoursText
+} from "../helper-functions/deal-line-processing.js";
 
 class VenueScreen extends Component {
-  getHoursText = hoursGroupedByDay => {
-    let hoursTextStringArray = [];
-    let currentDayItem;
-    Object.keys(hoursGroupedByDay).forEach(daysItemKey => {
-      // console.log(daysItemKey); // key
-      currentDayItem = hoursGroupedByDay[daysItemKey];
-      hoursTextStringArray = [
-        ...hoursTextStringArray,
-        `${daysItemKey}: ${currentDayItem[0].open}${
-          typeof currentDayItem[0].close !== "undefined"
-            ? `-${currentDayItem[0].close}`
-            : ""
-        }`
-      ];
-    });
-    return hoursTextStringArray.join(", ");
-  };
+  // getHoursText = hoursGroupedByDay => {
+  //   let hoursTextStringArray = [];
+  //   let currentDayItem;
+  //   Object.keys(hoursGroupedByDay).forEach(daysItemKey => {
+  //     // console.log(daysItemKey); // key
+  //     currentDayItem = hoursGroupedByDay[daysItemKey];
+  //     hoursTextStringArray = [
+  //       ...hoursTextStringArray,
+  //       `${daysItemKey}: ${currentDayItem[0].open}${
+  //         typeof currentDayItem[0].close !== "undefined"
+  //           ? `-${currentDayItem[0].close}`
+  //           : ""
+  //       }`
+  //     ];
+  //   });
+  //   return hoursTextStringArray.join(", ");
+  // };
 
   getDealsTextItems = dealsGroupedByDay => {
-    let dealsObjArray = [];
-    let currentDealsArray;
-    let currentDealObjArray;
-    // console.log("getDealsText");
-    // console.log(dealsGroupedByDay);
-    let dateTimeLabel;
-    let closeTimeString;
-    Object.keys(dealsGroupedByDay).forEach(daysItemKey => {
-      // console.log(daysItemKey); // key
-      currentDealsArray = dealsGroupedByDay[daysItemKey];
-      currentDealObjArray = currentDealsArray.map(currentDealObjArray => {
-        closeTimeString =
-          typeof currentDealObjArray.close !== "undefined"
-            ? `-${currentDealObjArray.close}`
-            : "";
-        dateTimeLabel = `${daysItemKey} ${
-          currentDealObjArray.open
-        }${closeTimeString}`;
-        return {
-          dateTimeLabel,
-          dealDescription: currentDealObjArray.dealDescription
-        };
-      });
-      dealsObjArray = [...dealsObjArray, ...currentDealObjArray];
-    });
+    const dealsObjArray = getDealTextObjArray(dealsGroupedByDay);
     let x = -1;
     const dealTextItems = dealsObjArray.map(dealObj => {
       x++;
@@ -83,18 +64,6 @@ class VenueScreen extends Component {
 
     return dealTextItems;
   };
-
-  /*
-      const dealTextItems = dealsObjArray.map(dealObj => {
-      x++;
-      return (
-        <Fragment>
-          <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}</Text>
-          <Text>{dealObj.dealDescription}</Text>
-        </Fragment>
-      );
-    });
-*/
 
   render() {
     const { navigation, venueDetails } = this.props;
@@ -191,7 +160,7 @@ class VenueScreen extends Component {
                   color: appColours.panelTextColor
                 }}
               >
-                {this.getHoursText(venueDetails.hoursGroupedByDay)}
+                {getHoursText(venueDetails.hoursGroupedByDay)}
               </Text>
             </View>
           </CardItem>
