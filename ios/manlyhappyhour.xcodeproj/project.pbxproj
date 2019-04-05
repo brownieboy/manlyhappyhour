@@ -51,6 +51,7 @@
 		4A6316822248A80500727C77 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A6316732248A80400727C77 /* Octicons.ttf */; };
 		4A6316832248A80500727C77 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A6316742248A80400727C77 /* Entypo.ttf */; };
 		4A6316842248A80500727C77 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A6316752248A80400727C77 /* Foundation.ttf */; };
+		4AC76E652258031F002B912F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AC76E3A2258031F002B912F /* GoogleService-Info.plist */; };
 		4B37D76490624BD3A173E8E3 /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA4CA40A8114971B76F9619 /* libRNVectorIcons-tvOS.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8F6934CF597C438DBBA4E449 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EBFAD60B56466D89335945 /* libRNGestureHandler-tvOS.a */; };
@@ -426,6 +427,7 @@
 		4A6316742248A80400727C77 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		4A6316752248A80400727C77 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
 		4A8241992251A22D00449830 /* manlyhappyhour.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = manlyhappyhour.entitlements; path = manlyhappyhour/manlyhappyhour.entitlements; sourceTree = "<group>"; };
+		4AC76E3A2258031F002B912F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		564B562808004444AEDCE6C1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		59C59396E5DD42008932ED2B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		5C85B970FF41424D8C93EC3F /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				4AC76E3A2258031F002B912F /* GoogleService-Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = manlyhappyhour;
@@ -1358,6 +1361,7 @@
 				4A63167E2248A80500727C77 /* Feather.ttf in Resources */,
 				4A63167F2248A80500727C77 /* Ionicons.ttf in Resources */,
 				4A6316802248A80500727C77 /* MaterialIcons.ttf in Resources */,
+				4AC76E652258031F002B912F /* GoogleService-Info.plist in Resources */,
 				4A6316812248A80500727C77 /* AntDesign.ttf in Resources */,
 				4A6316822248A80500727C77 /* Octicons.ttf in Resources */,
 				4A6316832248A80500727C77 /* Entypo.ttf in Resources */,
@@ -1429,18 +1433,20 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
