@@ -1,7 +1,9 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import { buffers, eventChannel } from "redux-saga";
 import { call, fork, put, take, takeLatest } from "redux-saga/effects";
 import firebaseApp, { reduxSagaFirebase } from "../../api/firebase-native.js";
 import { LOAD_VENUES_NOW } from "../venuesReducer.js";
+
 
 let updateChannel;
 const firebaseDatabaseRef = firebaseApp.database().ref("publishedData");
@@ -26,7 +28,12 @@ function createEventChannel(ref) {
 function* updatedItemSaga() {
   updateChannel = createEventChannel(firebaseDatabaseRef);
   while (true) {
-    console.log("running updatedItemSaga, inside loop...");
+    console.log("running updatedItemSaga, inside loop, localPublishedData");
+    const localPublishedDataString = yield AsyncStorage.getItem(
+      "localPublishedData"
+    );
+    console.log(localPublishedDataString);
+
 
     const item = yield take(updateChannel);
     try {
