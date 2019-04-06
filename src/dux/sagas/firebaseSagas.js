@@ -30,7 +30,8 @@ function* updatedItemSaga() {
 
     const item = yield take(updateChannel);
     try {
-      console.log("updatedItemSaga read: " + item);
+      console.log("updatedItemSaga read, item: ");
+      console.log(item);
     } catch (e) {
       console.log("updatedItemSaga error: " + e);
     }
