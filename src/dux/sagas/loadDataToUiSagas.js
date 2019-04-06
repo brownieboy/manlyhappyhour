@@ -26,13 +26,14 @@ function* loadDataGen() {
   yield put(setFetchVenuesRequest());
 
   try {
+    console.log("Try local storage first");
     const dataNormalisedString = yield AsyncStorage.getItem(
       "localPublishedData"
     );
 
     // const dataNormalisedString = yield require("../../api/localvenues.json");
-    // console.log("loadDataToUiSagas.js, dataNormalisedString:");
-    // console.log(dataNormalisedString);
+    console.log("loadDataToUiSagas.js, dataNormalisedString:");
+    console.log(dataNormalisedString);
 
     // console.log("Parsing data from Firebase");
     // console.log("bandsDataNormalisedString");
