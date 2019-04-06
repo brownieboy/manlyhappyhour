@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "563230316615",
+    "firebase_url": "https://manly-happy-hour.firebaseio.com",
+    "project_id": "manly-happy-hour",
+    "storage_bucket": "manly-happy-hour.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563230316615:android:d0c0c90adc97ba21",
+        "android_client_info": {
+          "package_name": "com.brownieboy.manlyhappyhour"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOyPd_gC8Enr-XJtHH8gWJb4qFSsnbRQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563230316615-o1ocpvttddqk1jk4rcccfhp5mm6b5327.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "563230316615-f24lcjghd1ibkd8f5o72fju01r7f436b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.brownieboy.manlyhappyhour",
+                "app_store_id": "1458194341"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

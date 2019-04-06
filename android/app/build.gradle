@@ -103,7 +103,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.manlyhappyhour"
+        applicationId "com.brownieboy.manlyhappyhour"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 6
