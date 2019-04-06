@@ -1,7 +1,7 @@
 import { all } from "redux-saga/effects";
 
 // import dataSagas from "./dataSagas.js";
-// import firebaseSagas from "./firebaseSagas.js";
+import firebaseSagas from "./firebaseSagas.js";
 // import uiSagas from "./uiSagas.js";
 // import favouritesSagas from "./favouritesSagas.js";
 import loadDataToUISagas from "./loadDataToUiSagas.js";
@@ -10,7 +10,7 @@ import loadDataToUISagas from "./loadDataToUiSagas.js";
 function* sagas() {
   yield all([
     // ...dataSagas,
-    // ...firebaseSagas,
+    ...firebaseSagas,
     // ...favouritesSagas,
     ...loadDataToUISagas
     // ...uiSagas
