@@ -31,24 +31,6 @@ import {
 } from "../helper-functions/deal-line-processing.js";
 
 class VenueScreen extends Component {
-  // getHoursText = hoursGroupedByDay => {
-  //   let hoursTextStringArray = [];
-  //   let currentDayItem;
-  //   Object.keys(hoursGroupedByDay).forEach(daysItemKey => {
-  //     // console.log(daysItemKey); // key
-  //     currentDayItem = hoursGroupedByDay[daysItemKey];
-  //     hoursTextStringArray = [
-  //       ...hoursTextStringArray,
-  //       `${daysItemKey}: ${currentDayItem[0].open}${
-  //         typeof currentDayItem[0].close !== "undefined"
-  //           ? `-${currentDayItem[0].close}`
-  //           : ""
-  //       }`
-  //     ];
-  //   });
-  //   return hoursTextStringArray.join(", ");
-  // };
-
   getDealsTextItems = dealsGroupedByDay => {
     const dealsObjArray = getDealTextObjArray(dealsGroupedByDay);
     let x = -1;
@@ -61,7 +43,6 @@ class VenueScreen extends Component {
         </Text>
       );
     });
-
     return dealTextItems;
   };
 
