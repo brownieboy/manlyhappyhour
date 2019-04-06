@@ -1,9 +1,10 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-community/async-storage";
 import { buffers, eventChannel } from "redux-saga";
 import { call, fork, put, take, takeLatest } from "redux-saga/effects";
 import firebaseApp, { reduxSagaFirebase } from "../../api/firebase-native.js";
-import { LOAD_VENUES_NOW } from "../venuesReducer.js";
+import deepEqual from "deep-equal";
 
+import { LOAD_VENUES_NOW } from "../venuesReducer.js";
 
 let updateChannel;
 const firebaseDatabaseRef = firebaseApp.database().ref("publishedData");
@@ -27,20 +28,42 @@ function createEventChannel(ref) {
 
 function* updatedItemSaga() {
   updateChannel = createEventChannel(firebaseDatabaseRef);
+  let overwriteLocal = false;
   while (true) {
-    console.log("running updatedItemSaga, inside loop, localPublishedData");
-    const localPublishedDataString = yield AsyncStorage.getItem(
-      "localPublishedData"
-    );
-    console.log(localPublishedDataString);
-
-
     const item = yield take(updateChannel);
     try {
-      console.log("updatedItemSaga read, item: ");
-      console.log(item);
+      // console.log("updatedItemSaga read, item: ");
+      // console.log(item);
+      // console.log("running updatedItemSaga, inside loop, localPublishedData");
+      const localPublishedDataString = yield AsyncStorage.getItem(
+        "localPublishedData"
+      );
+      // console.log(localPublishedDataString);
+      if (!localPublishedDataString) {
+        console.log("No local");
+        overwriteLocal = true;
+      } else {
+        console.log("have local");
+        const localPublishedData = JSON.parse(localPublishedDataString);
+        if (!deepEqual(localPublishedData, item.value)) {
+          console.log("local and server don't match, so update...");
+          overwriteLocal = true;
+        } else {
+          console.log("local and server match, don't update..");
+        }
+      }
     } catch (e) {
       console.log("updatedItemSaga error: " + e);
+    } finally {
+      if (overwriteLocal) {
+        console.log("Overwriting local data...");
+
+        yield AsyncStorage.setItem(
+          "localPublishedData",
+          JSON.stringify(item.value)
+        );
+        yield put({ type: LOAD_VENUES_NOW });
+      }
     }
   }
 }

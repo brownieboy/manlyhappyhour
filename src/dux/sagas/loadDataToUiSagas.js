@@ -1,5 +1,5 @@
 import { all, fork, put, take, takeLatest } from "redux-saga/effects";
-// import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import FastImage from "react-native-fast-image";
 
 // import preloadRNICimages from "../../helper-functions/preload-rnic-images.js";
@@ -22,17 +22,15 @@ const preloadImages = imageUrlsArray => {
 // Worker Saga: will be fired on LOAD_BANDS_NOW actions, and gets all
 // data, not just bands
 function* loadDataGen() {
-  // yield console.log("loadBandsgen() triggered in loadDataToUi.js");
+  yield console.log("setFetchVenuesRequest() triggered in loadDataToUi.js");
   yield put(setFetchVenuesRequest());
 
   try {
-    // const bandsDataNormalised = yield call(bandsApi.fetchBandsData);
-    // console.log("Getting data from Firebase");
-    // const dataNormalisedString = yield AsyncStorage.getItem(
-    //   "localPublishedData"
-    // );
+    const dataNormalisedString = yield AsyncStorage.getItem(
+      "localPublishedData"
+    );
 
-    const dataNormalisedString = yield require("../../api/localvenues.json");
+    // const dataNormalisedString = yield require("../../api/localvenues.json");
     // console.log("loadDataToUiSagas.js, dataNormalisedString:");
     // console.log(dataNormalisedString);
 
@@ -43,17 +41,19 @@ function* loadDataGen() {
       // console.log("Local storage returned data");
 
       // It's a string when returned from Firebase.
-      // const dataNormalised = JSON.parse(dataNormalisedString);
-      const dataNormalised = dataNormalisedString;
+      const dataNormalised = JSON.parse(dataNormalisedString);
+      // const dataNormalised = dataNormalisedString;
 
-      // console.log("bandsDataNormalised");
-      // console.log(bandsDataNormalised);
+      console.log("dataNormalised");
+      console.log(dataNormalised);
       // Filter out any half-completed data that we might have pulled
       // down from Firebase
       // console.log("imageUrls");
       // console.log(JSON.stringify(imageUrls, null, 2));
-      const venuesArray = dataNormalised.publishedData.venuesArray;
-      const imageUrls = dataNormalised.publishedData.imageUrls;
+      const venuesArray = dataNormalised.venuesArray;
+      const imageUrls = dataNormalised.imageUrls;
+      console.log("venuesArray:");
+      console.log(venuesArray);
 
       // yield console.log("loadBandsGen, about to yield all with loaded data");
       yield all([put(setFetchVenuesSucceeded(venuesArray))]);
