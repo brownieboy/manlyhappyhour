@@ -2,8 +2,7 @@
 import { buffers, eventChannel } from "redux-saga";
 import { call, fork, put, take, takeLatest } from "redux-saga/effects";
 import firebaseApp, { reduxSagaFirebase } from "../../api/firebase-native.js";
-import { LOAD_VENUES_NOW } from "../venuesReducer";
-import console = require("console");
+import { LOAD_VENUES_NOW } from "../venuesReducer.js";
 
 
 let updateChannel;
@@ -40,6 +39,7 @@ function* updatedItemSaga() {
     }
   }
 }
+export default firebaseSagas;
 
 /*
 import { AsyncStorage } from "react-native";
