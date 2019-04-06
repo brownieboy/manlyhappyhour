@@ -25,8 +25,8 @@ export const getDealTextObjArray = dealsGroupedByDay => {
     currentDealsArray = dealsGroupedByDay[daysItemKey];
     currentDaysDealObjArray = getDealTextObj(currentDealsArray, daysItemKey);
     dealsObjArray = [...dealsObjArray, ...currentDaysDealObjArray];
-    console.log("currentDaysDealObjArray outer:");
-    console.log(currentDaysDealObjArray);
+    // console.log("currentDaysDealObjArray outer:");
+    // console.log(currentDaysDealObjArray);
   });
   return dealsObjArray;
 };

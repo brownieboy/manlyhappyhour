@@ -1,13 +1,12 @@
-
 import { buffers, eventChannel } from "redux-saga";
 import { call, fork, put, take, takeLatest } from "redux-saga/effects";
 import firebaseApp, { reduxSagaFirebase } from "../../api/firebase-native.js";
 import { LOAD_VENUES_NOW } from "../venuesReducer.js";
 
-
 let updateChannel;
 const firebaseDatabaseRef = firebaseApp.database().ref("publishedData");
-export function createEventChannel(ref) {
+
+function createEventChannel(ref) {
   const listener = eventChannel(emit => {
     ref.on("value", snap => {
       emit({
@@ -22,23 +21,24 @@ export function createEventChannel(ref) {
   return listener;
 }
 
-const firebaseSagas = [
-  fork(updatedItemSaga)
-  // takeLatest(CLEAR_ALL_LOCAL_DATA, clearAllLocalDataGen)
-];
-
 function* updatedItemSaga() {
   updateChannel = createEventChannel(firebaseDatabaseRef);
   while (true) {
+    console.log("running updatedItemSaga, inside loop...");
+
     const item = yield take(updateChannel);
     try {
       console.log("updatedItemSaga read: " + item);
-      
     } catch (e) {
       console.log("updatedItemSaga error: " + e);
     }
   }
 }
+
+const firebaseSagas = [
+  fork(updatedItemSaga)
+  // takeLatest(CLEAR_ALL_LOCAL_DATA, clearAllLocalDataGen)
+];
 export default firebaseSagas;
 
 /*

@@ -33,14 +33,14 @@ function* loadDataGen() {
     // );
 
     const dataNormalisedString = yield require("../../api/localvenues.json");
-    console.log("loadDataToUiSagas.js, dataNormalisedString:");
-    console.log(dataNormalisedString);
+    // console.log("loadDataToUiSagas.js, dataNormalisedString:");
+    // console.log(dataNormalisedString);
 
     // console.log("Parsing data from Firebase");
     // console.log("bandsDataNormalisedString");
     // console.log(bandsDataNormalisedString);
     if (dataNormalisedString) {
-      console.log("Local storage returned data");
+      // console.log("Local storage returned data");
 
       // It's a string when returned from Firebase.
       // const dataNormalised = JSON.parse(dataNormalisedString);

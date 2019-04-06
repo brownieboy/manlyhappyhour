@@ -33,7 +33,7 @@ class MapScreen extends Component {
   componentDidMount() {
     if (Platform.OS === "android") {
       setTimeout(() => {
-        console.log("MapScreen..componentDidMount(), calling extra setState()");
+        // console.log("MapScreen..componentDidMount(), calling extra setState()");
         this.setState({ extraData: true });
       }, 100);
     }
@@ -91,7 +91,7 @@ class MapScreen extends Component {
       );
     });
   render() {
-    console.log("MapScreen..render()");
+    // console.log("MapScreen..render()");
     const { venuesList } = this.props;
     return (
       <Container>
