@@ -93,7 +93,6 @@ class VenuesScreen extends Component {
 }
 
 VenuesScreen.propTypes = {
-  loadVenuesNow: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired
 };
