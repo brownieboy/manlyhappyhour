@@ -81,6 +81,18 @@ class MapScreen extends Component {
             }}
             source={mapIcons[venue.address.mapIcon]}
           />
+          <View
+            style={{
+              backgroundColor: "white",
+              paddingTop: 1,
+              paddingBottom: 1,
+              paddingLeft: 3,
+              paddingRight: 3,
+              borderRadius: 4
+            }}
+          >
+            <Text style={{ fontSize: 11 }}>{venue.name}</Text>
+          </View>
           <Callout style={styles.plainView}>
             <View>
               <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
