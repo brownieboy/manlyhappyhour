@@ -14,8 +14,8 @@ import {
 
 const preloadImages = imageUrlsArray => {
   const uriObjArray = imageUrlsArray.map(url => ({ uri: url }));
-  // console.log("uriObjArray");
-  // console.log(uriObjArray);
+  console.log("loadDataToUiSagas..preloadImages, uriObjArray:");
+  console.log(uriObjArray);
   FastImage.preload(uriObjArray);
 };
 

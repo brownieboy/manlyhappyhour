@@ -6,7 +6,7 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 
 import IconAntDesign from "react-native-vector-icons/AntDesign";
 
-import HomeScreen from "../components/home-screen.js";
+import HomeScreen from "../container/home-screen-conn.js";
 import VenuesListNav from "../nav/venues-nav.js";
 import MapScreen from "../containers/map-screen-conn.js";
 import VenueTabIcon from "../components/venue-tab-icon.js";

@@ -20,10 +20,10 @@ import {
 import appColours from "../styles/appColours.js";
 
 class VenuesScreen extends Component {
-  componentDidMount() {
-    const { loadVenuesNow, venuesList } = this.props;
-    loadVenuesNow();
-  }
+  // componentDidMount() {
+  //   const { loadVenuesNow } = this.props;
+  //   loadVenuesNow();
+  // }
   render() {
     const { venuesList, navigation } = this.props;
 

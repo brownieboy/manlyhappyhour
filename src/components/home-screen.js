@@ -1,13 +1,13 @@
-/**
- * @format
- * @flow
- */
-
+import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Button } from "native-base";
+// import { Button } from "native-base";
 
 import { Text, View } from "react-native";
 class HomeScreen extends Component {
+  componentDidMount() {
+    const { loadVenuesNow } = this.props;
+    loadVenuesNow();
+  }
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -19,5 +19,9 @@ class HomeScreen extends Component {
     );
   }
 }
+
+HomeScreen.propTypes = {
+  loadVenuesNow: PropTypes.func.isRequired
+};
 
 export default HomeScreen;
