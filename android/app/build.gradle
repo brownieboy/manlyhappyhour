@@ -106,7 +106,7 @@ android {
         applicationId "com.brownieboy.manlyhappyhour"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
+        versionCode 10
         versionName "1.0"
     }
     signingConfigs {
