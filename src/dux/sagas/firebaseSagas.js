@@ -22,8 +22,8 @@ function createEventChannel(ref) {
       ref.off();
     };
   }, buffers.expanding(1));
-  // console.log("listener:");
-  // console.log(listener);
+  console.log("listener:");
+  console.log(listener);
   return listener;
 }
 
@@ -33,8 +33,8 @@ function* updatedItemSaga() {
   while (true) {
     const item = yield take(updateChannel);
     try {
-      // console.log("updatedItemSaga read, item: ");
-      // console.log(item);
+      console.log("updatedItemSaga read, item: ");
+      console.log(item);
       // console.log("running updatedItemSaga, inside loop, localPublishedData");
       const localPublishedDataString = yield AsyncStorage.getItem(
         "localPublishedData"
