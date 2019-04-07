@@ -1,5 +1,5 @@
-// import AsyncStorage from "@react-native-community/async-storage";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+// import { AsyncStorage } from "react-native";
 import { buffers, eventChannel } from "redux-saga";
 import { call, fork, put, take, takeLatest } from "redux-saga/effects";
 import firebaseApp, { reduxSagaFirebase } from "../../api/firebase-native.js";
@@ -22,8 +22,8 @@ function createEventChannel(ref) {
       ref.off();
     };
   }, buffers.expanding(1));
-  console.log("listener:");
-  console.log(listener);
+  // console.log("listener:");
+  // console.log(listener);
   return listener;
 }
 
@@ -33,18 +33,18 @@ function* updatedItemSaga() {
   while (true) {
     const item = yield take(updateChannel);
     try {
-      console.log("updatedItemSaga read, item: ");
-      console.log(item);
+      // console.log("updatedItemSaga read, item: ");
+      // console.log(item);
       // console.log("running updatedItemSaga, inside loop, localPublishedData");
       const localPublishedDataString = yield AsyncStorage.getItem(
         "localPublishedData"
       );
       // console.log(localPublishedDataString);
       if (!localPublishedDataString) {
-        console.log("No local");
+        console.log("No local data stored");
         overwriteLocal = true;
       } else {
-        console.log("have local");
+        console.log("We have local data stored");
         const localPublishedData = JSON.parse(localPublishedDataString);
         if (!deepEqual(localPublishedData, item.value)) {
           console.log("local and server don't match, so update...");

@@ -1,6 +1,6 @@
 import { all, fork, put, take, takeLatest } from "redux-saga/effects";
-// import AsyncStorage from "@react-native-community/async-storage";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+// import { AsyncStorage } from "react-native";
 import FastImage from "react-native-fast-image";
 
 // import preloadRNICimages from "../../helper-functions/preload-rnic-images.js";ß
