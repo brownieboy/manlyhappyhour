@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.manlyhappyhour">
+  package="com.brownieboy.manlyhappyhour">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -1,4 +1,5 @@
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from "react-native";
 import { buffers, eventChannel } from "redux-saga";
 import { call, fork, put, take, takeLatest } from "redux-saga/effects";
 import firebaseApp, { reduxSagaFirebase } from "../../api/firebase-native.js";

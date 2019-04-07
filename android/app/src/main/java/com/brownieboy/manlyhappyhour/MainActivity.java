@@ -1,4 +1,4 @@
-package com.manlyhappyhour;
+package com.brownieboy.manlyhappyhour;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

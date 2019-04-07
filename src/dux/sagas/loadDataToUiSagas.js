@@ -1,8 +1,9 @@
 import { all, fork, put, take, takeLatest } from "redux-saga/effects";
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from "react-native";
 import FastImage from "react-native-fast-image";
 
-// import preloadRNICimages from "../../helper-functions/preload-rnic-images.js";
+// import preloadRNICimages from "../../helper-functions/preload-rnic-images.js";ß
 
 import {
   LOAD_VENUES_NOW,
@@ -26,14 +27,13 @@ function* loadDataGen() {
   yield put(setFetchVenuesRequest());
 
   try {
-    console.log("Try local storage first");
     const dataNormalisedString = yield AsyncStorage.getItem(
       "localPublishedData"
     );
 
     // const dataNormalisedString = yield require("../../api/localvenues.json");
-    console.log("loadDataToUiSagas.js, dataNormalisedString:");
-    console.log(dataNormalisedString);
+    // console.log("loadDataToUiSagas.js, dataNormalisedString:");
+    // console.log(dataNormalisedString);
 
     // console.log("Parsing data from Firebase");
     // console.log("bandsDataNormalisedString");
