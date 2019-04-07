@@ -69,8 +69,11 @@ class MapScreen extends Component {
             latitude: venue.address.lat,
             longitude: venue.address.long
           }}
-          // title={venue.name}
-          // description={venue.shortDesc}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
         >
           <Image
             style={{
