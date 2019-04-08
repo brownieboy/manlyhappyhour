@@ -44,8 +44,8 @@ class MapScreen extends Component {
     let x = -1;
     const dealTextItems = dealsObjArray.map(dealObj => {
       x++;
-      console.log("dealObj");
-      console.log(dealObj);
+      // console.log("dealObj");
+      // console.log(dealObj);
       return (
         <Text key={x}>
           <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
@@ -58,6 +58,8 @@ class MapScreen extends Component {
 
   addMarkers = venuesList =>
     venuesList.map(venue => {
+      console.log("venue.dealsGroupedByDay");
+      console.log(venue.dealsGroupedByDay)
       const dealsTextItems =
         typeof venue.dealsGroupedByDay !== "undefined" ? (
           this.getDealsTextItems(venue.dealsGroupedByDay)
