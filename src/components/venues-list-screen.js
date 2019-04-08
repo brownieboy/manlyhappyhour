@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Platform } from "react-native";
 import PropTypes from "prop-types";
 import FastImage from "react-native-fast-image";
 
@@ -18,6 +19,11 @@ import {
 } from "native-base";
 
 import appColours from "../styles/appColours.js";
+export const listStyles = {
+  // alternateRowColour: Platform.OS === "android" ? "#E8E8E8" : "#F5F5F5"
+  // alternateRowColour: Platform.OS === "android" ? "#e4e3f2" : "#efeff7"
+  alternateRowColour: Platform.OS === "android" ? "#efeff7" : "#fafafd"
+};
 
 class VenuesScreen extends Component {
   // componentDidMount() {
@@ -52,14 +58,29 @@ class VenuesScreen extends Component {
           <FlatList
             data={[...venuesList]}
             keyExtractor={item => item.id}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <ListItem
+                thumbnail
                 onPress={() =>
                   navigation.navigate("VenueScreen", {
                     id: item.id,
                     parentList: "VenuesList"
                   })
                 }
+                style={{
+                  backgroundColor:
+                    index % 2 === 0
+                      ? "transparent"
+                      : listStyles.alternateRowColour,
+                  marginLeft: 0,
+                  paddingLeft: 10,
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                  paddingRight: 0,
+                  borderBottomColor: "lightgrey",
+                  borderBottomWidth: 0.2,
+                  justifyContent: "space-between"
+                }}
               >
                 <View style={{ flex: 3 }}>
                   <FastImage
