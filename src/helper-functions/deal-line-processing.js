@@ -1,4 +1,4 @@
-const getDealTextObj = (dealsArray, daysItemKey) => {
+const getDealTextObj = (dealsArray, daysItemKey, usesShortDesc = false) => {
   let dateTimeLabel;
   let closeTimeString;
   const currentDayDealObj = dealsArray.map(currentDealLineObj => {
@@ -11,22 +11,32 @@ const getDealTextObj = (dealsArray, daysItemKey) => {
     }${closeTimeString}`;
     return {
       dateTimeLabel,
-      dealDescription: currentDealLineObj.dealDescription
+      dealDescription:
+        usesShortDesc && currentDealLineObj.dealShortDescription
+          ? currentDealLineObj.dealShortDescription
+          : currentDealLineObj.dealDescription
     };
   });
   return currentDayDealObj;
 };
 
-export const getDealTextObjArray = dealsGroupedByDay => {
+export const getDealTextObjArray = (
+  dealsGroupedByDay,
+  usesShortDesc = false
+) => {
   let dealsObjArray = [];
   let currentDealsArray;
   let currentDaysDealObjArray;
   Object.keys(dealsGroupedByDay).forEach(daysItemKey => {
     currentDealsArray = dealsGroupedByDay[daysItemKey];
-    currentDaysDealObjArray = getDealTextObj(currentDealsArray, daysItemKey);
+    currentDaysDealObjArray = getDealTextObj(
+      currentDealsArray,
+      daysItemKey,
+      usesShortDesc
+    );
     dealsObjArray = [...dealsObjArray, ...currentDaysDealObjArray];
-    // console.log("currentDaysDealObjArray outer:");
-    // console.log(currentDaysDealObjArray);
+    console.log("currentDaysDealObjArray outer:");
+    console.log(currentDaysDealObjArray);
   });
   return dealsObjArray;
 };

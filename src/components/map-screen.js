@@ -40,7 +40,7 @@ class MapScreen extends Component {
   }
 
   getDealsTextItems = dealsGroupedByDay => {
-    const dealsObjArray = getDealTextObjArray(dealsGroupedByDay);
+    const dealsObjArray = getDealTextObjArray(dealsGroupedByDay, true);
     let x = -1;
     const dealTextItems = dealsObjArray.map(dealObj => {
       x++;
@@ -49,7 +49,7 @@ class MapScreen extends Component {
       return (
         <Text key={x}>
           <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
-          <Text style={{ fontSize: 13 }}>{dealObj.dealShortDescription}</Text>
+          <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
         </Text>
       );
     });
