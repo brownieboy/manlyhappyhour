@@ -8,7 +8,8 @@ import deepEqual from "deep-equal";
 import { LOAD_VENUES_NOW } from "../venuesReducer.js";
 
 let updateChannel;
-const firebaseDatabaseRef = firebaseApp.database().ref("publishedData");
+// const firebaseDatabaseRef = firebaseApp.database().ref("publishedData");
+const firebaseDatabaseRef = firebaseApp.database().ref("publishedLive");
 
 function createEventChannel(ref) {
   const listener = eventChannel(emit => {
@@ -33,8 +34,8 @@ function* updatedItemSaga() {
   while (true) {
     const item = yield take(updateChannel);
     try {
-      // console.log("updatedItemSaga read, item: ");
-      // console.log(item);
+      console.log("updatedItemSaga read, item: ");
+      console.log(item);
       // console.log("running updatedItemSaga, inside loop, localPublishedData");
       const localPublishedDataString = yield AsyncStorage.getItem(
         "localPublishedData"
