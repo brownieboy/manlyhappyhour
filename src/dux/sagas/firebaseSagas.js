@@ -64,7 +64,7 @@ function* updatedItemSaga() {
           "localPublishedData",
           JSON.stringify(item.value)
         );
-        yield put({ type: LOAD_VENUES_NOW });
+                yield put({ type: LOAD_VENUES_NOW });
       }
     }
   }

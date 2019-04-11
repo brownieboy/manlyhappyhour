@@ -51,13 +51,13 @@ function* loadDataGen() {
       // down from Firebase
       // console.log("imageUrls");
       // console.log(JSON.stringify(imageUrls, null, 2));
-      const venuesArray = dataNormalised.venuesArray;
+      const venues = dataNormalised.venues;
       const imageUrls = dataNormalised.imageUrls;
-      console.log("venuesArray:");
-      console.log(venuesArray);
+      console.log("venues:");
+      console.log(venues);
 
       // yield console.log("loadBandsGen, about to yield all with loaded data");
-      yield all([put(setFetchVenuesSucceeded(venuesArray))]);
+      yield all([put(setFetchVenuesSucceeded(venues))]);
       // yield console.log("loadBandsGen, finished yield all with loaded data");
 
       // console.log("Have restored preloadImage here");
