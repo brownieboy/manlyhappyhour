@@ -51,13 +51,19 @@ function* loadDataGen() {
       // down from Firebase
       // console.log("imageUrls");
       // console.log(JSON.stringify(imageUrls, null, 2));
-      const venues = dataNormalised.venues;
+      const venuesObj = dataNormalised.venues;
       const imageUrls = dataNormalised.imageUrls;
-      console.log("venues:");
-      console.log(venues);
+      // console.log("venuesObj:");
+      // console.log(venuesObj);
+
+      // "Arrays" in Firebase are actually objects.  So we need to turn the object
+      // into a "proper" array, like so, before passing to Redux.
+      const venuesArray = Object.keys(venuesObj).map(key => ({ id: key, ...venuesObj[key] }));
+      // console.log("venuesArray:");
+      // console.log(venuesArray);
 
       // yield console.log("loadBandsGen, about to yield all with loaded data");
-      yield all([put(setFetchVenuesSucceeded(venues))]);
+      yield all([put(setFetchVenuesSucceeded(venuesArray))]);
       // yield console.log("loadBandsGen, finished yield all with loaded data");
 
       // console.log("Have restored preloadImage here");

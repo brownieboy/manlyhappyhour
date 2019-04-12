@@ -1,0 +1,11 @@
+[
+  {
+    "venueShortId": "bavarian-manly",
+    "days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "start": "16:00",
+    "finish": "18:00",
+    "desc": "$5 for 500ml beers",
+    "types": ["beer"],
+    "extraNotes": "Recently Mon-Fri only, the Bavarian's Happy Hour recenlty went 7 days!"
+  }
+]
