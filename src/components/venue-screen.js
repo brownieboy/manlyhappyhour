@@ -53,12 +53,12 @@ class VenueScreen extends Component {
     const imageHeight = imageWidth / 1.6;
     console.log("venueDetails:");
     console.log(venueDetails);
-    const dealsTextItems =
-      typeof venueDetails.dealsGroupedByDay !== "undefined" ? (
-        this.getDealsTextItems(venueDetails.dealsGroupedByDay)
-      ) : (
-        <Text>No deals currently listed</Text>
-      );
+    // const dealsTextItems =
+    //   typeof venueDetails.dealsGroupedByDay !== "undefined" ? (
+    //     this.getDealsTextItems(venueDetails.dealsGroupedByDay)
+    //   ) : (
+    //     <Text>No deals currently listed</Text>
+    //   );
     return (
       <Container>
         <Header
@@ -141,7 +141,7 @@ class VenueScreen extends Component {
                   color: appColours.panelTextColor
                 }}
               >
-                {getHoursText(venueDetails.hoursGroupedByDay)}
+                {/* {getHoursText(venueDetails.hoursGroupedByDay)} */}
               </Text>
             </View>
           </CardItem>
@@ -157,7 +157,7 @@ class VenueScreen extends Component {
               }}
             >
               <Text style={{ fontWeight: "bold" }}>Deals:</Text>
-              {dealsTextItems}
+              {/* {dealsTextItems} */}
             </View>
           </CardItem>
         </Content>

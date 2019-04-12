@@ -19,7 +19,6 @@ const preloadImages = imageUrlsArray => {
   FastImage.preload(uriObjArray);
 };
 
-
 // Worker Saga: will be fired on LOAD_BANDS_NOW actions, and gets all
 // data, not just bands
 function* loadDataGen() {
@@ -52,15 +51,26 @@ function* loadDataGen() {
       // console.log("imageUrls");
       // console.log(JSON.stringify(imageUrls, null, 2));
       const venuesObj = dataNormalised.venues;
-      const imageUrls = dataNormalised.imageUrls;
+      // const imageUrls = dataNormalised.imageUrls;
       // console.log("venuesObj:");
       // console.log(venuesObj);
 
       // "Arrays" in Firebase are actually objects.  So we need to turn the object
       // into a "proper" array, like so, before passing to Redux.
-      const venuesArray = Object.keys(venuesObj).map(key => ({ id: key, ...venuesObj[key] }));
+      const venuesArray = Object.keys(venuesObj).map(key => ({
+        id: key,
+        ...venuesObj[key]
+      }));
+
       // console.log("venuesArray:");
       // console.log(venuesArray);
+
+      let imageUrls = [];
+      venuesArray.forEach(venue => {
+        imageUrls.push(venue.cardFullUrl, venue.thumbFullUrl);
+      });
+      console.log("imageUrls:");
+      console.log(imageUrls);
 
       // yield console.log("loadBandsGen, about to yield all with loaded data");
       yield all([put(setFetchVenuesSucceeded(venuesArray))]);
