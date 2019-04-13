@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Platform } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+// import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {Icon} from "native-base";
 
 // tintColor passed in is an object
 const VenueTabIcon = React.memo(({ tintColor }) => (
-  <FontAwesome5
-    name="beer"
+  <Icon
+    name="wine"
     size={Platform.OS === "android" ? 26 : 30}
     style={{ color: tintColor }}
   />
