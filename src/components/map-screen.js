@@ -74,8 +74,8 @@ class MapScreen extends Component {
   addMarkers = venuesList =>
     venuesList.map(venue => {
       const dealsArray = this.props.selectVenueDeals(venue.id);
-      console.log("mapScreen..addMarkers, dealsArray:");
-      console.log(dealsArray)
+      // console.log("mapScreen..addMarkers, dealsArray:");
+      // console.log(dealsArray)
       const dealsTextItems =
         dealsArray.length > 0 ? (
           this.getDealsTextItems(dealsArray)
