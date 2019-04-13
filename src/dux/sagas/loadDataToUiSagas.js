@@ -12,6 +12,9 @@ import {
   setFetchVenuesRequest
 } from "../venuesReducer.js";
 
+import { setFetchDealsSucceeded, setFetchDealsRequest, setFetchDealsFailed } from "../dealsReducer.js"; 
+
+
 const preloadImages = imageUrlsArray => {
   const uriObjArray = imageUrlsArray.map(url => ({ uri: url }));
   console.log("loadDataToUiSagas..preloadImages, uriObjArray:");
@@ -24,6 +27,7 @@ const preloadImages = imageUrlsArray => {
 function* loadDataGen() {
   yield console.log("setFetchVenuesRequest() triggered in loadDataToUi.js");
   yield put(setFetchVenuesRequest());
+  yield put(setFetchDealsRequest());
 
   try {
     const dataNormalisedString = yield AsyncStorage.getItem(
@@ -31,7 +35,7 @@ function* loadDataGen() {
     );
 
     // const dataNormalisedString = yield require("../../api/localvenues.json");
-    // console.log("loadDataToUiSagas.js, dataNormalisedString:");
+    // console.log("loadDataToUiSagas.js dataNormalisedString:");
     // console.log(dataNormalisedString);
 
     // console.log("Parsing data from Firebase");
@@ -62,6 +66,12 @@ function* loadDataGen() {
         ...venuesObj[key]
       }));
 
+      const dealsObj = dataNormalised.deals;
+      const dealsArray = Object.keys(dealsObj).map(key => ({
+        id: key,
+        ...dealsObj[key]
+      }));
+
       // console.log("venuesArray:");
       // console.log(venuesArray);
 
@@ -69,11 +79,12 @@ function* loadDataGen() {
       venuesArray.forEach(venue => {
         imageUrls.push(venue.cardFullUrl, venue.thumbFullUrl);
       });
-      console.log("imageUrls:");
-      console.log(imageUrls);
+      // console.log("imageUrls:");
+      // console.log(imageUrls);
 
       // yield console.log("loadBandsGen, about to yield all with loaded data");
       yield all([put(setFetchVenuesSucceeded(venuesArray))]);
+      yield all([put(setFetchDealsSucceeded(dealsArray))]);
       // yield console.log("loadBandsGen, finished yield all with loaded data");
 
       // console.log("Have restored preloadImage here");
@@ -86,6 +97,7 @@ function* loadDataGen() {
   } catch (e) {
     console.log("loadDataGen error=" + e);
     yield all([put(setFetchVenuesFailed(e))]);
+    yield all([put(setFetchDealsFailed(e))]);
   }
 }
 
