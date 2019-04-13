@@ -14,7 +14,7 @@ import {
 import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
-import { getDealTextObjArray } from "../helper-functions/deal-line-processing.js";
+import { getDealTextObjArray, getDaysLabel } from "../helper-functions/deal-line-processing.js";
 
 const styles = StyleSheet.create({
   plainView: {
@@ -60,7 +60,7 @@ class MapScreen extends Component {
     const dealTextItems = dealsArray.map(dealObj => {
       return (
         <Text key={dealObj.id}>
-          <Text style={{ fontSize: 11 }}>{dealObj.days.join("/")} </Text>
+          <Text style={{ fontSize: 11 }}>{getDaysLabel(dealObj.days)} </Text>
           <Text style={{ fontSize: 11 }}>
             {`${dealObj.start}-${dealObj.finish}: `}
           </Text>

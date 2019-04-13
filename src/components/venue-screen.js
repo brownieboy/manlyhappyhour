@@ -26,8 +26,9 @@ import {
 import HeaderBackArrow from "./header-back-arrow.js";
 import appColours from "../styles/appColours.js";
 import {
-  getDealTextObjArray,
-  getHoursText
+  // getDealTextObjArray,
+  // getHoursText,
+  getDaysLabel
 } from "../helper-functions/deal-line-processing.js";
 
 class VenueScreen extends Component {
@@ -35,7 +36,7 @@ class VenueScreen extends Component {
     const dealTextItems = dealsArray.map(dealObj => {
       return (
         <Text key={dealObj.id}>
-          <Text style={{ fontSize: 11 }}>{dealObj.days.join("/")} </Text>
+          <Text style={{ fontSize: 11 }}>{getDaysLabel(dealObj.days)} </Text>
           <Text style={{ fontSize: 11 }}>
             {`${dealObj.start}-${dealObj.finish}: `}
           </Text>

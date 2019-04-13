@@ -1,3 +1,5 @@
+const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+
 const getDealTextObj = (dealsArray, daysItemKey, usesShortDesc = false) => {
   let dateTimeLabel;
   let closeTimeString;
@@ -57,4 +59,19 @@ export const getHoursText = hoursGroupedByDay => {
     ];
   });
   return hoursTextStringArray.join(", ");
+};
+
+export const getDaysLabel = daysArray => {
+  if (daysArray.length === 7) {
+    return "Every Day";
+  }
+  if (daysArray.length === 5) {
+    let checker = (arr, target) => target.every(v => arr.includes(v));
+    if (checker(daysArray, weekDays)) {
+      return "Week Days";
+    }
+
+  }
+
+  return daysArray.join("/");
 };
