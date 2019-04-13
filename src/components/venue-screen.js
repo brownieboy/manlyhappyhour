@@ -51,8 +51,8 @@ class VenueScreen extends Component {
     const { id, parentList } = navigation.state.params;
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
-    console.log("venueDetails:");
-    console.log(venueDetails);
+    // console.log("venueDetails:");
+    // console.log(venueDetails);
     const dealsTextItems =
       venueDeals.length > 0 ? (
         this.getDealsTextItems(venueDeals)
@@ -60,8 +60,8 @@ class VenueScreen extends Component {
         <Text>No deals currently listed</Text>
       );
 
-    console.log("venueDeals");
-    console.log(venueDeals);
+    // console.log("venueDeals");
+    // console.log(venueDeals);
     return (
       <Container>
         <Header
@@ -98,10 +98,17 @@ class VenueScreen extends Component {
               backgroundColor: appColours.panelBackgroundColor,
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
+              height: 60
             }}
           >
-            <View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column"
+                // alignItems: "flex-end"
+              }}
+            >
               <View
                 style={{
                   display: "flex",
@@ -118,13 +125,26 @@ class VenueScreen extends Component {
                 >
                   {venueDetails.name}
                 </Text>
-                <Text
+                {/* <Text
                   style={{
                     color: appColours.panelTextColor,
+                    fontSize: 15,
                     marginLeft: 5
                   }}
                 >
-                  {venueDetails.address.addressLine}
+                  {venueDetails.address.town}
+                </Text> */}
+              </View>
+              <View>
+                <Text
+                  style={{
+                    color: appColours.panelTextColor
+                    // marginLeft: 5
+                  }}
+                >
+                  {`${venueDetails.address.addressLine}, ${
+                    venueDetails.address.town
+                  }`}
                 </Text>
               </View>
             </View>

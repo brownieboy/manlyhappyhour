@@ -95,7 +95,8 @@ class VenuesScreen extends Component {
                     note
                     style={{ fontSize: 14, color: "darkgrey" }}
                   >
-                    {item.styles.join(", ")}
+                    {/* {item.styles.join(", ")} */}
+                    {item.shortDesc}
                   </Text>
                 </View>
                 <View style={{ flex: 1 }}>
