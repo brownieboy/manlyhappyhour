@@ -47,7 +47,7 @@ class VenueScreen extends Component {
   };
 
   render() {
-    const { navigation, venueDetails } = this.props;
+    const { navigation, venueDetails, venueDeals } = this.props;
     const { id, parentList } = navigation.state.params;
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
@@ -59,6 +59,8 @@ class VenueScreen extends Component {
     //   ) : (
     //     <Text>No deals currently listed</Text>
     //   );
+    console.log("venueDeals");
+    console.log(venueDeals);
     return (
       <Container>
         <Header
@@ -168,7 +170,8 @@ class VenueScreen extends Component {
 
 VenueScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
-  venueDetails: PropTypes.object.isRequired
+  venueDetails: PropTypes.object.isRequired,
+  venueDeals: PropTypes.array.isRequired
 };
 
 export default VenueScreen;

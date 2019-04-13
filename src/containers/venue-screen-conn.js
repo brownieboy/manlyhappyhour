@@ -3,12 +3,13 @@
 import { connect } from "react-redux";
 
 import VenueScreen from "../components/venue-screen.js";
-import { selectVenueDetails } from "../dux/selectors.js";
+import { selectVenueDetails, selectVenueDeals } from "../dux/selectors.js";
 
 const mapDispatchToProps = dispatch => ({});
 
 const mapStateToProps = (state, props) => ({
-  venueDetails: selectVenueDetails(state, props)
+  venueDetails: selectVenueDetails(state, props),
+  venueDeals: selectVenueDeals(state, props)
 });
 
 const VenueScreenConn = connect(
