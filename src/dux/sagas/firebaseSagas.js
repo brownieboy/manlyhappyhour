@@ -40,7 +40,7 @@ function* updatedItemSaga() {
       const localPublishedDataString = yield AsyncStorage.getItem(
         "localPublishedData"
       );
-      console.log("localPublishedDataString from Aysnc storage ")
+      console.log("localPublishedDataString from Aysnc storage ");
       console.log(JSON.parse(localPublishedDataString));
       if (!localPublishedDataString) {
         console.log("No local data stored");
@@ -65,7 +65,7 @@ function* updatedItemSaga() {
           "localPublishedData",
           JSON.stringify(item.value)
         );
-                yield put({ type: LOAD_VENUES_NOW });
+        yield put({ type: LOAD_VENUES_NOW });
       }
     }
   }

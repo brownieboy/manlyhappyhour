@@ -58,14 +58,14 @@ class MapScreen extends Component {
 
   addMarkers = venuesList =>
     venuesList.map(venue => {
-      console.log("venue.dealsGroupedByDay");
-      console.log(venue.dealsGroupedByDay)
-      const dealsTextItems =
-        typeof venue.dealsGroupedByDay !== "undefined" ? (
-          this.getDealsTextItems(venue.dealsGroupedByDay)
-        ) : (
-          <Text>No deals currently listed</Text>
-        );
+      // console.log("venue.dealsGroupedByDay");
+      // console.log(venue.dealsGroupedByDay)
+      // const dealsTextItems =
+      //   typeof venue.dealsGroupedByDay !== "undefined" ? (
+      //     this.getDealsTextItems(venue.dealsGroupedByDay)
+      //   ) : (
+      //     <Text>No deals currently listed</Text>
+      //   );
       return (
         <Marker
           key={venue.id}
@@ -104,7 +104,7 @@ class MapScreen extends Component {
             <View>
               <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
             </View>
-            <View>{dealsTextItems}</View>
+            {/* <View>{dealsTextItems}</View> */}
           </Callout>
         </Marker>
       );

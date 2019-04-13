@@ -48,8 +48,8 @@ function* loadDataGen() {
       const dataNormalised = JSON.parse(dataNormalisedString);
       // const dataNormalised = dataNormalisedString;
 
-      console.log("dataNormalised");
-      console.log(dataNormalised);
+      // console.log("dataNormalised");
+      // console.log(dataNormalised);
       // Filter out any half-completed data that we might have pulled
       // down from Firebase
       // console.log("imageUrls");
