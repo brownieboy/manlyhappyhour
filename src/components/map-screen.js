@@ -39,17 +39,32 @@ class MapScreen extends Component {
     }
   }
 
-  getDealsTextItems = dealsGroupedByDay => {
-    const dealsObjArray = getDealTextObjArray(dealsGroupedByDay, true);
-    let x = -1;
-    const dealTextItems = dealsObjArray.map(dealObj => {
-      x++;
-      // console.log("dealObj");
-      // console.log(dealObj);
+  // getDealsTextItems = dealsGroupedByDay => {
+  //   const dealsObjArray = getDealTextObjArray(dealsGroupedByDay, true);
+  //   let x = -1;
+  //   const dealTextItems = dealsObjArray.map(dealObj => {
+  //     x++;
+  //     // console.log("dealObj");
+  //     // console.log(dealObj);
+  //     return (
+  //       <Text key={x}>
+  //         <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
+  //         <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
+  //       </Text>
+  //     );
+  //   });
+  //   return dealTextItems;
+  // };
+
+  getDealsTextItems = dealsArray => {
+    const dealTextItems = dealsArray.map(dealObj => {
       return (
-        <Text key={x}>
-          <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
-          <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
+        <Text key={dealObj.id}>
+          <Text style={{ fontSize: 11 }}>{dealObj.days.join("/")} </Text>
+          <Text style={{ fontSize: 11 }}>
+            {`${dealObj.start}-${dealObj.finish}: `}
+          </Text>
+          <Text style={{ fontSize: 13 }}>{dealObj.desc}</Text>
         </Text>
       );
     });
@@ -58,14 +73,15 @@ class MapScreen extends Component {
 
   addMarkers = venuesList =>
     venuesList.map(venue => {
-      // console.log("venue.dealsGroupedByDay");
-      // console.log(venue.dealsGroupedByDay)
-      // const dealsTextItems =
-      //   typeof venue.dealsGroupedByDay !== "undefined" ? (
-      //     this.getDealsTextItems(venue.dealsGroupedByDay)
-      //   ) : (
-      //     <Text>No deals currently listed</Text>
-      //   );
+      const dealsArray = this.props.selectVenueDeals(venue.id);
+      console.log("mapScreen..addMarkers, dealsArray:");
+      console.log(dealsArray)
+      const dealsTextItems =
+        dealsArray.length > 0 ? (
+          this.getDealsTextItems(dealsArray)
+        ) : (
+          <Text>No deals currently listed</Text>
+        );
       return (
         <Marker
           key={venue.id}
@@ -104,11 +120,12 @@ class MapScreen extends Component {
             <View>
               <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
             </View>
-            {/* <View>{dealsTextItems}</View> */}
+            <View>{dealsTextItems}</View>
           </Callout>
         </Marker>
       );
     });
+
   render() {
     // console.log("MapScreen..render()");
     const { venuesList } = this.props;
@@ -156,7 +173,8 @@ class MapScreen extends Component {
 }
 
 MapScreen.propTypes = {
-  venuesList: PropTypes.arrayOf(PropTypes.object).isRequired
+  venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectVenueDeals: PropTypes.func.isRequired
 };
 
 export default MapScreen;

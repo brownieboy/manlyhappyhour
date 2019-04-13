@@ -11,6 +11,7 @@ const getVenues = state => state.venuesState.venuesList; // not actually a selec
 const getId = (state, props) => props.navigation.state.params.id;
 const getDeals = state => state.dealsState.dealsList;
 
+const getVenueId = (state, venueId) => venueId;
 
 export const selectVenues = createSelector(
   [getVenues],
@@ -33,3 +34,8 @@ export const selectVenueDeals = createCachedSelector(
   [selectDeals, getId],
   (dealsList, id) => dealsList.filter(dealMember => dealMember.venueId === id) // Mutliple deals, so return them all
 )((state, props) => getId(state, props));
+
+export const selectVenueDealsForVenueId = createCachedSelector(
+  [selectDeals, getVenueId],
+  (dealsList, venueId) => dealsList.filter(dealMember => dealMember.venueId === venueId) // Mutliple deals, so return them all
+)((state, venueId) => getVenueId(state, venueId));

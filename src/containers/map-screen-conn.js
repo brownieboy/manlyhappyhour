@@ -4,13 +4,14 @@ import { connect } from "react-redux";
 
 import MapScreen from "../components/map-screen.js";
 // import { selectVenueDetails } from "../dux/selectors.js";
-import { selectVenues } from "../dux/selectors.js";
+import { selectVenues, selectVenueDealsForVenueId } from "../dux/selectors.js";
 
 const mapDispatchToProps = dispatch => ({});
 
 const mapStateToProps = state => ({
   // venueDetails: selectVenueDetails(state, props)
-  venuesList: selectVenues(state)
+  venuesList: selectVenues(state),
+  selectVenueDeals: id => selectVenueDealsForVenueId(state, id)
 });
 
 const MapScreenConn = connect(
