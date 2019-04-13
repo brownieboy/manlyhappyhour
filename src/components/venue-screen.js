@@ -31,15 +31,31 @@ import {
 } from "../helper-functions/deal-line-processing.js";
 
 class VenueScreen extends Component {
-  getDealsTextItems = dealsGroupedByDay => {
-    const dealsObjArray = getDealTextObjArray(dealsGroupedByDay);
-    let x = -1;
-    const dealTextItems = dealsObjArray.map(dealObj => {
-      x++;
+  // getDealsTextItems = dealsGroupedByDay => {
+  //   const dealsObjArray = getDealTextObjArray(dealsGroupedByDay);
+  //   let x = -1;
+  //   const dealTextItems = dealsObjArray.map(dealObj => {
+  //     x++;
+  //     return (
+  //       <Text key={x}>
+  //         <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
+  //         <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
+  //       </Text>
+  //     );
+  //   });
+  //   return dealTextItems;
+  // };
+
+  getDealsTextItems = dealsArray => {
+    // const dealsObjArray = getDealTextObjArray(dealsArray);
+    const dealTextItems = dealsArray.map(dealObj => {
       return (
-        <Text key={x}>
-          <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
-          <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
+        <Text key={dealObj.id}>
+          <Text style={{ fontSize: 11 }}>{dealObj.days.join("/")} </Text>
+          <Text style={{ fontSize: 11 }}>
+            {`${dealObj.start}-${dealObj.finish}`}:{" "}
+          </Text>
+          <Text style={{ fontSize: 13 }}>{dealObj.desc}</Text>
         </Text>
       );
     });
@@ -47,18 +63,19 @@ class VenueScreen extends Component {
   };
 
   render() {
-    const { navigation, venueDetails, venueDeals } = this.props;
+    const { navigation, venueDetails, venueDeals = [] } = this.props;
     const { id, parentList } = navigation.state.params;
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
     console.log("venueDetails:");
     console.log(venueDetails);
-    // const dealsTextItems =
-    //   typeof venueDetails.dealsGroupedByDay !== "undefined" ? (
-    //     this.getDealsTextItems(venueDetails.dealsGroupedByDay)
-    //   ) : (
-    //     <Text>No deals currently listed</Text>
-    //   );
+    const dealsTextItems =
+      venueDeals.length > 0 ? (
+        this.getDealsTextItems(venueDeals)
+      ) : (
+        <Text>No deals currently listed</Text>
+      );
+
     console.log("venueDeals");
     console.log(venueDeals);
     return (
@@ -159,7 +176,7 @@ class VenueScreen extends Component {
               }}
             >
               <Text style={{ fontWeight: "bold" }}>Deals:</Text>
-              {/* {dealsTextItems} */}
+              {dealsTextItems}
             </View>
           </CardItem>
         </Content>
