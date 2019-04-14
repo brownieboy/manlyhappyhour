@@ -159,7 +159,7 @@ class VenueScreen extends Component {
               </Text> */}
               <Text
                 style={{
-                  fontSize: 13,
+                  fontSize: 15,
                   color: appColours.panelTextColor
                 }}
               >

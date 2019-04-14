@@ -93,7 +93,7 @@ class VenuesScreen extends Component {
                   <Text
                     numberOfLines={2}
                     note
-                    style={{ fontSize: 14, color: "darkgrey" }}
+                    style={{ fontSize: 14, color: "#696969" }}
                   >
                     {/* {item.styles.join(", ")} */}
                     {item.shortDesc}
