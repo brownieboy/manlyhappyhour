@@ -23,6 +23,7 @@ import {
 } from "native-base";
 // import { Button } from "native-base";
 
+import ParsedTextFormatted from "./parsed-text-formatted.js";
 import HeaderBackArrow from "./header-back-arrow.js";
 import appColours from "../styles/appColours.js";
 import {
@@ -168,7 +169,9 @@ class VenueScreen extends Component {
             </View>
           </CardItem>
           <CardItem padder>
-            <Text>{venueDetails.description}</Text>
+            <ParsedTextFormatted>
+              {venueDetails.description}
+            </ParsedTextFormatted>
           </CardItem>
           <CardItem padder>
             <View

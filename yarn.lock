@@ -5716,6 +5716,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-communications@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
+  integrity sha1-eIO1ayCgAu63kMET+GFuqGksp5U=
+
 react-native-drawer@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
@@ -5781,6 +5786,13 @@ react-native-paper@^2.14.0:
     hoist-non-react-statics "^3.1.0"
     react-lifecycles-compat "^3.0.4"
     react-native-safe-area-view "^0.12.0"
+
+react-native-parsed-text@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/react-native-parsed-text/-/react-native-parsed-text-0.0.21.tgz#86cf233aedc7a848b801b674c81d6b5ee37162df"
+  integrity sha512-0oqnn7/2TxkQW+6z7MN8SrPdEldDlDYScCK4QfHRsCmzllZFeBfdGNdYaIkSX35JWN++SSq7VBfHR74pUDmb2A==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-safe-area-view@^0.12.0:
   version "0.12.0"
