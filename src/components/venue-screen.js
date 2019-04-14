@@ -114,7 +114,7 @@ class VenueScreen extends Component {
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  alignItems: "flex-end"
+                  alignItems: "center"
                 }}
               >
                 <Text
@@ -126,15 +126,15 @@ class VenueScreen extends Component {
                 >
                   {venueDetails.name}
                 </Text>
-                {/* <Text
+                <Text
                   style={{
                     color: appColours.panelTextColor,
-                    fontSize: 15,
-                    marginLeft: 5
+                    fontSize: 13,
+                    marginLeft: 8
                   }}
                 >
-                  {venueDetails.address.town}
-                </Text> */}
+                  {venueDetails.address.addressLine}
+                </Text>
               </View>
               <View>
                 <Text
@@ -143,9 +143,7 @@ class VenueScreen extends Component {
                     // marginLeft: 5
                   }}
                 >
-                  {`${venueDetails.address.addressLine}, ${
-                    venueDetails.address.town
-                  }`}
+                  {venueDetails.shortDesc}
                 </Text>
               </View>
             </View>

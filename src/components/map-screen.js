@@ -64,7 +64,7 @@ class MapScreen extends Component {
           <Text style={{ fontSize: 11 }}>
             {`${dealObj.start}-${dealObj.finish}: `}
           </Text>
-          <Text style={{ fontSize: 13 }}>{dealObj.desc}</Text>
+          <Text style={{ fontSize: 13 }}>{dealObj.shortDesc}</Text>
         </Text>
       );
     });
