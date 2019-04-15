@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>16</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -37,9 +37,9 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To help guide you to your next Manly deal</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To help guide you to your next Manly deal</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To help guide you to your next Manly deal</string>
 	<key>UIAppFonts</key>
 	<array>

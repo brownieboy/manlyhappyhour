@@ -11,7 +11,7 @@ import {
   // Content,
   Header,
   Left,
-  // Radio,
+  Radio,
   Right,
   Title
 } from "native-base";
@@ -32,15 +32,21 @@ const styles = StyleSheet.create({
 class MapFilter extends Component {
   render() {
     const { selectedFilter, handleFilterTap } = this.props;
-    console.log("MapFilter..props");
-    console.log(this.props);
+    // console.log("MapFilter..props");
+    // console.log(this.props);
     return (
       <View
         style={{
           position: "absolute",
           top: 10,
+          left: "20%",
+          width: "70%",
           backgroundColor: "white",
-          flexDirection: "row"
+          flexDirection: "row",
+          padding: 5,
+          borderRadius: 5,
+          justifyContent: "center",
+          alignItems: "center"
         }}
       >
         <Text
@@ -49,15 +55,17 @@ class MapFilter extends Component {
         >
           All venues
         </Text>
+        <Radio selected={selectedFilter === "all"} style={{marginLeft: 3}}/>
         <Text
           onPress={() => handleFilterTap("today")}
           style={{
             fontWeight: selectedFilter === "today" ? "bold" : "normal",
-            marginLeft: 10
+            marginLeft: 15
           }}
         >
           Deals on today
         </Text>
+        <Radio selected={selectedFilter === "today"} style={{marginLeft: 3}} />
       </View>
     );
   }
@@ -102,16 +110,21 @@ class MapScreen extends Component {
     return dealTextItems;
   };
 
-  addMarkers = (venuesList, filterDay) => {
-    return venuesList.map(venue => {
+  addMarkers = (venuesList, selectedFilter, filterDay) => {
+    let filteredVenuesList = venuesList;
+
+    if (selectedFilter !== "all") {
+      filteredVenuesList = venuesList.filter(venue => {
+        const dealsArray = this.props.selectVenueDeals(venue.id);
+        const filteredDealsArray = dealsArray.filter(dealMember =>
+          dealMember.days.includes(filterDay)
+        );
+        return filteredDealsArray.length > 0;
+      });
+    }
+
+    return filteredVenuesList.map(venue => {
       const dealsArray = this.props.selectVenueDeals(venue.id);
-      // console.log("mapScreen..addMarkers, dealsArray:");
-      // console.log(dealsArray)
-      const filteredDealsArray = dealsArray.filter(dealMember =>
-        dealMember.days.includes(filterDay)
-      );
-      console.log("filteredDealsArray");
-      console.log(filteredDealsArray);
       const dealsTextItems =
         dealsArray.length > 0 ? (
           this.getDealsTextItems(dealsArray)
@@ -134,7 +147,7 @@ class MapScreen extends Component {
           <Image
             style={{
               width: 32,
-              height: 32,r
+              height: 32,
               resizeMode: "contain"
               // zIndex: 3
             }}
@@ -150,9 +163,10 @@ class MapScreen extends Component {
               borderRadius: 4
             }}
           >
-            <Text style={{ fontSize: 11 }}>{`${venue.name}${
+            {/* <Text style={{ fontSize: 11 }}>{`${venue.name}${
               filteredDealsArray.length > 0 ? " (X)" : ""
-            }`}</Text>
+            }`}</Text> */}
+            <Text style={{ fontSize: 11 }}>{venue.name}</Text>
           </View>
           <Callout style={styles.plainView}>
             <View>
@@ -204,12 +218,12 @@ class MapScreen extends Component {
             customMapStyle={mapStyles}
             tracksViewChanges={false}
           >
-            {this.addMarkers(venuesList, dayOfWeek)}
+            {this.addMarkers(venuesList, selectedFilter, dayOfWeek)}
           </MapView>
-          {/* <MapFilter
+          <MapFilter
             handleFilterTap={this.handleFilterTap}
             selectedFilter={selectedFilter}
-          /> */}
+          />
         </View>
       </Container>
     );
