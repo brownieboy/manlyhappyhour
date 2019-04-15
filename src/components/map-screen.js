@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Image, Platform, StyleSheet, Text, View } from "react-native";
+// import getDay from "date-fns/get_day";
+import dateFormat from "date-fns/format";
 
 import {
   Body,
   Container,
-  Content,
+  // Content,
   Header,
   Left,
-  Radio,
+  // Radio,
   Right,
   Title
 } from "native-base";
@@ -17,7 +19,7 @@ import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
 import {
-  getDealTextObjArray,
+  // getDealTextObjArray,
   getDaysLabel
 } from "../helper-functions/deal-line-processing.js";
 
@@ -33,7 +35,14 @@ class MapFilter extends Component {
     console.log("MapFilter..props");
     console.log(this.props);
     return (
-      <View style={{ position: "absolute", top: 10, backgroundColor: "white", flexDirection: "row" }}>
+      <View
+        style={{
+          position: "absolute",
+          top: 10,
+          backgroundColor: "white",
+          flexDirection: "row"
+        }}
+      >
         <Text
           onPress={() => handleFilterTap("all")}
           style={{ fontWeight: selectedFilter === "all" ? "bold" : "normal" }}
@@ -42,7 +51,10 @@ class MapFilter extends Component {
         </Text>
         <Text
           onPress={() => handleFilterTap("today")}
-          style={{ fontWeight: selectedFilter === "today" ? "bold" : "normal", marginLeft: 10 }}
+          style={{
+            fontWeight: selectedFilter === "today" ? "bold" : "normal",
+            marginLeft: 10
+          }}
         >
           Deals on today
         </Text>
@@ -56,7 +68,8 @@ class MapScreen extends Component {
     super(props);
     this.state = {
       extraData: false,
-      selectedFilter: "all"
+      selectedFilter: "all",
+      dayOfWeek: dateFormat(new Date(), "ddd")
     };
   }
 
@@ -89,11 +102,16 @@ class MapScreen extends Component {
     return dealTextItems;
   };
 
-  addMarkers = venuesList =>
-    venuesList.map(venue => {
+  addMarkers = (venuesList, filterDay) => {
+    return venuesList.map(venue => {
       const dealsArray = this.props.selectVenueDeals(venue.id);
       // console.log("mapScreen..addMarkers, dealsArray:");
       // console.log(dealsArray)
+      const filteredDealsArray = dealsArray.filter(dealMember =>
+        dealMember.days.includes(filterDay)
+      );
+      console.log("filteredDealsArray");
+      console.log(filteredDealsArray);
       const dealsTextItems =
         dealsArray.length > 0 ? (
           this.getDealsTextItems(dealsArray)
@@ -116,7 +134,7 @@ class MapScreen extends Component {
           <Image
             style={{
               width: 32,
-              height: 32,
+              height: 32,r
               resizeMode: "contain"
               // zIndex: 3
             }}
@@ -132,7 +150,9 @@ class MapScreen extends Component {
               borderRadius: 4
             }}
           >
-            <Text style={{ fontSize: 11 }}>{venue.name}</Text>
+            <Text style={{ fontSize: 11 }}>{`${venue.name}${
+              filteredDealsArray.length > 0 ? " (X)" : ""
+            }`}</Text>
           </View>
           <Callout style={styles.plainView}>
             <View>
@@ -143,11 +163,14 @@ class MapScreen extends Component {
         </Marker>
       );
     });
+  };
 
   render() {
     // console.log("MapScreen..render()");
     const { venuesList } = this.props;
-    const { selectedFilter } = this.state;
+    const { selectedFilter, dayOfWeek } = this.state;
+    // console.log("MapScreen..render(), state");
+    // console.log(this.state);
     return (
       <Container>
         <Header
@@ -167,7 +190,6 @@ class MapScreen extends Component {
           </Body>
           <Right />
         </Header>
-        {/* <Content> */}
         <View style={{ flex: 1 }}>
           <MapView
             initialRegion={{
@@ -182,14 +204,13 @@ class MapScreen extends Component {
             customMapStyle={mapStyles}
             tracksViewChanges={false}
           >
-            {this.addMarkers(venuesList)}
+            {this.addMarkers(venuesList, dayOfWeek)}
           </MapView>
-          <MapFilter
+          {/* <MapFilter
             handleFilterTap={this.handleFilterTap}
             selectedFilter={selectedFilter}
-          />
+          /> */}
         </View>
-        {/* </Content> */}
       </Container>
     );
   }
