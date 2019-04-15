@@ -103,6 +103,7 @@ const parsedTextArray = [
 
 const ParsedTextFormatted = ({ children }) => (
   <ParsedText
+    style={{fontSize: 15}}
     parse={parsedTextArray}
     childrenProps={{ allowFontScaling: false }}
   >

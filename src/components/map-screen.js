@@ -2,25 +2,41 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Image, Platform, StyleSheet, Text, View } from "react-native";
+
 import {
   Body,
   Container,
   Content,
   Header,
   Left,
+  Radio,
   Right,
   Title
 } from "native-base";
 import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
-import { getDealTextObjArray, getDaysLabel } from "../helper-functions/deal-line-processing.js";
+import {
+  getDealTextObjArray,
+  getDaysLabel
+} from "../helper-functions/deal-line-processing.js";
 
 const styles = StyleSheet.create({
   plainView: {
     width: 200
   }
 });
+
+class MapFilter extends Component {
+  render() {
+    return (
+      <View style={{ position: "absolute", top: 10 }}>
+        <Text>Today</Text>
+        <Radio />
+      </View>
+    );
+  }
+}
 
 class MapScreen extends Component {
   constructor(props) {
@@ -38,23 +54,6 @@ class MapScreen extends Component {
       }, 100);
     }
   }
-
-  // getDealsTextItems = dealsGroupedByDay => {
-  //   const dealsObjArray = getDealTextObjArray(dealsGroupedByDay, true);
-  //   let x = -1;
-  //   const dealTextItems = dealsObjArray.map(dealObj => {
-  //     x++;
-  //     // console.log("dealObj");
-  //     // console.log(dealObj);
-  //     return (
-  //       <Text key={x}>
-  //         <Text style={{ fontSize: 11 }}>{dealObj.dateTimeLabel}: </Text>
-  //         <Text style={{ fontSize: 13 }}>{dealObj.dealDescription}</Text>
-  //       </Text>
-  //     );
-  //   });
-  //   return dealTextItems;
-  // };
 
   getDealsTextItems = dealsArray => {
     const dealTextItems = dealsArray.map(dealObj => {
@@ -165,6 +164,7 @@ class MapScreen extends Component {
           >
             {this.addMarkers(venuesList)}
           </MapView>
+          <MapFilter />
         </View>
         {/* </Content> */}
       </Container>
