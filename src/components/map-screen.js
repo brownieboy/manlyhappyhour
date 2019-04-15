@@ -29,10 +29,23 @@ const styles = StyleSheet.create({
 
 class MapFilter extends Component {
   render() {
+    const { selectedFilter, handleFilterTap } = this.props;
+    console.log("MapFilter..props");
+    console.log(this.props);
     return (
-      <View style={{ position: "absolute", top: 10 }}>
-        <Text>Today</Text>
-        <Radio />
+      <View style={{ position: "absolute", top: 10, backgroundColor: "white", flexDirection: "row" }}>
+        <Text
+          onPress={() => handleFilterTap("all")}
+          style={{ fontWeight: selectedFilter === "all" ? "bold" : "normal" }}
+        >
+          All venues
+        </Text>
+        <Text
+          onPress={() => handleFilterTap("today")}
+          style={{ fontWeight: selectedFilter === "today" ? "bold" : "normal", marginLeft: 10 }}
+        >
+          Deals on today
+        </Text>
       </View>
     );
   }
@@ -42,9 +55,15 @@ class MapScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      extraData: false
+      extraData: false,
+      selectedFilter: "all"
     };
   }
+
+  handleFilterTap = selectedFilter => {
+    console.log("handleFilterTap");
+    this.setState({ selectedFilter });
+  };
 
   componentDidMount() {
     if (Platform.OS === "android") {
@@ -128,6 +147,7 @@ class MapScreen extends Component {
   render() {
     // console.log("MapScreen..render()");
     const { venuesList } = this.props;
+    const { selectedFilter } = this.state;
     return (
       <Container>
         <Header
@@ -164,7 +184,10 @@ class MapScreen extends Component {
           >
             {this.addMarkers(venuesList)}
           </MapView>
-          <MapFilter />
+          <MapFilter
+            handleFilterTap={this.handleFilterTap}
+            selectedFilter={selectedFilter}
+          />
         </View>
         {/* </Content> */}
       </Container>
