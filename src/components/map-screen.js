@@ -55,7 +55,11 @@ class MapFilter extends Component {
         >
           All venues
         </Text>
-        <Radio selected={selectedFilter === "all"} style={{marginLeft: 3}}/>
+        <Radio
+          selected={selectedFilter === "all"}
+          onPress={() => handleFilterTap("all")}
+          style={{ marginLeft: 3 }}
+        />
         <Text
           onPress={() => handleFilterTap("today")}
           style={{
@@ -65,7 +69,11 @@ class MapFilter extends Component {
         >
           Deals on today
         </Text>
-        <Radio selected={selectedFilter === "today"} style={{marginLeft: 3}} />
+        <Radio
+          selected={selectedFilter === "today"}
+          onPress={() => handleFilterTap("today")}
+          style={{ marginLeft: 3 }}
+        />
       </View>
     );
   }
