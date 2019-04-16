@@ -1,12 +1,8 @@
-/**
- * @format
- * @flow
- */
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Dimensions, Text, View } from "react-native";
 import FastImage from "react-native-fast-image";
+import Emoji from "react-native-emoji";
 
 import {
   CardItem,
@@ -21,7 +17,6 @@ import {
   Body
   // Thumbnail
 } from "native-base";
-// import { Button } from "native-base";
 
 import { parseTextFieldToDataTypesArray } from "../helper-functions/textfield-processing.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
@@ -49,6 +44,22 @@ class VenueScreen extends Component {
     return dealTextItems;
   };
 
+  renderTextElements = textString => {
+    const textElementsArray = parseTextFieldToDataTypesArray(textString);
+    if (textElementsArray.length === 0) {
+      return <ParsedTextFormatted>{textString}</ParsedTextFormatted>;
+    }
+    let x = -1;
+    
+    return textElementsArray.map(elementMember => {
+      x++;
+      if (elementMember.type === "emoji") {
+        return <Emoji name={elementMember.data} key={x} />;
+      }
+      return <ParsedTextFormatted key={x}>{textString}</ParsedTextFormatted>;
+    });
+  };
+
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
     const { id, parentList } = navigation.state.params;
@@ -62,8 +73,6 @@ class VenueScreen extends Component {
       ) : (
         <Text>No deals currently listed</Text>
       );
-
-      parseTextFieldToDataTypesArray(venueDetails.description);
 
     // console.log("venueDeals");
     // console.log(venueDeals);
@@ -172,9 +181,7 @@ class VenueScreen extends Component {
             </View>
           </CardItem>
           <CardItem padder>
-            <ParsedTextFormatted>
-              {venueDetails.description}
-            </ParsedTextFormatted>
+            {this.renderTextElements(venueDetails.description)}
           </CardItem>
           <CardItem padder>
             <View
