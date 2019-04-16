@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Dimensions, Text, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import Emoji from "react-native-emoji";
+import nodeEmoji from "node-emoji";
 
 import {
   CardItem,
@@ -50,11 +51,12 @@ class VenueScreen extends Component {
       return <ParsedTextFormatted>{textString}</ParsedTextFormatted>;
     }
     let x = -1;
-    
+
     return textElementsArray.map(elementMember => {
       x++;
       if (elementMember.type === "emoji") {
-        return <Emoji name={elementMember.data} key={x} />;
+        // return <Emoji name={elementMember.data} key={x} />;
+        return <Text key={x}>{nodeEmoji.get(elementMember.data)}</Text>;
       }
       return <ParsedTextFormatted key={x}>{textString}</ParsedTextFormatted>;
     });
