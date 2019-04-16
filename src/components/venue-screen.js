@@ -23,6 +23,7 @@ import {
 } from "native-base";
 // import { Button } from "native-base";
 
+import { parseTextFieldToDataTypesArray } from "../helper-functions/textfield-processing.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
 import HeaderBackArrow from "./header-back-arrow.js";
 import appColours from "../styles/appColours.js";
@@ -61,6 +62,8 @@ class VenueScreen extends Component {
       ) : (
         <Text>No deals currently listed</Text>
       );
+
+      parseTextFieldToDataTypesArray(venueDetails.description);
 
     // console.log("venueDeals");
     // console.log(venueDeals);
