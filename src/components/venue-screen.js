@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Dimensions, Text, View } from "react-native";
 import FastImage from "react-native-fast-image";
-import Emoji from "react-native-emoji";
+// import Emoji from "react-native-emoji";
 import nodeEmoji from "node-emoji";
 
 import {
@@ -19,7 +19,7 @@ import {
   // Thumbnail
 } from "native-base";
 
-import { parseTextFieldToDataTypesArray } from "../helper-functions/textfield-processing.js";
+// import { parseTextFieldToDataTypesArray } from "../helper-functions/textfield-processing.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
 import HeaderBackArrow from "./header-back-arrow.js";
 import appColours from "../styles/appColours.js";
@@ -45,22 +45,22 @@ class VenueScreen extends Component {
     return dealTextItems;
   };
 
-  renderTextElements = textString => {
-    const textElementsArray = parseTextFieldToDataTypesArray(textString);
-    if (textElementsArray.length === 0) {
-      return <ParsedTextFormatted>{textString}</ParsedTextFormatted>;
-    }
-    let x = -1;
+  // renderTextElements = textString => {
+  //   const textElementsArray = parseTextFieldToDataTypesArray(textString);
+  //   if (textElementsArray.length === 0) {
+  //     return <ParsedTextFormatted>{textString}</ParsedTextFormatted>;
+  //   }
+  //   let x = -1;
 
-    return textElementsArray.map(elementMember => {
-      x++;
-      if (elementMember.type === "emoji") {
-        // return <Emoji name={elementMember.data} key={x} />;
-        return <Text key={x}>{nodeEmoji.get(elementMember.data)}</Text>;
-      }
-      return <ParsedTextFormatted key={x}>{textString}</ParsedTextFormatted>;
-    });
-  };
+  //   return textElementsArray.map(elementMember => {
+  //     x++;
+  //     if (elementMember.type === "emoji") {
+  //       // return <Emoji name={elementMember.data} key={x} />;
+  //       return <Text key={x}>{nodeEmoji.get(elementMember.data)}</Text>;
+  //     }
+  //     return <ParsedTextFormatted key={x}>{textString}</ParsedTextFormatted>;
+  //   });
+  // };
 
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
@@ -183,7 +183,9 @@ class VenueScreen extends Component {
             </View>
           </CardItem>
           <CardItem padder>
-            {this.renderTextElements(venueDetails.description)}
+            <ParsedTextFormatted>
+              {venueDetails.description}
+            </ParsedTextFormatted>
           </CardItem>
           <CardItem padder>
             <View

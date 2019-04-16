@@ -3,6 +3,7 @@ import ParsedText from "react-native-parsed-text";
 import { StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import { email, text, web, phonecall } from "react-native-communications";
+import nodeEmoji from "node-emoji";
 
 // Probably belongs in here, but never mind..
 // import { parsedTextArray } from "../helper-functions/text-links.js";
@@ -24,6 +25,7 @@ const touchStyles = StyleSheet.create({
 const boldPattern = /\*(\S(.*?\S)?)\*/gm;
 const italicPattern = /_(\S(.*?\S)?)\_/gm;
 const strikethroughPattern = /-(\S(.*?\S)?)\-/gm;
+const emojiPattern = /:(\S(.*?\S)?)\:/gm;
 
 const markdownStyles = StyleSheet.create({
   bold: {
@@ -54,6 +56,16 @@ const renderItalicText = (matchingString, matches) => {
 const renderStrikethroughText = (matchingString, matches) => {
   const match = matchingString.match(strikethroughPattern);
   return `${match[0].replace(/-(.*)-/, "$1")}`;
+};
+
+const renderEmoji = (matchingString, matches) => {
+  const match = matchingString.match(emojiPattern);
+  // console.log("remderEmoji match");
+  // console.log(match);
+  return `${match[0].replace(
+    /:(.*):/,
+    nodeEmoji.get(match[0].replace(/:/g, ""))
+  )}`;
 };
 
 const parsedTextArray = [
@@ -98,12 +110,18 @@ const parsedTextArray = [
     pattern: strikethroughPattern,
     style: markdownStyles.strikethrough,
     renderText: renderStrikethroughText
+  },
+  {
+    // Emoji (matching colons)
+    pattern: emojiPattern,
+    style: {},
+    renderText: renderEmoji
   }
 ];
 
 const ParsedTextFormatted = ({ children }) => (
   <ParsedText
-    style={{fontSize: 15}}
+    style={{ fontSize: 15 }}
     parse={parsedTextArray}
     childrenProps={{ allowFontScaling: false }}
   >
