@@ -94,6 +94,12 @@ const parsedTextArray = [
   //   renderText: renderBoldItalicText
   // },
   {
+    // Emoji (matching colons)
+    pattern: emojiPattern,
+    style: {},
+    renderText: renderEmoji
+  },
+  {
     // Bold (matching asterisks)
     pattern: boldPattern,
     style: markdownStyles.bold,
@@ -110,12 +116,6 @@ const parsedTextArray = [
     pattern: strikethroughPattern,
     style: markdownStyles.strikethrough,
     renderText: renderStrikethroughText
-  },
-  {
-    // Emoji (matching colons)
-    pattern: emojiPattern,
-    style: {},
-    renderText: renderEmoji
   }
 ];
 
