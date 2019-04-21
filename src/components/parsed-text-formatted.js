@@ -22,10 +22,10 @@ const touchStyles = StyleSheet.create({
 
 // Latest regex patterns taken from:
 // https://stackoverflow.com/questions/47016770/replace-markdown-characters-with-regex/47016951#47016951
-const boldPattern = /[^\w]\*(\S(.*?\S)?)\*[^\w]/gm;
-const italicPattern = /[^\w]_(\S(.*?\S)?)\_[^\w]/gm;
-const strikethroughPattern = /[^\w]-(\S(.*?\S)?)\-[^\w]/gm;
-const emojiPattern = /[^\w]:(\S(.*?\S)?)\:[^\w]/gm;
+const boldPattern = /\*(\S(.*?\S)?)\*/gm;
+const italicPattern = /_(\S(.*?\S)?)\_/gm;
+const strikethroughPattern = /-(\S(.*?\S)?)-/gm;
+const emojiPattern = /:(\S(.*?\S)?)\:/gm;
 
 const markdownStyles = StyleSheet.create({
   bold: {
@@ -93,7 +93,12 @@ const parsedTextArray = [
   //   style: markdownStyles.boldItalic,
   //   renderText: renderBoldItalicText
   // },
-
+  {
+    // Emoji (matching colons)
+    pattern: emojiPattern,
+    style: {},
+    renderText: renderEmoji
+  },
   {
     // Bold (matching asterisks)
     pattern: boldPattern,
@@ -111,13 +116,7 @@ const parsedTextArray = [
     pattern: strikethroughPattern,
     style: markdownStyles.strikethrough,
     renderText: renderStrikethroughText
-  },
-  {
-    // Emoji (matching colons)
-    pattern: emojiPattern,
-    style: {},
-    renderText: renderEmoji
-  },
+  }
 ];
 
 const ParsedTextFormatted = ({ children }) => (
