@@ -100,8 +100,8 @@ class MapScreen extends Component {
   }
 
   handleDayChange = dayOfWeek => {
-    console.log("handleDayChange, dayOfWeek");
-    console.log(dayOfWeek);
+    // console.log("handleDayChange, dayOfWeek");
+    // console.log(dayOfWeek);
     this.setState({ dayOfWeek });
   };
 
