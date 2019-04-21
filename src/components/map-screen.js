@@ -43,22 +43,32 @@ class MapFilter extends Component {
     // console.log("MapFilter..props");
     // console.log(this.props);
     return (
+      // <View
+      //   style={{
+      //     position: "absolute",
+      //     top: 10,
+      //     left: "20%",
+      //     width: "70%",
+      //     backgroundColor: "white",
+      //     flexDirection: "row",
+      //     padding: 5,
+      //     borderRadius: 5,
+      //     justifyContent: "center",
+      //     alignItems: "center"
+      //   }}
+      // >
       <View
         style={{
           position: "absolute",
           top: 10,
           left: "20%",
           width: "70%",
-          backgroundColor: "white",
-          flexDirection: "row",
-          padding: 5,
-          borderRadius: 5,
-          justifyContent: "center",
-          alignItems: "center"
+          backgroundColor: "white"
         }}
       >
         <RNPickerSelect
           placeholder={placeholder}
+          useNativeAndroidPickerStyle={true}
           items={daysPicker}
           value={filterDay}
           onValueChange={value => {
