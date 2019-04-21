@@ -4284,6 +4284,11 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
+
 lodash.pad@^4.1.0:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/lodash.pad/-/lodash.pad-4.5.1.tgz#4330949a833a7c8da22cc20f6a26c4d59debba70"
@@ -5810,6 +5815,13 @@ react-native-parsed-text@^0.0.21:
   integrity sha512-0oqnn7/2TxkQW+6z7MN8SrPdEldDlDYScCK4QfHRsCmzllZFeBfdGNdYaIkSX35JWN++SSq7VBfHR74pUDmb2A==
   dependencies:
     prop-types "^15.5.10"
+
+react-native-picker-select@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-picker-select/-/react-native-picker-select-6.1.0.tgz#0ae6ba1578e3edc8b89660b81fdd85eef2226a35"
+  integrity sha512-JYD0nMr9lXwcW/xxxf09TF8SN5ZqDlfIyr96Q4248ElvPpxVrSNlNNcZMo4OPnfogu1zBBVbrZzURh0oG+BV6g==
+  dependencies:
+    lodash.isequal "^4.5.0"
 
 react-native-safe-area-view@^0.12.0:
   version "0.12.0"

@@ -4,6 +4,7 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Image, Platform, StyleSheet, Text, View } from "react-native";
 // import getDay from "date-fns/get_day";
 import dateFormat from "date-fns/format";
+import RNPickerSelect from "react-native-picker-select";
 
 import {
   Body,
@@ -18,6 +19,7 @@ import {
 import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
+import { daysPicker } from "../constants/general.js";
 import {
   // getDealTextObjArray,
   getDaysLabel
@@ -29,9 +31,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const placeholder = {
+  label: "Select a day...",
+  value: null,
+  color: "#9EA0A4"
+};
+
 class MapFilter extends Component {
   render() {
-    const { selectedFilter, handleFilterTap } = this.props;
+    const { filterDay, handleDayChange } = this.props;
     // console.log("MapFilter..props");
     // console.log(this.props);
     return (
@@ -49,49 +57,52 @@ class MapFilter extends Component {
           alignItems: "center"
         }}
       >
-        <Text
-          onPress={() => handleFilterTap("all")}
-          style={{ fontWeight: selectedFilter === "all" ? "bold" : "normal" }}
-        >
-          All venues
-        </Text>
-        <Radio
-          selected={selectedFilter === "all"}
-          onPress={() => handleFilterTap("all")}
-          style={{ marginLeft: 3 }}
-        />
-        <Text
-          onPress={() => handleFilterTap("today")}
-          style={{
-            fontWeight: selectedFilter === "today" ? "bold" : "normal",
-            marginLeft: 15
+        <RNPickerSelect
+          placeholder={placeholder}
+          items={daysPicker}
+          value={filterDay}
+          onValueChange={value => {
+            handleDayChange(value);
           }}
-        >
-          Deals on today
-        </Text>
-        <Radio
-          selected={selectedFilter === "today"}
-          onPress={() => handleFilterTap("today")}
-          style={{ marginLeft: 3 }}
         />
       </View>
     );
   }
 }
 
+/*
+      <Text>set useNativeAndroidPickerStyle to false</Text>
+        <RNPickerSelect
+          placeholder={placeholder}
+          items={sports}
+          onValueChange={value => {
+            this.setState({
+              favSport1: value,
+            });
+          }}
+          style={pickerSelectStyles}
+          value={this.state.favSport1}
+          useNativeAndroidPickerStyle={false}
+          ref={el => {
+            this.inputRefs.favSport1 = el;
+          }}
+        />
+*/
+
 class MapScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       extraData: false,
-      selectedFilter: "all",
-      dayOfWeek: dateFormat(new Date(), "ddd")
+      dayOfWeek: "all"
+      // dayOfWeek: dateFormat(new Date(), "ddd")
     };
   }
 
-  handleFilterTap = selectedFilter => {
-    console.log("handleFilterTap");
-    this.setState({ selectedFilter });
+  handleDayChange = dayOfWeek => {
+    console.log("handleDayChange, dayOfWeek");
+    console.log(dayOfWeek);
+    this.setState({ dayOfWeek });
   };
 
   componentDidMount() {
@@ -118,10 +129,12 @@ class MapScreen extends Component {
     return dealTextItems;
   };
 
-  addMarkers = (venuesList, selectedFilter, filterDay) => {
+  addMarkers = (venuesList, filterDay) => {
+    console.log("addMarkers, filterDay:");
+    console.log(filterDay);
     let filteredVenuesList = venuesList;
 
-    if (selectedFilter !== "all") {
+    if (filterDay !== "all") {
       filteredVenuesList = venuesList.filter(venue => {
         const dealsArray = this.props.selectVenueDeals(venue.id);
         const filteredDealsArray = dealsArray.filter(dealMember =>
@@ -190,7 +203,7 @@ class MapScreen extends Component {
   render() {
     // console.log("MapScreen..render()");
     const { venuesList } = this.props;
-    const { selectedFilter, dayOfWeek } = this.state;
+    const { dayOfWeek, filterDay } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
     return (
@@ -226,11 +239,12 @@ class MapScreen extends Component {
             customMapStyle={mapStyles}
             tracksViewChanges={false}
           >
-            {this.addMarkers(venuesList, selectedFilter, dayOfWeek)}
+            {this.addMarkers(venuesList, dayOfWeek)}
           </MapView>
           <MapFilter
-            handleFilterTap={this.handleFilterTap}
-            selectedFilter={selectedFilter}
+            handleDayChange={this.handleDayChange}
+            filterDay={filterDay}
+            // selectedFilter={selectedFilter}
           />
         </View>
       </Container>

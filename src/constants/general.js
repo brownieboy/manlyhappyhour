@@ -7,3 +7,14 @@ export const daysArray = [
   { name: "Saturday", shortName: "Sat", sortOrder: 5 },
   { name: "Sunday", shortName: "Sung", sortOrder: 6 }
 ];
+
+export const daysPicker = [
+  { label: "All days", value: "all" },
+  { label: "Monday", value: "Mon", sortOrder: 0 },
+  { label: "Tuesday", value: "Tue", sortOrder: 1 },
+  { label: "Wednesday", value: "Wed", sortOrder: 2 },
+  { label: "Thursday", value: "Thu", sortOrder: 3 },
+  { label: "Friday", value: "Fri", sortOrder: 4 },
+  { label: "Saturday", value: "Sat", sortOrder: 5 },
+  { label: "Sunday", value: "Sung", sortOrder: 6 }
+];
