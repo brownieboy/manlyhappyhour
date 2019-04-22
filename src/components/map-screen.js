@@ -39,7 +39,7 @@ const placeholder = {
 
 class MapFilter extends Component {
   render() {
-    const { filterDay, handleDayChange } = this.props;
+    const { filterDay, handleDayChange, handleTapMenu, menuOptionExpanded } = this.props;
     // console.log("MapFilter..props");
     // console.log(this.props);
     return (
@@ -58,11 +58,13 @@ class MapFilter extends Component {
       //   }}
       // >
       <View
+        onPress={handleTapMenu}
         style={{
           position: "absolute",
           top: 10,
           left: "20%",
           width: "70%",
+          height: menuOptionExpanded ? 400 : 50,
           backgroundColor: "white"
         }}
       >
@@ -104,7 +106,8 @@ class MapScreen extends Component {
     super(props);
     this.state = {
       extraData: false,
-      dayOfWeek: "all"
+      dayOfWeek: "all",
+      menuOptionExpanded: false
       // dayOfWeek: dateFormat(new Date(), "ddd")
     };
   }
@@ -113,6 +116,10 @@ class MapScreen extends Component {
     // console.log("handleDayChange, dayOfWeek");
     // console.log(dayOfWeek);
     this.setState({ dayOfWeek });
+  };
+
+  handleTapMenu = () => {
+    this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
   };
 
   componentDidMount() {
@@ -213,7 +220,7 @@ class MapScreen extends Component {
   render() {
     // console.log("MapScreen..render()");
     const { venuesList } = this.props;
-    const { dayOfWeek, filterDay } = this.state;
+    const { dayOfWeek, filterDay, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
     return (
@@ -254,6 +261,8 @@ class MapScreen extends Component {
           <MapFilter
             handleDayChange={this.handleDayChange}
             filterDay={filterDay}
+            handleTapMenu={this.handleTapMenu}
+            menuOptionExpanded={menuOptionExpanded}
             // selectedFilter={selectedFilter}
           />
         </View>
