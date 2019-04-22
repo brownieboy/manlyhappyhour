@@ -8,6 +8,7 @@ import RNPickerSelect from "react-native-picker-select";
 
 import {
   Body,
+  Button,
   Container,
   // Content,
   Header,
@@ -39,9 +40,14 @@ const placeholder = {
 
 class MapFilter extends Component {
   render() {
-    const { filterDay, handleDayChange, handleTapMenu, menuOptionExpanded } = this.props;
-    // console.log("MapFilter..props");
-    // console.log(this.props);
+    const {
+      filterDay,
+      handleDayChange,
+      handleTapMenu,
+      menuOptionExpanded
+    } = this.props;
+    console.log("MapFilter..props");
+    console.log(this.props);
     return (
       // <View
       //   style={{
@@ -58,7 +64,6 @@ class MapFilter extends Component {
       //   }}
       // >
       <View
-        onPress={handleTapMenu}
         style={{
           position: "absolute",
           top: 10,
@@ -77,6 +82,9 @@ class MapFilter extends Component {
             handleDayChange(value);
           }}
         />
+        <Button onPress={handleTapMenu}>
+          <Text>Size</Text>
+        </Button>
       </View>
     );
   }
