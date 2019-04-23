@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { Image, Platform, StyleSheet, Text, View } from "react-native";
+import { Image, LayoutAnimation, Platform, StyleSheet, Text, View } from "react-native";
 // import getDay from "date-fns/get_day";
 import dateFormat from "date-fns/format";
 import RNPickerSelect from "react-native-picker-select";
@@ -127,6 +127,7 @@ class MapScreen extends Component {
   };
 
   handleTapMenu = () => {
+    LayoutAnimation.spring();
     this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
   };
 
