@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { Image, LayoutAnimation, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  LayoutAnimation,
+  NativeModules,
+  Platform,
+  StyleSheet,
+  Text,
+  View
+} from "react-native";
 // import getDay from "date-fns/get_day";
 import dateFormat from "date-fns/format";
 import RNPickerSelect from "react-native-picker-select";
@@ -25,6 +33,11 @@ import {
   // getDealTextObjArray,
   getDaysLabel
 } from "../helper-functions/deal-line-processing.js";
+
+const { UIManager } = NativeModules;
+
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const styles = StyleSheet.create({
   plainView: {
@@ -70,21 +83,25 @@ class MapFilter extends Component {
           left: "20%",
           width: "70%",
           height: menuOptionExpanded ? 400 : 50,
-          backgroundColor: "white"
+          backgroundColor: "white",
+          flexDirection: "row"
         }}
       >
-        <RNPickerSelect
-          placeholder={placeholder}
-          useNativeAndroidPickerStyle={true}
-          items={daysPicker}
-          value={filterDay}
-          onValueChange={value => {
-            handleDayChange(value);
-          }}
-        />
-        <Button onPress={handleTapMenu}>
-          <Text>Size</Text>
-        </Button>
+        <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+          <RNPickerSelect
+            placeholder={placeholder}
+            useNativeAndroidPickerStyle={true}
+            items={daysPicker}
+            value={filterDay}
+            onValueChange={value => {
+              handleDayChange(value);
+            }}
+            style={{ borderWidth: 1, borderColor: "red", width: 70 }}
+          />
+          <Button onPress={handleTapMenu}>
+            <Text>Size</Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -127,6 +144,7 @@ class MapScreen extends Component {
   };
 
   handleTapMenu = () => {
+    console.log("handleTapMenu");
     LayoutAnimation.spring();
     this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
   };
