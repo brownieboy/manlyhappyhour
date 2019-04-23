@@ -76,18 +76,38 @@ class MapFilter extends Component {
       //     alignItems: "center"
       //   }}
       // >
-      <View
-        style={{
-          position: "absolute",
-          top: 10,
-          left: "20%",
-          width: "70%",
-          height: menuOptionExpanded ? 400 : 50,
-          backgroundColor: "white",
-          flexDirection: "row"
-        }}
-      >
-        <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+      [
+        <View
+          key="filterSummaryView"
+          style={{
+            position: "absolute",
+            top: 10,
+            left: "20%",
+            width: "70%",
+            height: 30,
+            backgroundColor: "white",
+            flexDirection: "row"
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+            <Text>Deals summary across here</Text>
+            <Button onPress={handleTapMenu} style={{ height: 30 }}>
+              <Text>Filter</Text>
+            </Button>
+          </View>
+        </View>,
+        <View
+          key="filterPopuView"
+          style={{
+            position: "absolute",
+            top: 40,
+            left: "20%",
+            width: "70%",
+            height: menuOptionExpanded ? 400 : 0,
+            backgroundColor: "white"
+          }}
+        >
+          <Text>Selector controls here</Text>
           <RNPickerSelect
             placeholder={placeholder}
             useNativeAndroidPickerStyle={true}
@@ -98,11 +118,8 @@ class MapFilter extends Component {
             }}
             style={{ borderWidth: 1, borderColor: "red", width: 70 }}
           />
-          <Button onPress={handleTapMenu}>
-            <Text>Size</Text>
-          </Button>
         </View>
-      </View>
+      ]
     );
   }
 }
@@ -145,18 +162,21 @@ class MapScreen extends Component {
 
   handleTapMenu = () => {
     console.log("handleTapMenu");
-    LayoutAnimation.spring();
+    // LayoutAnimation.spring();
+    LayoutAnimation.easeInEaseOut();
     this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
   };
 
-  componentDidMount() {
-    if (Platform.OS === "android") {
-      setTimeout(() => {
-        // console.log("MapScreen..componentDidMount(), calling extra setState()");
-        this.setState({ extraData: true });
-      }, 100);
-    }
-  }
+  // componentDidMount() {
+  //   if (Platform.OS === "android") {
+  //     setTimeout(() => {
+  //       // console.log("MapScreen..componentDidMount(), calling extra setState()");
+  //       // check we still need this
+  //       LayoutAnimation.easeInEaseOut();
+  //       this.setState({ extraData: true });
+  //     }, 100);
+  //   }
+  // }
 
   getDealsTextItems = dealsArray => {
     const dealTextItems = dealsArray.map(dealObj => {
