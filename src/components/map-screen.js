@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import {
@@ -8,11 +8,13 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from "react-native";
 // import getDay from "date-fns/get_day";
 import dateFormat from "date-fns/format";
 import RNPickerSelect from "react-native-picker-select";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import {
   Body,
@@ -62,86 +64,56 @@ class MapFilter extends Component {
     console.log("MapFilter..props");
     console.log(this.props);
     return (
-      // <View
-      //   style={{
-      //     position: "absolute",
-      //     top: 10,
-      //     left: "20%",
-      //     width: "70%",
-      //     backgroundColor: "white",
-      //     flexDirection: "row",
-      //     padding: 5,
-      //     borderRadius: 5,
-      //     justifyContent: "center",
-      //     alignItems: "center"
-      //   }}
-      // >
-      [
+      <Fragment>
         <View
-          key="filterSummaryView"
           style={{
             position: "absolute",
             top: 10,
-            left: "20%",
-            width: "70%",
-            height: 30,
+            left: "10%",
+            right: "10%",
+            height: 40,
+            padding: 3,
             backgroundColor: "white",
-            flexDirection: "row"
+            flexDirection: "row",
+            justifyContent: "space-between"
           }}
         >
-          <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-            <Text>Deals summary across here</Text>
-            <Button onPress={handleTapMenu} style={{ height: 30 }}>
-              <Text>Filter</Text>
-            </Button>
-          </View>
-        </View>,
+          <Text style={{ fontSize: 11 }}>Deals summary across here</Text>
+          <TouchableOpacity onPress={handleTapMenu}>
+            <MaterialCommunityIcons name="filter" size={30} />
+          </TouchableOpacity>
+        </View>
         <View
-          key="filterPopuView"
           style={{
             position: "absolute",
             top: 40,
-            left: "20%",
-            width: "70%",
+            left: "10%",
+            right: "10%",
+            padding: 3,
             height: menuOptionExpanded ? 400 : 0,
             backgroundColor: "white"
           }}
         >
-          <Text>Selector controls here</Text>
-          <RNPickerSelect
-            placeholder={placeholder}
-            useNativeAndroidPickerStyle={true}
-            items={daysPicker}
-            value={filterDay}
-            onValueChange={value => {
-              handleDayChange(value);
-            }}
-            style={{ borderWidth: 1, borderColor: "red", width: 70 }}
-          />
+          {menuOptionExpanded ? (
+            <View>
+              <Text>Selector controls here</Text>
+              <RNPickerSelect
+                placeholder={placeholder}
+                useNativeAndroidPickerStyle={true}
+                items={daysPicker}
+                value={filterDay}
+                onValueChange={value => {
+                  handleDayChange(value);
+                }}
+                style={{ borderWidth: 1, borderColor: "red", width: 70 }}
+              />
+            </View>
+          ) : null}
         </View>
-      ]
+      </Fragment>
     );
   }
 }
-
-/*
-      <Text>set useNativeAndroidPickerStyle to false</Text>
-        <RNPickerSelect
-          placeholder={placeholder}
-          items={sports}
-          onValueChange={value => {
-            this.setState({
-              favSport1: value,
-            });
-          }}
-          style={pickerSelectStyles}
-          value={this.state.favSport1}
-          useNativeAndroidPickerStyle={false}
-          ref={el => {
-            this.inputRefs.favSport1 = el;
-          }}
-        />
-*/
 
 class MapScreen extends Component {
   constructor(props) {
@@ -167,16 +139,16 @@ class MapScreen extends Component {
     this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
   };
 
-  // componentDidMount() {
-  //   if (Platform.OS === "android") {
-  //     setTimeout(() => {
-  //       // console.log("MapScreen..componentDidMount(), calling extra setState()");
-  //       // check we still need this
-  //       LayoutAnimation.easeInEaseOut();
-  //       this.setState({ extraData: true });
-  //     }, 100);
-  //   }
-  // }
+  componentDidMount() {
+    if (Platform.OS === "android") {
+      setTimeout(() => {
+        // console.log("MapScreen..componentDidMount(), calling extra setState()");
+        // check we still need this
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ extraData: true });
+      }, 100);
+    }
+  }
 
   getDealsTextItems = dealsArray => {
     const dealTextItems = dealsArray.map(dealObj => {
