@@ -61,8 +61,13 @@ class MapFilter extends Component {
       handleTapMenu,
       menuOptionExpanded
     } = this.props;
-    console.log("MapFilter..props");
-    console.log(this.props);
+    // console.log("MapFilter..props");
+    // console.log(this.props);
+    const summaryText =
+      filterDay === "all"
+        ? "No filters: all venues shown"
+        : `Deals for ${filterDay}`;
+
     return (
       <Fragment>
         <View
@@ -71,32 +76,29 @@ class MapFilter extends Component {
             top: 10,
             left: "10%",
             right: "10%",
-            height: 40,
+            height: 20,
             padding: 3,
             backgroundColor: "white",
             flexDirection: "row",
             justifyContent: "space-between"
           }}
         >
-          <Text style={{ fontSize: 11 }}>Deals summary across here</Text>
-          <TouchableOpacity onPress={handleTapMenu}>
-            <MaterialCommunityIcons name="filter" size={30} />
-          </TouchableOpacity>
+          <Text style={{ fontSize: 11 }}>{summaryText}</Text>
         </View>
         <View
           style={{
             position: "absolute",
-            top: 40,
+            top: 30,
             left: "10%",
             right: "10%",
             padding: 3,
-            height: menuOptionExpanded ? 400 : 0,
+            height: menuOptionExpanded ? 200 : 0,
             backgroundColor: "white"
           }}
         >
           {menuOptionExpanded ? (
             <View>
-              <Text>Selector controls here</Text>
+              <Text>Showing deals for day:</Text>
               <RNPickerSelect
                 placeholder={placeholder}
                 useNativeAndroidPickerStyle={true}
@@ -239,7 +241,7 @@ class MapScreen extends Component {
   render() {
     // console.log("MapScreen..render()");
     const { venuesList } = this.props;
-    const { dayOfWeek, filterDay, menuOptionExpanded } = this.state;
+    const { dayOfWeek, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
     return (
@@ -259,7 +261,15 @@ class MapScreen extends Component {
               Map Search
             </Title>
           </Body>
-          <Right />
+          <Right>
+            <TouchableOpacity onPress={this.handleTapMenu}>
+              <MaterialCommunityIcons
+                name="filter"
+                size={25}
+                style={{ color: "white" }}
+              />
+            </TouchableOpacity>
+          </Right>
         </Header>
         <View style={{ flex: 1 }}>
           <MapView
@@ -279,7 +289,7 @@ class MapScreen extends Component {
           </MapView>
           <MapFilter
             handleDayChange={this.handleDayChange}
-            filterDay={filterDay}
+            filterDay={dayOfWeek}
             handleTapMenu={this.handleTapMenu}
             menuOptionExpanded={menuOptionExpanded}
             // selectedFilter={selectedFilter}
