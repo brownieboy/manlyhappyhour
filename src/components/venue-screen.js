@@ -28,8 +28,20 @@ import {
   // getHoursText,
   getDaysLabel
 } from "../helper-functions/deal-line-processing.js";
+import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
 
 class VenueScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dimensions: Dimensions.get("window"),
+      fullScreenPhotoCard: false,
+      internalStateChanged: false,
+      orientation: "unknown"
+    };
+    this.handleOnLayout = handleOnLayout.bind(this);
+  }
+
   getDealsTextItems = dealsArray => {
     const dealTextItems = dealsArray.map(dealObj => {
       return (
@@ -64,6 +76,8 @@ class VenueScreen extends Component {
 
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
+    const { fullScreenPhotoCard, isFavourite, orientation } = this.state;
+
     const { id, parentList } = navigation.state.params;
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
@@ -80,25 +94,27 @@ class VenueScreen extends Component {
     // console.log(venueDeals);
     return (
       <Container>
-        <Header
-          style={{
-            backgroundColor: appColours.panelBackgroundColor
-          }}
-        >
-          <Left style={{ flex: 2 }}>
-            <HeaderBackArrow navCallback={navigation.goBack} />
-          </Left>
-          <Right style={{ flex: 11 }}>
-            <Title
-              style={{
-                color: appColours.panelTextColor
-              }}
-            >
-              {`${venueDetails.name}, ${venueDetails.address.town}` ||
-                "unknown"}
-            </Title>
-          </Right>
-        </Header>
+        {orientation !== "landscape" && (
+          <Header
+            style={{
+              backgroundColor: appColours.panelBackgroundColor
+            }}
+          >
+            <Left style={{ flex: 2 }}>
+              <HeaderBackArrow navCallback={navigation.goBack} />
+            </Left>
+            <Right style={{ flex: 11 }}>
+              <Title
+                style={{
+                  color: appColours.panelTextColor
+                }}
+              >
+                {`${venueDetails.name}, ${venueDetails.address.town}` ||
+                  "unknown"}
+              </Title>
+            </Right>
+          </Header>
+        )}
 
         <Content>
           <FastImage
@@ -199,6 +215,11 @@ class VenueScreen extends Component {
               {dealsTextItems}
             </View>
           </CardItem>
+          <View
+            onLayout={() => {
+              this.handleOnLayout(Dimensions);
+            }}
+          />
         </Content>
       </Container>
     );
