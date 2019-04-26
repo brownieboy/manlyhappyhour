@@ -106,9 +106,9 @@ class MapFilter extends Component {
               <Text>Showing deals for day:</Text>
               <ListItem
                 icon
-                onPress={() => {
-                  this._pickerSelect.togglePicker();
-                }}
+                // onPress={() => {
+                //   this._pickerSelect.togglePicker();
+                // }}
               >
                 <Left>
                   <Button style={{ backgroundColor: "#FF9501" }}>
@@ -125,7 +125,7 @@ class MapFilter extends Component {
                 <Right>
                   <RNPickerSelect
                     placeholder={placeholder}
-                    useNativeAndroidPickerStyle={true}
+                    useNativeAndroidPickerStyle={false}
                     items={daysPicker}
                     value={filterDay}
                     ref={pickerSelect => (this._pickerSelect = pickerSelect)}
