@@ -16,6 +16,7 @@ import dateFormat from "date-fns/format";
 import RNPickerSelect from "react-native-picker-select";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import {
   Body,
@@ -134,6 +135,17 @@ class MapFilter extends Component {
                     }}
                     style={{ borderWidth: 1, borderColor: "red", width: 70 }}
                   />
+                </Right>
+              </ListItem>
+              <ListItem icon>
+                <Left>
+                  <Ionicons name="ios-beer" />
+                </Left>
+                <Body>
+                  <Text>Beer</Text>
+                </Body>
+                <Right>
+                  <Text>Switch</Text>
                 </Right>
               </ListItem>
             </View>
