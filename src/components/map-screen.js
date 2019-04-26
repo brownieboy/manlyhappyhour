@@ -15,6 +15,7 @@ import {
 import dateFormat from "date-fns/format";
 import RNPickerSelect from "react-native-picker-select";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 
 import {
   Body,
@@ -23,6 +24,7 @@ import {
   // Content,
   Header,
   Left,
+  ListItem,
   Radio,
   Right,
   Title
@@ -54,6 +56,9 @@ const placeholder = {
 };
 
 class MapFilter extends Component {
+  // handlePickerLinePress = () => {
+  //   this._pickerSelect.togglePicker();
+  // };
   render() {
     const {
       filterDay,
@@ -74,8 +79,8 @@ class MapFilter extends Component {
           style={{
             position: "absolute",
             top: 10,
-            left: "10%",
-            right: "10%",
+            left: "5%",
+            right: "5%",
             height: 20,
             padding: 3,
             backgroundColor: "white",
@@ -89,8 +94,8 @@ class MapFilter extends Component {
           style={{
             position: "absolute",
             top: 30,
-            left: "10%",
-            right: "10%",
+            left: "5%",
+            right: "5%",
             padding: 3,
             height: menuOptionExpanded ? 200 : 0,
             backgroundColor: "white"
@@ -99,16 +104,38 @@ class MapFilter extends Component {
           {menuOptionExpanded ? (
             <View>
               <Text>Showing deals for day:</Text>
-              <RNPickerSelect
-                placeholder={placeholder}
-                useNativeAndroidPickerStyle={true}
-                items={daysPicker}
-                value={filterDay}
-                onValueChange={value => {
-                  handleDayChange(value);
+              <ListItem
+                icon
+                onPress={() => {
+                  this._pickerSelect.togglePicker();
                 }}
-                style={{ borderWidth: 1, borderColor: "red", width: 70 }}
-              />
+              >
+                <Left>
+                  <Button style={{ backgroundColor: "#FF9501" }}>
+                    <FontAwesome5Icons
+                      active
+                      name="calendar-day"
+                      style={{ color: "white" }}
+                    />
+                  </Button>
+                </Left>
+                <Body>
+                  <Text>Day of week</Text>
+                </Body>
+                <Right>
+                  <RNPickerSelect
+                    placeholder={placeholder}
+                    useNativeAndroidPickerStyle={true}
+                    items={daysPicker}
+                    value={filterDay}
+                    ref={pickerSelect => (this._pickerSelect = pickerSelect)}
+                    onValueChange={value => {
+                      handleDayChange(value);
+                    }}
+                    style={{ borderWidth: 1, borderColor: "red", width: 70 }}
+                  />
+                </Right>
+              </ListItem>
             </View>
           ) : null}
         </View>
