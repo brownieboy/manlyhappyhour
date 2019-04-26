@@ -1,17 +1,20 @@
 // import React, { Component } from "react";
-// import { bindActionCreators } from "redux";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import MapScreen from "../components/map-screen.js";
 // import { selectVenueDetails } from "../dux/selectors.js";
 import { selectVenues, selectVenueDealsForVenueId } from "../dux/selectors.js";
+import { setDealTypeFilters, getDealTypeFilters } from "../dux/settingsReducer.js";
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ setDealTypeFilters }, dispatch);
 
 const mapStateToProps = state => ({
   // venueDetails: selectVenueDetails(state, props)
   venuesList: selectVenues(state),
-  selectVenueDeals: id => selectVenueDealsForVenueId(state, id)
+  selectVenueDeals: id => selectVenueDealsForVenueId(state, id),
+  dealTypeFilters: getDealTypeFilters(state)
 });
 
 const MapScreenConn = connect(

@@ -65,10 +65,12 @@ class MapFilter extends Component {
       filterDay,
       handleDayChange,
       handleTapMenu,
-      menuOptionExpanded
+      menuOptionExpanded,
+      dealTypeFilters,
+      setDealTypeFilters
     } = this.props;
-    // console.log("MapFilter..props");
-    // console.log(this.props);
+    console.log("MapFilter..props");
+    console.log(this.props);
     const summaryText =
       filterDay === "all"
         ? "No filters: all venues shown"
@@ -278,7 +280,8 @@ class MapScreen extends Component {
   };
 
   render() {
-    // console.log("MapScreen..render()");
+    console.log("MapScreen..render(), props");
+    console.log(this.props);
     const { venuesList } = this.props;
     const { dayOfWeek, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
@@ -341,7 +344,9 @@ class MapScreen extends Component {
 
 MapScreen.propTypes = {
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectVenueDeals: PropTypes.func.isRequired
+  selectVenueDeals: PropTypes.func.isRequired,
+  dealTypeFilters: PropTypes.array.isRequired,
+  setDealTypeFilters: PropTypes.func.isRequired,
 };
 
 export default MapScreen;

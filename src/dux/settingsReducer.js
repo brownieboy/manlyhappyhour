@@ -53,6 +53,7 @@ export const setFetchSettingsSucceeded = settingsState => ({
 export const loadSettingsNow = () => ({ type: LOAD_SETTINGS_NOW });
 
 // Getters
+export const getDealTypeFilters = state => state.settingsState.dealTypeFilters;
 // export const getincludeFoodInFilter = state =>
 //   state.uiState.includeFoodInFilter;
 // export const getAppearancesView = state => state.uiState.appearancesView;
