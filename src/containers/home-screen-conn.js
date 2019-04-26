@@ -10,9 +10,10 @@ import {
   // selectVenuesAlphabeticalWithFavourites
 } from "../dux/venuesReducer.js";
 // import { selectVenues } from "../dux/selectors.js";
+import {loadSettingsNow} from "../dux/settingsReducer.js";
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ loadVenuesNow }, dispatch);
+  bindActionCreators({ loadVenuesNow, loadSettingsNow }, dispatch);
 
 const mapStateToProps = state => ({
   // venuesList: selectVenues(state)

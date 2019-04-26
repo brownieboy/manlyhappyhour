@@ -129,7 +129,7 @@ class MapFilter extends Component {
                     useNativeAndroidPickerStyle={false}
                     items={daysPicker}
                     value={filterDay}
-                    ref={pickerSelect => (this._pickerSelect = pickerSelect)}
+                    // ref={pickerSelect => (this._pickerSelect = pickerSelect)}
                     onValueChange={value => {
                       handleDayChange(value);
                     }}
@@ -174,7 +174,7 @@ class MapScreen extends Component {
   };
 
   handleTapMenu = () => {
-    console.log("handleTapMenu");
+    // console.log("handleTapMenu");
     // LayoutAnimation.spring();
     LayoutAnimation.easeInEaseOut();
     this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
@@ -207,8 +207,8 @@ class MapScreen extends Component {
   };
 
   addMarkers = (venuesList, filterDay) => {
-    console.log("addMarkers, filterDay:");
-    console.log(filterDay);
+    // console.log("addMarkers, filterDay:");
+    // console.log(filterDay);
     let filteredVenuesList = venuesList;
 
     if (filterDay !== "all") {
