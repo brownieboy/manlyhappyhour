@@ -6,6 +6,7 @@ import {
   LayoutAnimation,
   NativeModules,
   Platform,
+  Switch,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -26,7 +27,7 @@ import {
   Header,
   Left,
   ListItem,
-  Radio,
+  // Radio,
   Right,
   Title
 } from "native-base";
@@ -147,7 +148,13 @@ class MapFilter extends Component {
                   <Text>Beer</Text>
                 </Body>
                 <Right>
-                  <Text>Switch</Text>
+                  <Switch
+                    value={dealTypeFilters.includes("beer")}
+                    onChange={() => {
+                      setDealTypeFilters("beer");
+                    }}
+                    trackColor="#50B948"
+                  />
                 </Right>
               </ListItem>
             </View>
@@ -282,7 +289,7 @@ class MapScreen extends Component {
   render() {
     console.log("MapScreen..render(), props");
     console.log(this.props);
-    const { venuesList } = this.props;
+    const { venuesList, dealTypeFilters, setDealTypeFilters } = this.props;
     const { dayOfWeek, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
@@ -334,6 +341,8 @@ class MapScreen extends Component {
             filterDay={dayOfWeek}
             handleTapMenu={this.handleTapMenu}
             menuOptionExpanded={menuOptionExpanded}
+            dealTypeFilters={dealTypeFilters}
+            setDealTypeFilters={setDealTypeFilters}
             // selectedFilter={selectedFilter}
           />
         </View>
@@ -346,7 +355,7 @@ MapScreen.propTypes = {
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectVenueDeals: PropTypes.func.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
-  setDealTypeFilters: PropTypes.func.isRequired,
+  setDealTypeFilters: PropTypes.func.isRequired
 };
 
 export default MapScreen;
