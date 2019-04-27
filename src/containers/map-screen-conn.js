@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import MapScreen from "../components/map-screen.js";
 // import { selectVenueDetails } from "../dux/selectors.js";
 import { selectVenues, selectVenueDealsForVenueId } from "../dux/selectors.js";
-import { setDealTypeFilters, getDealTypeFilters } from "../dux/settingsReducer.js";
+import { toggleDealTypeFilter, getDealTypeFilters } from "../dux/settingsReducer.js";
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ setDealTypeFilters }, dispatch);
+  bindActionCreators({ toggleDealTypeFilter }, dispatch);
 
 const mapStateToProps = state => ({
   // venueDetails: selectVenueDetails(state, props)

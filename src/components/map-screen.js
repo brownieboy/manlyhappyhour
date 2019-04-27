@@ -41,6 +41,10 @@ import {
 } from "../helper-functions/deal-line-processing.js";
 
 const { UIManager } = NativeModules;
+let iconPlatformPrefix = "ios-";
+if (Platform.OS === "android") {
+  iconPlatformPrefix = "md-";
+}
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -68,14 +72,23 @@ class MapFilter extends Component {
       handleTapMenu,
       menuOptionExpanded,
       dealTypeFilters,
-      setDealTypeFilters
+      toggleDealTypeFilter
     } = this.props;
     console.log("MapFilter..props");
     console.log(this.props);
     const summaryText =
       filterDay === "all"
-        ? "No filters: all venues shown"
-        : `Deals for ${filterDay}`;
+        ? "Showing deals for all days"
+        : `Showing deals for ${filterDay}`;
+
+    let filterTypesSummary = "all types";
+    if (dealTypeFilters.length < 4) {
+      // filterTypesSummary = dealTypeFilters.join(", ");
+      filterTypesSummary = [
+        dealTypeFilters.slice(0, -1).join(", "),
+        dealTypeFilters.slice(-1)[0]
+      ].join(dealTypeFilters.length < 2 ? "" : " and ");
+    }
 
     return (
       <Fragment>
@@ -92,22 +105,26 @@ class MapFilter extends Component {
             justifyContent: "space-between"
           }}
         >
-          <Text style={{ fontSize: 11 }}>{summaryText}</Text>
+          <Text
+            style={{ fontSize: 11 }}
+          >{`${summaryText}: ${filterTypesSummary}`}</Text>
         </View>
         <View
           style={{
             position: "absolute",
-            top: 30,
+            top: 10,
             left: "5%",
             right: "5%",
             padding: 3,
-            height: menuOptionExpanded ? 200 : 0,
+            height: menuOptionExpanded ? 310 : 0,
             backgroundColor: "white"
           }}
         >
           {menuOptionExpanded ? (
             <View>
-              <Text>Showing deals for day:</Text>
+              <ListItem itemDivider>
+                <Text>Showing deals for day:</Text>
+              </ListItem>
               <ListItem
                 icon
                 // onPress={() => {
@@ -124,9 +141,6 @@ class MapFilter extends Component {
                   </Button>
                 </Left>
                 <Body>
-                  <Text>Day of week</Text>
-                </Body>
-                <Right>
                   <RNPickerSelect
                     placeholder={placeholder}
                     useNativeAndroidPickerStyle={false}
@@ -138,11 +152,42 @@ class MapFilter extends Component {
                     }}
                     style={{ borderWidth: 1, borderColor: "red", width: 70 }}
                   />
+                </Body>
+                <Right />
+              </ListItem>
+              <ListItem itemDivider>
+                <Text>Where deals include:</Text>
+              </ListItem>
+              <ListItem icon>
+                <Left>
+                  <Button disabled={!dealTypeFilters.includes("food")}>
+                    <MaterialCommunityIcons
+                      name="silverware-fork-knife"
+                      style={{ color: "white", fontSize: 15 }}
+                    />
+                  </Button>
+                </Left>
+                <Body>
+                  <Text>Food</Text>
+                </Body>
+                <Right>
+                  <Switch
+                    value={dealTypeFilters.includes("food")}
+                    onChange={() => {
+                      toggleDealTypeFilter("food");
+                    }}
+                    trackColor="#50B948"
+                  />
                 </Right>
               </ListItem>
               <ListItem icon>
                 <Left>
-                  <Ionicons name="ios-beer" />
+                  <Button disabled={!dealTypeFilters.includes("beer")}>
+                    <Ionicons
+                      name={`${iconPlatformPrefix}beer`}
+                      style={{ color: "white", fontSize: 15 }}
+                    />
+                  </Button>
                 </Left>
                 <Body>
                   <Text>Beer</Text>
@@ -151,7 +196,51 @@ class MapFilter extends Component {
                   <Switch
                     value={dealTypeFilters.includes("beer")}
                     onChange={() => {
-                      setDealTypeFilters("beer");
+                      toggleDealTypeFilter("beer");
+                    }}
+                    trackColor="#50B948"
+                  />
+                </Right>
+              </ListItem>
+              <ListItem icon>
+                <Left>
+                  <Button disabled={!dealTypeFilters.includes("wine")}>
+                    <Ionicons
+                      name={`${iconPlatformPrefix}wine`}
+                      style={{ color: "white", fontSize: 20 }}
+                    />
+                  </Button>
+                </Left>
+                <Body>
+                  <Text>Wine</Text>
+                </Body>
+                <Right>
+                  <Switch
+                    value={dealTypeFilters.includes("wine")}
+                    onChange={() => {
+                      toggleDealTypeFilter("wine");
+                    }}
+                    trackColor="#50B948"
+                  />
+                </Right>
+              </ListItem>
+              <ListItem icon>
+                <Left>
+                  <Button disabled={!dealTypeFilters.includes("cocktail")}>
+                    <FontAwesome5Icons
+                      name="cocktail"
+                      style={{ color: "white", fontSize: 15 }}
+                    />
+                  </Button>
+                </Left>
+                <Body>
+                  <Text>Cocktail</Text>
+                </Body>
+                <Right>
+                  <Switch
+                    value={dealTypeFilters.includes("cocktail")}
+                    onChange={() => {
+                      toggleDealTypeFilter("cocktail");
                     }}
                     trackColor="#50B948"
                   />
@@ -289,7 +378,7 @@ class MapScreen extends Component {
   render() {
     console.log("MapScreen..render(), props");
     console.log(this.props);
-    const { venuesList, dealTypeFilters, setDealTypeFilters } = this.props;
+    const { venuesList, dealTypeFilters, toggleDealTypeFilter } = this.props;
     const { dayOfWeek, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
@@ -342,7 +431,7 @@ class MapScreen extends Component {
             handleTapMenu={this.handleTapMenu}
             menuOptionExpanded={menuOptionExpanded}
             dealTypeFilters={dealTypeFilters}
-            setDealTypeFilters={setDealTypeFilters}
+            toggleDealTypeFilter={toggleDealTypeFilter}
             // selectedFilter={selectedFilter}
           />
         </View>
@@ -355,7 +444,7 @@ MapScreen.propTypes = {
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectVenueDeals: PropTypes.func.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
-  setDealTypeFilters: PropTypes.func.isRequired
+  toggleDealTypeFilter: PropTypes.func.isRequired
 };
 
 export default MapScreen;
