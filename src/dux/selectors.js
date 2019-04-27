@@ -22,7 +22,7 @@ export const selectVenues = createSelector(
   //   venuesList => venuesList
 );
 
-export const selectDetailTypeFilters = createSelector(
+export const selectDealTypeFilters = createSelector(
   [getDealTypeFilters],
   dealTypeFilters => dealTypeFilters
 );
@@ -84,7 +84,7 @@ export const selectVenueDealsForVenueId = createCachedSelector(
 //const found = arr1.some(r=> arr2.includes(r))
 
 export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
-  [selectVenues, selectDeals, getFilterDay, selectDetailTypeFilters],
+  [selectVenues, selectDeals, getFilterDay, selectDealTypeFilters],
   (venuesList, dealsList, filterDay, dealTypeFilters) => {
     // console.log("selectFilteredVenuesByDay:");
     // console.log(venuesList);
@@ -112,10 +112,14 @@ export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
     });
   }
 )((state, filterDay) => {
-  // console.log("selectFilteredDealsByDay resolution:");
+  // console.log("selectFilteredVenuesByDayAndDealType resolution:");
   // console.log(state);
+  // const dealFilters = selectDealTypeFilters(state);
   // console.log(filterDay);
-  return filterDay;
+  // console.log(dealFilters);
+  const cacheKey = `${filterDay}~${selectDealTypeFilters(state).join("~")}`;
+  // console.log(cacheKey);
+  return cacheKey;
 });
 
 /*
