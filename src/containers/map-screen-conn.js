@@ -7,11 +7,12 @@ import MapScreen from "../components/map-screen.js";
 import {
   selectVenues,
   selectVenueDealsForVenueId,
-  selectFilteredVenuesByDay
+  selectFilteredVenuesByDay,
+  selectDetailTypeFilters
 } from "../dux/selectors.js";
 import {
-  toggleDealTypeFilter,
-  getDealTypeFilters
+  toggleDealTypeFilter
+  // getDealTypeFilters
 } from "../dux/settingsReducer.js";
 
 const mapDispatchToProps = dispatch =>
@@ -21,9 +22,8 @@ const mapStateToProps = state => ({
   // venueDetails: selectVenueDetails(state, props)
   venuesList: selectVenues(state),
   selectVenueDeals: id => selectVenueDealsForVenueId(state, id),
-  selectFilteredDeals: (filterDay) =>
-    selectFilteredVenuesByDay(state, filterDay),
-  dealTypeFilters: getDealTypeFilters(state)
+  selectFilteredDeals: filterDay => selectFilteredVenuesByDay(state, filterDay),
+  dealTypeFilters: selectDetailTypeFilters(state)
 });
 
 const MapScreenConn = connect(

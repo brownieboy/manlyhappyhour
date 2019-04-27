@@ -10,6 +10,7 @@ import { stringSortIgnoreArticle } from "../helper-functions/sorting.js";
 const getVenues = state => state.venuesState.venuesList; // not actually a selector
 const getId = (state, props) => props.navigation.state.params.id;
 const getDeals = (state, filterDay) => state.dealsState.dealsList;
+const getDealTypeFilters = state => state.settingsState.dealTypeFilters;
 
 const getVenueId = (state, venueId) => venueId;
 // const getFilterDay = (state, venueId, filterDay) => filterDay;
@@ -19,6 +20,11 @@ export const selectVenues = createSelector(
   [getVenues],
   venuesList => stringSortIgnoreArticle(venuesList, "name")
   //   venuesList => venuesList
+);
+
+export const selectDetailTypeFilters = createSelector(
+  [getDealTypeFilters],
+  dealTypeFilters => dealTypeFilters
 );
 
 export const selectVenueDetails = createCachedSelector(
@@ -75,6 +81,34 @@ export const selectFilteredVenuesByDay = createCachedSelector(
   // console.log(filterDay);
   return filterDay;
 });
+
+export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
+  [selectVenues, selectDeals, getFilterDay, selectDetailTypeFilters],
+  (venuesList, dealsList, filterDay, dealTypeFilters) => {
+    console.log("selectFilteredVenuesByDay:");
+    console.log(venuesList);
+    console.log(dealsList);
+    console.log("filterDay:");
+    console.log(filterDay);
+
+    return venuesList.filter(venueMember => {
+      const dealsForVenue = dealsList.filter(
+        dealMember => dealMember.venueId === venueMember.id
+      );
+      const filteredDealsArray = dealsForVenue.filter(dMember =>
+        (filterDay === "all" || dMember.days.includes(filterDay))
+      );
+
+      return filteredDealsArray.length > 0;
+    });
+  }
+)((state, filterDay) => {
+  // console.log("selectFilteredDealsByDay resolution:");
+  // console.log(state);
+  // console.log(filterDay);
+  return filterDay;
+});
+
 
 /*
     if (filterDay !== "all") {
