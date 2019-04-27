@@ -55,49 +55,58 @@ export const selectVenueDealsForVenueId = createCachedSelector(
 //     dealsList.filter(dealMember => dealMember.days.includes(filterDay))
 // )((state, venueId, filterDay) => getFilterDay(state, venueId, filterDay));
 
-export const selectFilteredVenuesByDay = createCachedSelector(
-  [selectVenues, selectDeals, getFilterDay],
-  (venuesList, dealsList, filterDay) => {
-    console.log("selectFilteredVenuesByDay:");
-    console.log(venuesList);
-    console.log(dealsList);
-    console.log("filterDay:");
-    console.log(filterDay);
+// export const selectFilteredVenuesByDay = createCachedSelector(
+//   [selectVenues, selectDeals, getFilterDay],
+//   (venuesList, dealsList, filterDay) => {
+//     console.log("selectFilteredVenuesByDay:");
+//     console.log(venuesList);
+//     console.log(dealsList);
+//     console.log("filterDay:");
+//     console.log(filterDay);
 
-    return venuesList.filter(venueMember => {
-      const dealsForVenue = dealsList.filter(
-        dealMember => dealMember.venueId === venueMember.id
-      );
-      const filteredDealsArray = dealsForVenue.filter(dMember =>
-        (filterDay === "all" || dMember.days.includes(filterDay))
-      );
+//     return venuesList.filter(venueMember => {
+//       const dealsForVenue = dealsList.filter(
+//         dealMember => dealMember.venueId === venueMember.id
+//       );
+//       const filteredDealsArray = dealsForVenue.filter(
+//         dMember => filterDay === "all" || dMember.days.includes(filterDay)
+//       );
 
-      return filteredDealsArray.length > 0;
-    });
-  }
-)((state, filterDay) => {
-  // console.log("selectFilteredDealsByDay resolution:");
-  // console.log(state);
-  // console.log(filterDay);
-  return filterDay;
-});
+//       return filteredDealsArray.length > 0;
+//     });
+//   }
+// )((state, filterDay) => {
+//   // console.log("selectFilteredDealsByDay resolution:");
+//   // console.log(state);
+//   // console.log(filterDay);
+//   return filterDay;
+// });
+//const found = arr1.some(r=> arr2.includes(r))
 
 export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
   [selectVenues, selectDeals, getFilterDay, selectDetailTypeFilters],
   (venuesList, dealsList, filterDay, dealTypeFilters) => {
-    console.log("selectFilteredVenuesByDay:");
-    console.log(venuesList);
-    console.log(dealsList);
-    console.log("filterDay:");
-    console.log(filterDay);
+    // console.log("selectFilteredVenuesByDay:");
+    // console.log(venuesList);
+    // console.log(dealsList);
+    // console.log("filterDay:");
+    // console.log(filterDay);
+    // console.log(dealTypeFilters);
 
     return venuesList.filter(venueMember => {
       const dealsForVenue = dealsList.filter(
         dealMember => dealMember.venueId === venueMember.id
       );
-      const filteredDealsArray = dealsForVenue.filter(dMember =>
-        (filterDay === "all" || dMember.days.includes(filterDay))
-      );
+      const filteredDealsArray = dealsForVenue.filter(dMember => {
+        // console.log("dMember:");
+        // console.log(dMember);
+        return (
+          (filterDay === "all" || dMember.days.includes(filterDay)) &&
+          dealTypeFilters.some(
+            dealType => dMember.types && dMember.types.includes(dealType)
+          )
+        );
+      });
 
       return filteredDealsArray.length > 0;
     });
@@ -108,7 +117,6 @@ export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
   // console.log(filterDay);
   return filterDay;
 });
-
 
 /*
     if (filterDay !== "all") {

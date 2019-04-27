@@ -3,7 +3,7 @@ export const FETCH_SETTINGS_SUCCESS = "FETCH_SETTINGS_SUCCESS";
 export const LOAD_SETTINGS_NOW = "LOAD_SETTINGS_NOW";
 
 const defaultState = {
-  dealTypeFilters: ["beer", "wine", "cocktail", "food"]
+  dealTypeFilters: ["beer", "wine", "cocktails", "food"]
 };
 
 const settingsReducer = (state = defaultState, action) => {

@@ -226,7 +226,7 @@ class MapFilter extends Component {
               </ListItem>
               <ListItem icon>
                 <Left>
-                  <Button disabled={!dealTypeFilters.includes("cocktail")}>
+                  <Button disabled={!dealTypeFilters.includes("cocktails")}>
                     <FontAwesome5Icons
                       name="cocktail"
                       style={{ color: "white", fontSize: 15 }}
@@ -238,9 +238,9 @@ class MapFilter extends Component {
                 </Body>
                 <Right>
                   <Switch
-                    value={dealTypeFilters.includes("cocktail")}
+                    value={dealTypeFilters.includes("cocktails")}
                     onChange={() => {
-                      toggleDealTypeFilter("cocktail");
+                      toggleDealTypeFilter("cocktails");
                     }}
                     trackColor="#50B948"
                   />
@@ -304,16 +304,16 @@ class MapScreen extends Component {
     return dealTextItems;
   };
 
-  addMarkers = venuesList => {
+  addMarkers = () => {
     const { selectFilteredDeals } = this.props;
     const { dayOfWeek } = this.state;
     const filterDay = dayOfWeek; 
     // let filteredVenuesList = venuesList;
-    console.log("addMarkers, filterDay:");
-    console.log(filterDay);
+    // console.log("addMarkers, filterDay:");
+    // console.log(filterDay);
     const filteredVenuesList = selectFilteredDeals(filterDay);
-    console.log("addMarkers, filteredVenuesList:");
-    console.log(filteredVenuesList);
+    // console.log("addMarkers, filteredVenuesList:");
+    // console.log(filteredVenuesList);
 
     // if (filterDay !== "all") {
     //   filteredVenuesList = venuesList.filter(venue => {

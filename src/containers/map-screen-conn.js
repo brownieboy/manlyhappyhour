@@ -7,7 +7,7 @@ import MapScreen from "../components/map-screen.js";
 import {
   selectVenues,
   selectVenueDealsForVenueId,
-  selectFilteredVenuesByDay,
+  selectFilteredVenuesByDayAndDealType,
   selectDetailTypeFilters
 } from "../dux/selectors.js";
 import {
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
   // venueDetails: selectVenueDetails(state, props)
   venuesList: selectVenues(state),
   selectVenueDeals: id => selectVenueDealsForVenueId(state, id),
-  selectFilteredDeals: filterDay => selectFilteredVenuesByDay(state, filterDay),
+  selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
   dealTypeFilters: selectDetailTypeFilters(state)
 });
 
