@@ -12,6 +12,7 @@ const getId = (state, props) => props.navigation.state.params.id;
 const getDeals = state => state.dealsState.dealsList;
 
 const getVenueId = (state, venueId) => venueId;
+const getFilterDay = (state, venueId, filterDay) => filterDay;
 
 export const selectVenues = createSelector(
   [getVenues],
@@ -37,5 +38,48 @@ export const selectVenueDeals = createCachedSelector(
 
 export const selectVenueDealsForVenueId = createCachedSelector(
   [selectDeals, getVenueId],
-  (dealsList, venueId) => dealsList.filter(dealMember => dealMember.venueId === venueId) // Mutliple deals, so return them all
+  (dealsList, venueId) =>
+    dealsList.filter(dealMember => dealMember.venueId === venueId) // Mutliple deals, so return them all
 )((state, venueId) => getVenueId(state, venueId));
+
+export const selectFilteredDealsByDay = createCachedSelector(
+  [selectVenueDealsForVenueId, getVenueId, getFilterDay],
+  (dealsList, venueId, filterDay) =>
+    dealsList.filter(dealMember => dealMember.days.includes(filterDay))
+)((state, venueId, filterDay) => getFilterDay(state, venueId, filterDay));
+
+export const selectFilteredVenuesByDay = createCachedSelector(
+  [selectVenues, selectDeals, getFilterDay],
+  (venuesList, dealsList, filterDay) => {
+    console.log("selectFilteredVenuesByDay:");
+    console.log(venuesList);
+    return venuesList.filter(venueMember => {
+      const dealsForVenue = dealsList.filter(
+        dealMember => dealMember.venueId === venueMember.id
+      );
+      const filteredDealsArray = dealsForVenue.filter(dMember =>
+        dMember.days.includes(filterDay)
+      );
+
+      return filteredDealsArray.length > 0;
+    });
+  }
+)((state, filterDay) => {
+  console.log("selectFilteredDealsByDay resolution:");
+  console.log(state);
+  console.log(filterDay);
+  return filterDay;
+});
+
+/*
+    if (filterDay !== "all") {
+      filteredVenuesList = venuesList.filter(venue => {
+        const dealsArray = this.props.selectVenueDeals(venue.id);
+        const filteredDealsArray = dealsArray.filter(dealMember =>
+          dealMember.days.includes(filterDay)
+        );
+        return filteredDealsArray.length > 0;
+      });
+    }
+
+*/

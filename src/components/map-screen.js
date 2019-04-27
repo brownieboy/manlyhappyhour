@@ -304,20 +304,26 @@ class MapScreen extends Component {
     return dealTextItems;
   };
 
-  addMarkers = (venuesList, filterDay) => {
-    // console.log("addMarkers, filterDay:");
-    // console.log(filterDay);
-    let filteredVenuesList = venuesList;
+  addMarkers = venuesList => {
+    const { selectFilteredDeals } = this.props;
+    const { dayOfWeek } = this.state;
+    const filterDay = dayOfWeek; 
+    // let filteredVenuesList = venuesList;
+    console.log("addMarkers, filterDay:");
+    console.log(filterDay);
+    const filteredVenuesList = selectFilteredDeals(filterDay);
+    console.log("addMarkers, filteredVenuesList:");
+    console.log(filteredVenuesList);
 
-    if (filterDay !== "all") {
-      filteredVenuesList = venuesList.filter(venue => {
-        const dealsArray = this.props.selectVenueDeals(venue.id);
-        const filteredDealsArray = dealsArray.filter(dealMember =>
-          dealMember.days.includes(filterDay)
-        );
-        return filteredDealsArray.length > 0;
-      });
-    }
+    // if (filterDay !== "all") {
+    //   filteredVenuesList = venuesList.filter(venue => {
+    //     const dealsArray = this.props.selectVenueDeals(venue.id);
+    //     const filteredDealsArray = dealsArray.filter(dealMember =>
+    //       dealMember.days.includes(filterDay)
+    //     );
+    //     return filteredDealsArray.length > 0;
+    //   });
+    // }
 
     return filteredVenuesList.map(venue => {
       const dealsArray = this.props.selectVenueDeals(venue.id);
@@ -376,9 +382,14 @@ class MapScreen extends Component {
   };
 
   render() {
-    console.log("MapScreen..render(), props");
-    console.log(this.props);
-    const { venuesList, dealTypeFilters, toggleDealTypeFilter } = this.props;
+    // console.log("MapScreen..render(), props");
+    // console.log(this.props);
+    const {
+      venuesList,
+      dealTypeFilters,
+      toggleDealTypeFilter
+      // selectFilteredDeals
+    } = this.props;
     const { dayOfWeek, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
@@ -443,6 +454,7 @@ class MapScreen extends Component {
 MapScreen.propTypes = {
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectVenueDeals: PropTypes.func.isRequired,
+  selectFilteredDeals: PropTypes.func.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
   toggleDealTypeFilter: PropTypes.func.isRequired
 };
