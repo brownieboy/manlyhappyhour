@@ -69,13 +69,13 @@ class MapFilter extends Component {
     const {
       filterDay,
       handleDayChange,
-      handleTapMenu,
+      // handleTapMenu,
       menuOptionExpanded,
       dealTypeFilters,
       toggleDealTypeFilter
     } = this.props;
-    console.log("MapFilter..props");
-    console.log(this.props);
+    // console.log("MapFilter..props");
+    // console.log(this.props);
     const summaryText =
       filterDay === "all"
         ? "Showing deals for all days"
@@ -443,6 +443,15 @@ class MapScreen extends Component {
 MapScreen.propTypes = {
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectVenueDeals: PropTypes.func.isRequired,
+  dealTypeFilters: PropTypes.array.isRequired,
+  toggleDealTypeFilter: PropTypes.func.isRequired
+};
+
+MapFilter.propTypes = {
+  filterDay: PropTypes.string.isRequired,
+  handleDayChange: PropTypes.func.isRequired,
+  // handleTapMenu,
+  menuOptionExpanded: PropTypes.bool.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
   toggleDealTypeFilter: PropTypes.func.isRequired
 };
