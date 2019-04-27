@@ -25,7 +25,7 @@ const touchStyles = StyleSheet.create({
 const boldPattern = /\*(\S(.*?\S)?)\*/gm;
 const italicPattern = /_(\S(.*?\S)?)\_/gm;
 const strikethroughPattern = /-(\S(.*?\S)?)-/gm;
-const emojiPattern = /:(\S(.*?\S)?)\:/gm;
+const emojiPattern = /:(\S(\w*?\S)?)\:/gm;
 
 const markdownStyles = StyleSheet.create({
   bold: {
