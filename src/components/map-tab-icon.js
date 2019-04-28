@@ -6,7 +6,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 // tintColor passed in is an object
 const MapTabIcon = React.memo(({ tintColor }) => (
   <MaterialCommunityIcons
-    name="google-maps"
+    name={Platform.OS === "android" ? "google-maps" : "map-marker-multiple"}
     size={Platform.OS === "android" ? 26 : 30}
     style={{ color: tintColor }}
   />

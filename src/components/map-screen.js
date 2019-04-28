@@ -433,6 +433,8 @@ class MapScreen extends Component {
             // customMapStyle={Platform.OS === "ios" ? mapStyles : null}
             customMapStyle={mapStyles}
             tracksViewChanges={false}
+            // mapType="mutedStandard"
+            showsUserLocation={true}
           >
             {this.addMarkers(venuesList, dayOfWeek)}
           </MapView>
