@@ -28,12 +28,14 @@ export const selectDealsSortedByDay = createSelector(
   [getDeals],
   dealsList => {
     // [...dealsList].sort((a, b) => {});
-    const dealsListSorted = dealsList.map(deal => {
-      const lowDayNumber = getLowestDayNumberFromDealDays(deal.days);
-      console.log("lowDayNumber: " + lowDayNumber);
-      return lowDayNumber;
+    const dealsListSorted = [...dealsList].sort((dealA, dealB) => {
+      const lowDayNumberA = getLowestDayNumberFromDealDays(dealA.days);
+      const lowDayNumberB = getLowestDayNumberFromDealDays(dealB.days);
+      // console.log("lowDayNumber: " + lowDayNumber);
+      return lowDayNumberA - lowDayNumberB;
     });
-    return dealsList;
+    // return dealsList;
+    return dealsListSorted;
   }
 );
 
