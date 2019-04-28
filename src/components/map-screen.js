@@ -429,7 +429,7 @@ class MapScreen extends Component {
               longitudeDelta: 0.015
             }}
             style={{ flex: 1 }}
-            provider={PROVIDER_GOOGLE}
+            // provider={PROVIDER_GOOGLE}
             // customMapStyle={Platform.OS === "ios" ? mapStyles : null}
             customMapStyle={mapStyles}
             tracksViewChanges={false}
