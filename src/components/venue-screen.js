@@ -145,7 +145,8 @@ class VenueScreen extends Component {
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  alignItems: "center"
+                  alignItems: "center",
+                  flex: 1
                 }}
               >
                 <Text
