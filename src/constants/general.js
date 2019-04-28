@@ -10,11 +10,11 @@ export const daysArray = [
 
 export const daysPicker = [
   { label: "All days", value: "all" },
-  { label: "Monday", value: "Mon", sortOrder: 0 },
-  { label: "Tuesday", value: "Tue", sortOrder: 1 },
-  { label: "Wednesday", value: "Wed", sortOrder: 2 },
-  { label: "Thursday", value: "Thu", sortOrder: 3 },
-  { label: "Friday", value: "Fri", sortOrder: 4 },
-  { label: "Saturday", value: "Sat", sortOrder: 5 },
-  { label: "Sunday", value: "Sun", sortOrder: 6 }
+  { label: "Monday", value: "Mon" },
+  { label: "Tuesday", value: "Tue" },
+  { label: "Wednesday", value: "Wed" },
+  { label: "Thursday", value: "Thu" },
+  { label: "Friday", value: "Fri" },
+  { label: "Saturday", value: "Sat" },
+  { label: "Sunday", value: "Sun" }
 ];

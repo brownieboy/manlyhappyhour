@@ -6,6 +6,8 @@ import { createSelector } from "reselect";
 import createCachedSelector from "re-reselect";
 
 import { stringSortIgnoreArticle } from "../helper-functions/sorting.js";
+// import { daysArray } from "../constants/general.js";
+import { getLowestDayNumberFromDealDays } from "../helper-functions/dateTime.js";
 
 const getVenues = state => state.venuesState.venuesList; // not actually a selector
 const getId = (state, props) => props.navigation.state.params.id;
@@ -20,6 +22,19 @@ export const selectVenues = createSelector(
   [getVenues],
   venuesList => stringSortIgnoreArticle(venuesList, "name")
   //   venuesList => venuesList
+);
+
+export const selectDealsSortedByDay = createSelector(
+  [getDeals],
+  dealsList => {
+    // [...dealsList].sort((a, b) => {});
+    const dealsListSorted = dealsList.map(deal => {
+      const lowDayNumber = getLowestDayNumberFromDealDays(deal.days);
+      console.log("lowDayNumber: " + lowDayNumber);
+      return lowDayNumber;
+    });
+    return dealsList;
+  }
 );
 
 export const selectDealTypeFilters = createSelector(
@@ -39,12 +54,12 @@ export const selectDeals = createSelector(
 );
 
 export const selectVenueDeals = createCachedSelector(
-  [selectDeals, getId],
+  [selectDealsSortedByDay, getId],
   (dealsList, id) => dealsList.filter(dealMember => dealMember.venueId === id) // Mutliple deals, so return them all
 )((state, props) => getId(state, props));
 
 export const selectVenueDealsForVenueId = createCachedSelector(
-  [selectDeals, getVenueId],
+  [selectDealsSortedByDay, getVenueId],
   (dealsList, venueId) =>
     dealsList.filter(dealMember => dealMember.venueId === venueId) // Mutliple deals, so return them all
 )((state, venueId) => getVenueId(state, venueId));
@@ -84,7 +99,7 @@ export const selectVenueDealsForVenueId = createCachedSelector(
 //const found = arr1.some(r=> arr2.includes(r))
 
 export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
-  [selectVenues, selectDeals, getFilterDay, selectDealTypeFilters],
+  [selectVenues, selectDealsSortedByDay, getFilterDay, selectDealTypeFilters],
   (venuesList, dealsList, filterDay, dealTypeFilters) => {
     // console.log("selectFilteredVenuesByDay:");
     // console.log(venuesList);
