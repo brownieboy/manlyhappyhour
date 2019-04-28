@@ -4,6 +4,7 @@
 
 import { createSelector } from "reselect";
 import createCachedSelector from "re-reselect";
+// import dateFnsParse from "date-fns/parse";
 
 import { stringSortIgnoreArticle } from "../helper-functions/sorting.js";
 // import { daysArray } from "../constants/general.js";
@@ -27,14 +28,19 @@ export const selectVenues = createSelector(
 export const selectDealsSortedByDay = createSelector(
   [getDeals],
   dealsList => {
-    // [...dealsList].sort((a, b) => {});
     const dealsListSorted = [...dealsList].sort((dealA, dealB) => {
       const lowDayNumberA = getLowestDayNumberFromDealDays(dealA.days);
       const lowDayNumberB = getLowestDayNumberFromDealDays(dealB.days);
-      // console.log("lowDayNumber: " + lowDayNumber);
+
+      // If the days match, then we need to look at the two deal's start times.
+      if (lowDayNumberA === lowDayNumberB) {
+        // Make it a proper date, although we're only comapring the time part
+        const startTimeA = new Date(`01 Jan 1970 ${dealA.start}`);
+        const startTimeB = new Date(`01 Jan 1970 ${dealB.start}`);
+        return startTimeA - startTimeB;
+      }
       return lowDayNumberA - lowDayNumberB;
     });
-    // return dealsList;
     return dealsListSorted;
   }
 );
