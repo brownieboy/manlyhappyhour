@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Callout, Marker } from "react-native-maps";
 import {
   Image,
   LayoutAnimation,
@@ -13,7 +13,7 @@ import {
   View
 } from "react-native";
 // import getDay from "date-fns/get_day";
-import dateFormat from "date-fns/format";
+// import dateFormat from "date-fns/format";
 import RNPickerSelect from "react-native-picker-select";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
@@ -293,10 +293,14 @@ class MapScreen extends Component {
     const dealTextItems = dealsArray.map(dealObj => {
       return (
         <Text key={dealObj.id}>
-          <Text style={{ fontSize: 11 }}>{getDaysLabel(dealObj.days)} </Text>
           <Text style={{ fontSize: 11 }}>
-            {`${dealObj.start}-${dealObj.finish}: `}
+            {dealObj.days ? getDaysLabel(dealObj.days) : "Day?"}{" "}
           </Text>
+          {dealObj.start && dealObj.finish && (
+            <Text style={{ fontSize: 11 }}>
+              {`${dealObj.start}-${dealObj.finish}: `}
+            </Text>
+          )}
           <Text style={{ fontSize: 13 }}>{dealObj.shortDesc}</Text>
         </Text>
       );
@@ -323,67 +327,71 @@ class MapScreen extends Component {
         ) : (
           <Text>No deals currently listed</Text>
         );
-      return (
-        <Marker
-          key={venue.id}
-          coordinate={{
-            latitude: venue.address.lat,
-            longitude: venue.address.long
-          }}
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <View
+      if (venue.address && venue.address.lat && venue.address.long) {
+        return (
+          <Marker
+            key={venue.id}
+            coordinate={{
+              latitude: venue.address.lat,
+              longitude: venue.address.long
+            }}
             style={{
-              borderRadius: 50,
-              // paddingTop: 8,
-              // paddingBottom: 8,
-              // paddingLeft: 5,
-              // paddingRight: 5,
-              padding: 6,
-              backgroundColor: "#FFFFCC",
               flex: 1,
               justifyContent: "center",
               alignItems: "center"
             }}
           >
-            <Image
+            <View
               style={{
-                width: 32,
-                height: 32,
-                resizeMode: "contain"
-                // zIndex: 3
+                borderRadius: 50,
+                // paddingTop: 8,
+                // paddingBottom: 8,
+                // paddingLeft: 5,
+                // paddingRight: 5,
+                padding: 6,
+                backgroundColor: "#FFFFCC",
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
               }}
-              source={mapIcons[venue.address.mapIcon]}
-            />
-          </View>
-          <View
-            style={{
-              backgroundColor: "white",
-              paddingTop: 1,
-              paddingBottom: 1,
-              paddingLeft: 3,
-              paddingRight: 3,
-              borderRadius: 4,
-              marginTop: -6
-            }}
-          >
-            {/* <Text style={{ fontSize: 11 }}>{`${venue.name}${
+            >
+              <Image
+                style={{
+                  width: 32,
+                  height: 32,
+                  resizeMode: "contain"
+                  // zIndex: 3
+                }}
+                source={mapIcons[venue.address.mapIcon]}
+              />
+            </View>
+            <View
+              style={{
+                backgroundColor: "white",
+                paddingTop: 1,
+                paddingBottom: 1,
+                paddingLeft: 3,
+                paddingRight: 3,
+                borderRadius: 4,
+                marginTop: -6
+              }}
+            >
+              {/* <Text style={{ fontSize: 11 }}>{`${venue.name}${
               filteredDealsArray.length > 0 ? " (X)" : ""
             }`}</Text> */}
-            <Text style={{ fontSize: 11 }}>{venue.name}</Text>
-          </View>
-          <Callout style={styles.plainView}>
-            <View>
-              <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
+              <Text style={{ fontSize: 11 }}>{venue.name}</Text>
             </View>
-            <View>{dealsTextItems}</View>
-          </Callout>
-        </Marker>
-      );
+            <Callout style={styles.plainView}>
+              <View>
+                <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
+              </View>
+              <View>{dealsTextItems}</View>
+            </Callout>
+          </Marker>
+        );
+      } else {
+        return null;
+      }
     });
   };
 
