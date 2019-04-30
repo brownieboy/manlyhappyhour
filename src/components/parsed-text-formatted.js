@@ -24,7 +24,13 @@ const touchStyles = StyleSheet.create({
 // https://stackoverflow.com/questions/47016770/replace-markdown-characters-with-regex/47016951#47016951
 const boldPattern = /\*(\S(.*?\S)?)\*/gm;
 const italicPattern = /_(\S(.*?\S)?)\_/gm;
-const strikethroughPattern = /-(\S(.*?\S)?)-/gm;
+// const strikethroughPattern = /-(\S(.*?\S)?)-/gm;
+// const strikethroughPattern = /(?!\s)-(\S(.*?\S)?)-(?=\W)/gm;  // Gives null but works in online test
+// const strikethroughPattern = /\s-(\S(.*?\S)?)-\s/gm;  // Gives null but works in online test
+// const strikethroughPattern = /(?=(-))(\S(.*?\S)?)-/gm;
+// const strikethroughPattern = /\s{1}-(\S(.*?\S)?)-\W{1}/gm;
+// const strikethroughPattern = /\s-(\S(.*?\S)?)-/gm;
+const strikethroughPattern = /\s-(\S(.*?\S)?)-\W/gm;
 const emojiPattern = /:(\S(\w*?\S)?)\:/gm;
 
 const markdownStyles = StyleSheet.create({

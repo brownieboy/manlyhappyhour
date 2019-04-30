@@ -57,23 +57,6 @@ class VenueScreen extends Component {
     return dealTextItems;
   };
 
-  // renderTextElements = textString => {
-  //   const textElementsArray = parseTextFieldToDataTypesArray(textString);
-  //   if (textElementsArray.length === 0) {
-  //     return <ParsedTextFormatted>{textString}</ParsedTextFormatted>;
-  //   }
-  //   let x = -1;
-
-  //   return textElementsArray.map(elementMember => {
-  //     x++;
-  //     if (elementMember.type === "emoji") {
-  //       // return <Emoji name={elementMember.data} key={x} />;
-  //       return <Text key={x}>{nodeEmoji.get(elementMember.data)}</Text>;
-  //     }
-  //     return <ParsedTextFormatted key={x}>{textString}</ParsedTextFormatted>;
-  //   });
-  // };
-
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
     const { fullScreenPhotoCard, isFavourite, orientation } = this.state;
@@ -131,29 +114,25 @@ class VenueScreen extends Component {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
+              flex: 1,
               height: 60
             }}
           >
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "column"
-                // alignItems: "flex-end"
-              }}
-            >
+            <Body style={{ flexGrow: 7 }}>
               <View
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  alignItems: "center",
-                  flex: 1
+                  justifyContent: "space-between",
+                  width: "100%"
                 }}
               >
                 <Text
                   style={{
                     color: appColours.panelTextColor,
                     fontSize: 18,
-                    fontWeight: "bold"
+                    fontWeight: "bold",
+                    flex: 1
                   }}
                 >
                   {venueDetails.name}
@@ -161,24 +140,24 @@ class VenueScreen extends Component {
                 <Text
                   style={{
                     color: appColours.panelTextColor,
-                    fontSize: 13,
-                    marginLeft: 8
+                    fontSize: 13
+                    // flex:3
                   }}
                 >
                   {venueDetails.address.addressLine}
                 </Text>
               </View>
+
               <View>
                 <Text
                   style={{
                     color: appColours.panelTextColor
-                    // marginLeft: 5
                   }}
                 >
                   {venueDetails.shortDesc}
                 </Text>
               </View>
-            </View>
+            </Body>
             <View
               style={{
                 display: "flex",
