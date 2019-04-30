@@ -8,7 +8,8 @@ import IconAntDesign from "react-native-vector-icons/AntDesign";
 
 import HomeScreen from "../containers/home-screen-conn.js";
 import VenuesListNav from "../nav/venues-nav.js";
-import MapScreen from "../containers/map-screen-conn.js";
+// import MapScreen from "../containers/map-screen-conn.js";
+import MapNav from "../nav/map-nav.js";
 import VenueTabIcon from "../components/venue-tab-icon.js";
 import MapTabIcon from "../components/map-tab-icon.js";
 
@@ -29,7 +30,7 @@ HomeScreen.navigationOptions = {
 const routes = {
   Home: HomeScreen,
   Venues: VenuesListNav,
-  Maps: MapScreen
+  Maps: MapNav
 };
 
 VenuesListNav.navigationOptions = {
@@ -37,7 +38,7 @@ VenuesListNav.navigationOptions = {
   tabBarIcon: ({ tintColor }) => <VenueTabIcon tintColor={tintColor} />
 };
 
-MapScreen.navigationOptions = {
+MapNav.navigationOptions = {
   tabBarLabel: "Map",
   tabBarIcon: ({ tintColor }) => <MapTabIcon tintColor={tintColor} />
 };
