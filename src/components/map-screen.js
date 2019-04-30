@@ -285,7 +285,7 @@ class MapScreen extends Component {
         // check we still need this
         LayoutAnimation.easeInEaseOut();
         this.setState({ extraData: true });
-      }, 100);
+      }, 50);
     }
   }
 
@@ -307,23 +307,13 @@ class MapScreen extends Component {
   addMarkers = () => {
     const { selectFilteredDeals } = this.props;
     const { dayOfWeek } = this.state;
-    const filterDay = dayOfWeek; 
+    const filterDay = dayOfWeek;
     // let filteredVenuesList = venuesList;
     // console.log("addMarkers, filterDay:");
     // console.log(filterDay);
     const filteredVenuesList = selectFilteredDeals(filterDay);
     // console.log("addMarkers, filteredVenuesList:");
     // console.log(filteredVenuesList);
-
-    // if (filterDay !== "all") {
-    //   filteredVenuesList = venuesList.filter(venue => {
-    //     const dealsArray = this.props.selectVenueDeals(venue.id);
-    //     const filteredDealsArray = dealsArray.filter(dealMember =>
-    //       dealMember.days.includes(filterDay)
-    //     );
-    //     return filteredDealsArray.length > 0;
-    //   });
-    // }
 
     return filteredVenuesList.map(venue => {
       const dealsArray = this.props.selectVenueDeals(venue.id);
@@ -346,15 +336,30 @@ class MapScreen extends Component {
             alignItems: "center"
           }}
         >
-          <Image
+          <View
             style={{
-              width: 32,
-              height: 32,
-              resizeMode: "contain"
-              // zIndex: 3
+              borderRadius: 50,
+              // paddingTop: 8,
+              // paddingBottom: 8,
+              // paddingLeft: 5,
+              // paddingRight: 5,
+              padding: 6,
+              backgroundColor: "#FFFFCC",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
             }}
-            source={mapIcons[venue.address.mapIcon]}
-          />
+          >
+            <Image
+              style={{
+                width: 32,
+                height: 32,
+                resizeMode: "contain"
+                // zIndex: 3
+              }}
+              source={mapIcons[venue.address.mapIcon]}
+            />
+          </View>
           <View
             style={{
               backgroundColor: "white",
@@ -362,7 +367,8 @@ class MapScreen extends Component {
               paddingBottom: 1,
               paddingLeft: 3,
               paddingRight: 3,
-              borderRadius: 4
+              borderRadius: 4,
+              marginTop: -6
             }}
           >
             {/* <Text style={{ fontSize: 11 }}>{`${venue.name}${
@@ -425,8 +431,10 @@ class MapScreen extends Component {
             initialRegion={{
               latitude: -33.797474,
               longitude: 151.286902,
-              latitudeDelta: 0.015,
-              longitudeDelta: 0.015
+              // latitudeDelta: 0.015,
+              // longitudeDelta: 0.015,
+              latitudeDelta: 0.008,
+              longitudeDelta: 0.008
             }}
             style={{ flex: 1 }}
             // provider={PROVIDER_GOOGLE}
