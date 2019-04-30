@@ -82,21 +82,21 @@ class VenuesScreen extends Component {
                   justifyContent: "space-between"
                 }}
               >
-                <View style={{ flex: 3 }}>
+                {item.thumbFullUrl && <View style={{ flex: 3 }}>
                   <FastImage
                     source={{ uri: item.thumbFullUrl }}
                     style={{ width: 55, height: 55, borderRadius: 27.5 }}
                   />
-                </View>
+                </View>}
                 <View style={{ flex: 11 }}>
-                  <Text style={{ fontSize: 18 }}>{item.name}</Text>
+                  <Text style={{ fontSize: 18 }}>{item.name ? item.name : "Venue name"}</Text>
                   <Text
                     numberOfLines={2}
                     note
                     style={{ fontSize: 14, color: "#696969" }}
                   >
                     {/* {item.styles.join(", ")} */}
-                    {item.shortDesc}
+                    {item.shortDesc ? item.shortDesc : "Venue short description"}
                   </Text>
                 </View>
                 <View style={{ flex: 1 }}>

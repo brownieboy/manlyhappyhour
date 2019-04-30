@@ -46,11 +46,11 @@ class VenueScreen extends Component {
     const dealTextItems = dealsArray.map(dealObj => {
       return (
         <Text key={dealObj.id}>
-          <Text style={{ fontSize: 11 }}>{getDaysLabel(dealObj.days)} </Text>
-          <Text style={{ fontSize: 11 }}>
+          <Text style={{ fontSize: 11 }}>{getDaysLabel(dealObj.days ? dealObj.days : [])} </Text>
+          {dealObj.start & dealObj.finish && <Text style={{ fontSize: 11 }}>
             {`${dealObj.start}-${dealObj.finish}: `}
-          </Text>
-          <Text style={{ fontSize: 13 }}>{dealObj.desc}</Text>
+          </Text>}
+          <Text style={{ fontSize: 13 }}>{dealObj.desc ? dealObj.desc : "Deal description"}</Text>
         </Text>
       );
     });
@@ -59,9 +59,9 @@ class VenueScreen extends Component {
 
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
-    const { fullScreenPhotoCard, isFavourite, orientation } = this.state;
+    const {orientation } = this.state;
 
-    const { id, parentList } = navigation.state.params;
+    // const { id, parentList } = navigation.state.params;
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
     // console.log("venueDetails:");
@@ -92,22 +92,23 @@ class VenueScreen extends Component {
                   color: appColours.panelTextColor
                 }}
               >
-                {`${venueDetails.name}, ${venueDetails.address.town}` ||
-                  "unknown"}
+                {`${venueDetails.name ? venueDetails.name : "Venue name"}, ${venueDetails.address && venueDetails.address.town ? venueDetails.address.town : "Suburb"}`}
               </Title>
             </Right>
           </Header>
         )}
 
         <Content>
-          <FastImage
-            style={{
-              width: imageWidth,
-              height: imageHeight
-              // flex: 1
-            }}
-            source={{ uri: venueDetails.cardFullUrl }}
-          />
+          {venueDetails.cardFullUrl && (
+            <FastImage
+              style={{
+                width: imageWidth,
+                height: imageHeight
+                // flex: 1
+              }}
+              source={{ uri: venueDetails.cardFullUrl }}
+            />
+          )}
           <CardItem
             style={{
               backgroundColor: appColours.panelBackgroundColor,
@@ -135,16 +136,16 @@ class VenueScreen extends Component {
                     flex: 1
                   }}
                 >
-                  {venueDetails.name}
+                  {venueDetails.name ? venueDetails.name : "Venue name"}
                 </Text>
                 <Text
                   style={{
                     color: appColours.panelTextColor,
-                    fontSize: 13,
+                    fontSize: 13
                     // flex:3
                   }}
                 >
-                  {venueDetails.address.addressLine}
+                  {venueDetails.address && venueDetails.address.addressLine ? venueDetails.address.addressLine : "Venue address"}
                 </Text>
               </View>
 
@@ -154,7 +155,7 @@ class VenueScreen extends Component {
                     color: appColours.panelTextColor
                   }}
                 >
-                  {venueDetails.shortDesc}
+                  {venueDetails.shortDesc ? venueDetails.shortDesc : "Venue short descritpion"}
                 </Text>
               </View>
             </Body>
@@ -180,7 +181,7 @@ class VenueScreen extends Component {
           </CardItem>
           <CardItem padder>
             <ParsedTextFormatted>
-              {venueDetails.description}
+              {venueDetails.description ? venueDetails.description : "Venue description"}
             </ParsedTextFormatted>
           </CardItem>
           <CardItem padder>
