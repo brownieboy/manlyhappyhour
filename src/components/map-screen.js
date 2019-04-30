@@ -382,15 +382,23 @@ class MapScreen extends Component {
             }`}</Text> */}
               <Text style={{ fontSize: 11 }}>{venue.name}</Text>
             </View>
-            <Callout style={styles.plainView}>
-              <TouchableOpacity
+            <Callout
+              onPress={() => {
+                this.props.navigation.navigate("VenueScreen", {
+                  id: venue.id,
+                  parentList: "map"
+                });
+              }}
+              style={styles.plainView}
+            >
+              {/* <TouchableOpacity
                 onPress={() => {
                   this.props.navigation.navigate("VenueScreen", {
                     id: venue.id,
                     parentList: "map"
                   });
                 }}
-              >
+              > */}
                 <View
                   style={{
                     flexDirection: "row",
@@ -400,7 +408,7 @@ class MapScreen extends Component {
                   <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
                   <Icon name="arrow-forward" style={{ fontSize: 18 }} />
                 </View>
-              </TouchableOpacity>
+              {/* </TouchableOpacity> */}
               <View>{dealsTextItems}</View>
             </Callout>
           </Marker>
