@@ -37,8 +37,8 @@ export const getDealTextObjArray = (
       usesShortDesc
     );
     dealsObjArray = [...dealsObjArray, ...currentDaysDealObjArray];
-    console.log("currentDaysDealObjArray outer:");
-    console.log(currentDaysDealObjArray);
+    // console.log("currentDaysDealObjArray outer:");
+    // console.log(currentDaysDealObjArray);
   });
   return dealsObjArray;
 };

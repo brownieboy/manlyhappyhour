@@ -49,7 +49,7 @@ class VenueScreen extends Component {
           <Text style={{ fontSize: 11 }}>
             {getDaysLabel(dealObj.days ? dealObj.days : [])}{" "}
           </Text>
-          {dealObj.start & dealObj.finish && (
+          {dealObj.start && dealObj.finish && (
             <Text style={{ fontSize: 11 }}>
               {`${dealObj.start}-${dealObj.finish}: `}
             </Text>
