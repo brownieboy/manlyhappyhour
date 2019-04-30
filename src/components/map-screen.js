@@ -23,8 +23,9 @@ import {
   Body,
   Button,
   Container,
-  // Content,
+  Content,
   Header,
+  Icon,
   Left,
   ListItem,
   // Radio,
@@ -382,9 +383,24 @@ class MapScreen extends Component {
               <Text style={{ fontSize: 11 }}>{venue.name}</Text>
             </View>
             <Callout style={styles.plainView}>
-              <View>
-                <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
-              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate("VenueScreen", {
+                    id: venue.id,
+                    parentList: "map"
+                  });
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between"
+                  }}
+                >
+                  <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
+                  <Icon name="arrow-forward" style={{ fontSize: 18 }} />
+                </View>
+              </TouchableOpacity>
               <View>{dealsTextItems}</View>
             </Callout>
           </Marker>
@@ -470,6 +486,7 @@ class MapScreen extends Component {
 }
 
 MapScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectVenueDeals: PropTypes.func.isRequired,
   selectFilteredDeals: PropTypes.func.isRequired,

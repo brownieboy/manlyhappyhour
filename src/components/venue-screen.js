@@ -46,11 +46,17 @@ class VenueScreen extends Component {
     const dealTextItems = dealsArray.map(dealObj => {
       return (
         <Text key={dealObj.id}>
-          <Text style={{ fontSize: 11 }}>{getDaysLabel(dealObj.days ? dealObj.days : [])} </Text>
-          {dealObj.start & dealObj.finish && <Text style={{ fontSize: 11 }}>
-            {`${dealObj.start}-${dealObj.finish}: `}
-          </Text>}
-          <Text style={{ fontSize: 13 }}>{dealObj.desc ? dealObj.desc : "Deal description"}</Text>
+          <Text style={{ fontSize: 11 }}>
+            {getDaysLabel(dealObj.days ? dealObj.days : [])}{" "}
+          </Text>
+          {dealObj.start & dealObj.finish && (
+            <Text style={{ fontSize: 11 }}>
+              {`${dealObj.start}-${dealObj.finish}: `}
+            </Text>
+          )}
+          <Text style={{ fontSize: 13 }}>
+            {dealObj.desc ? dealObj.desc : "Deal description"}
+          </Text>
         </Text>
       );
     });
@@ -59,9 +65,12 @@ class VenueScreen extends Component {
 
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
-    const {orientation } = this.state;
+    const { orientation } = this.state;
+    console.log("venue-screen render, props");
+    console.log(this.props);
 
-    // const { id, parentList } = navigation.state.params;
+    const { id, parentList } = navigation.state.params;
+    console.log("parentList: " + parentList);
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
     // console.log("venueDetails:");
@@ -83,8 +92,12 @@ class VenueScreen extends Component {
               backgroundColor: appColours.panelBackgroundColor
             }}
           >
-            <Left style={{ flex: 2 }}>
-              <HeaderBackArrow navCallback={navigation.goBack} />
+            <Left style={{ flex: 4 }}>
+              <HeaderBackArrow navCallback={navigation.goBack}>
+                <Text style={{ fontSize: 11, color: "white", marginLeft: 4 }}>
+                  Back to {parentList === "map" ? "Map" : "Venues"}
+                </Text>
+              </HeaderBackArrow>
             </Left>
             <Right style={{ flex: 11 }}>
               <Title
@@ -92,7 +105,11 @@ class VenueScreen extends Component {
                   color: appColours.panelTextColor
                 }}
               >
-                {`${venueDetails.name ? venueDetails.name : "Venue name"}, ${venueDetails.address && venueDetails.address.town ? venueDetails.address.town : "Suburb"}`}
+                {`${venueDetails.name ? venueDetails.name : "Venue name"}, ${
+                  venueDetails.address && venueDetails.address.town
+                    ? venueDetails.address.town
+                    : "Suburb"
+                }`}
               </Title>
             </Right>
           </Header>
@@ -145,7 +162,9 @@ class VenueScreen extends Component {
                     // flex:3
                   }}
                 >
-                  {venueDetails.address && venueDetails.address.addressLine ? venueDetails.address.addressLine : "Venue address"}
+                  {venueDetails.address && venueDetails.address.addressLine
+                    ? venueDetails.address.addressLine
+                    : "Venue address"}
                 </Text>
               </View>
 
@@ -155,7 +174,9 @@ class VenueScreen extends Component {
                     color: appColours.panelTextColor
                   }}
                 >
-                  {venueDetails.shortDesc ? venueDetails.shortDesc : "Venue short descritpion"}
+                  {venueDetails.shortDesc
+                    ? venueDetails.shortDesc
+                    : "Venue short descritpion"}
                 </Text>
               </View>
             </Body>
@@ -181,7 +202,9 @@ class VenueScreen extends Component {
           </CardItem>
           <CardItem padder>
             <ParsedTextFormatted>
-              {venueDetails.description ? venueDetails.description : "Venue description"}
+              {venueDetails.description
+                ? venueDetails.description
+                : "Venue description"}
             </ParsedTextFormatted>
           </CardItem>
           <CardItem padder>
