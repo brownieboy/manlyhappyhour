@@ -29,6 +29,7 @@ import {
   getDaysLabel
 } from "../helper-functions/deal-line-processing.js";
 import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
+import { getTimeText } from "../helper-functions/dateTime.js";
 
 class VenueScreen extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class VenueScreen extends Component {
           </Text>
           {dealObj.start && dealObj.finish && (
             <Text style={{ fontSize: 11 }}>
-              {`${dealObj.start}-${dealObj.finish}: `}
+              {`${getTimeText(dealObj.start)}-${getTimeText(dealObj.finish)}: `}
             </Text>
           )}
           <Text style={{ fontSize: 13 }}>

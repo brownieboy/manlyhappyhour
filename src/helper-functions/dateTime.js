@@ -1,4 +1,5 @@
 import { daysArray } from "../constants/general.js";
+import DeviceInfo from "react-native-device-info";
 
 // Every Day test is easy.
 const isDealEveryDay = dealDays => dealDays.length === 7;
@@ -40,4 +41,22 @@ export const getLowestDayNumberFromDealDays = dealDays => {
 
   // Only now do we look at the individual days
   return Math.min(...getSortOrderArrayFromDealDays(dealDays));
+};
+
+export const getTimeText = timeText24Hour => {
+  if (DeviceInfo.is24Hour()) {
+    return timeText24Hour;
+  }
+
+  let time = timeText24Hour.match(
+    /^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/
+  ) || [time];
+
+  if (time.length > 1) {
+    // If time format correct
+    time = time.slice(1); // Remove full string match value
+    time[5] = +time[0] < 12 ? "am" : "pm"; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join(""); // return adjusted time or original string
 };

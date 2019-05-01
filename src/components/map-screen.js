@@ -41,6 +41,8 @@ import {
   getDaysLabel
 } from "../helper-functions/deal-line-processing.js";
 
+import { getTimeText } from "../helper-functions/dateTime.js";
+
 const { UIManager } = NativeModules;
 let iconPlatformPrefix = "ios-";
 if (Platform.OS === "android") {
@@ -299,7 +301,7 @@ class MapScreen extends Component {
           </Text>
           {dealObj.start && dealObj.finish && (
             <Text style={{ fontSize: 11 }}>
-              {`${dealObj.start}-${dealObj.finish}: `}
+              {`${getTimeText(dealObj.start)}-${getTimeText(dealObj.finish)}: `}
             </Text>
           )}
           <Text style={{ fontSize: 13 }}>{dealObj.shortDesc}</Text>
