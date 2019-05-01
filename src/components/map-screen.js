@@ -399,15 +399,15 @@ class MapScreen extends Component {
                   });
                 }}
               > */}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between"
-                  }}
-                >
-                  <Text style={{ fontWeight: "bold" }}>{venue.name}</Text>
-                  <Icon name="arrow-forward" style={{ fontSize: 18 }} />
-                </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between"
+                }}
+              >
+                <Text style={{ fontWeight: "bold", flex: 1 }}>{venue.name}</Text>
+                <Icon name="arrow-forward" style={{ fontSize: 18 }} />
+              </View>
               {/* </TouchableOpacity> */}
               <View>{dealsTextItems}</View>
             </Callout>
