@@ -255,6 +255,60 @@ class MapFilter extends Component {
   }
 }
 
+class CalloutWrapper extends Component {
+  render() {
+    const { venue, dealsTextItems, navigate } = this.props;
+    if (Platform.OS === "android") {
+      return (
+        <Callout
+          onPress={() => {
+            navigate("VenueScreen", {
+              id: venue.id,
+              parentList: "map"
+            });
+          }}
+          style={styles.plainView}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <Text style={{ fontWeight: "bold", flex: 1 }}>{venue.name}</Text>
+            <Icon name="arrow-forward" style={{ fontSize: 18 }} />
+          </View>
+          <View>{dealsTextItems}</View>
+        </Callout>
+      );
+    }
+    // iOS
+    return (
+      <Callout style={styles.plainView}>
+        <TouchableOpacity
+          onPress={() => {
+            navigate("VenueScreen", {
+              id: venue.id,
+              parentList: "map"
+            });
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <Text style={{ fontWeight: "bold", flex: 1 }}>{venue.name}</Text>
+            <Icon name="arrow-forward" style={{ fontSize: 18 }} />
+          </View>
+          <View>{dealsTextItems}</View>
+        </TouchableOpacity>
+      </Callout>
+    );
+  }
+}
+
 class MapScreen extends Component {
   constructor(props) {
     super(props);
@@ -382,35 +436,11 @@ class MapScreen extends Component {
             }`}</Text> */}
               <Text style={{ fontSize: 11 }}>{venue.name}</Text>
             </View>
-            <Callout
-              onPress={() => {
-                this.props.navigation.navigate("VenueScreen", {
-                  id: venue.id,
-                  parentList: "map"
-                });
-              }}
-              style={styles.plainView}
-            >
-              {/* <TouchableOpacity
-                onPress={() => {
-                  this.props.navigation.navigate("VenueScreen", {
-                    id: venue.id,
-                    parentList: "map"
-                  });
-                }}
-              > */}
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between"
-                }}
-              >
-                <Text style={{ fontWeight: "bold", flex: 1 }}>{venue.name}</Text>
-                <Icon name="arrow-forward" style={{ fontSize: 18 }} />
-              </View>
-              {/* </TouchableOpacity> */}
-              <View>{dealsTextItems}</View>
-            </Callout>
+            <CalloutWrapper
+              venue={venue}
+              dealsTextItems={dealsTextItems}
+              navigate={this.props.navigation.navigate}
+            />
           </Marker>
         );
       } else {
