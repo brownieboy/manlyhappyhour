@@ -42,6 +42,8 @@ target 'manlyhappyhour' do
 
     pod 'react-native-async-storage', :path => '../node_modules/@react-native-community/async-storage'
 
+    pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   end
   
   post_install do |installer|
