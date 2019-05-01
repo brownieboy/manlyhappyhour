@@ -23,7 +23,7 @@ import {
   Body,
   Button,
   Container,
-  Content,
+  // Content,
   Header,
   Icon,
   Left,
