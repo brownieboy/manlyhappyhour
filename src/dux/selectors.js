@@ -52,14 +52,6 @@ const selectDealItems = createSelector(
   [getDeals, getVenues],
   (dealsList, venuesList) => {
     const dealItemsListItemsArray = [];
-    // const dealsListItemsArray = dealsList.map(deal => {
-    //   console.log("deal:");
-    //   console.log(deal);
-    //   const dealsItems = deal.days.map(dealDay => {
-    //     return { day: dealDay, ...deal };
-    //   });
-    //   return dealsItems;
-    // });
 
     for (let deal of dealsList) {
       for (let dealDay of deal.days) {
@@ -70,7 +62,6 @@ const selectDealItems = createSelector(
         });
       }
     }
-
     // console.log("selectDealItems, dealItemsListItemsArray");
     // console.log(dealItemsListItemsArray);
     return dealItemsListItemsArray;
@@ -86,6 +77,46 @@ const selectDealItemsSortedByStartTime = createSelector(
         new Date(`01 Jan 1970 ${dealItemB.start}`)
     )
 );
+
+
+export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
+  [selectVenues, selectDealsSortedByDay, getFilterDay, selectDealTypeFilters],
+  (venuesList, dealItemsList, filterDay, dealTypeFilters) => {
+    // console.log("selectFilteredVenuesByDay:");
+    // console.log(venuesList);
+    // console.log(dealsList);
+    // console.log("filterDay:");
+    // console.log(filterDay);
+    // console.log(dealTypeFilters);
+
+    return venuesList.filter(venueMember => {
+      const dealsForVenue = dealsList.filter(
+        dealMember => dealMember.venueId === venueMember.id
+      );
+      const filteredDealsArray = dealsForVenue.filter(dMember => {
+        // console.log("dMember:");
+        // console.log(dMember);
+        return (
+          (filterDay === "all" || dMember.days.includes(filterDay)) &&
+          dealTypeFilters.some(
+            dealType => dMember.types && dMember.types.includes(dealType)
+          )
+        );
+      });
+
+      return filteredDealsArray.length > 0;
+    });
+  }
+)((state, filterDay) => {
+  // console.log("selectFilteredVenuesByDayAndDealType resolution:");
+  // console.log(state);
+  // const dealFilters = selectDealTypeFilters(state);
+  // console.log(filterDay);
+  // console.log(dealFilters);
+  const cacheKey = `${filterDay}~${selectDealTypeFilters(state).join("~")}`;
+  // console.log(cacheKey);
+  return cacheKey;
+});
 
 export const selectDealsGroupedByDay = createSelector(
   [selectDealItemsSortedByStartTime],

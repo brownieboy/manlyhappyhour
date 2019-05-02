@@ -57,6 +57,12 @@ export default class DealsListScreen extends Component {
     this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
   };
 
+  handleDayChange = dayOfWeek => {
+    // console.log("handleDayChange, dayOfWeek");
+    // console.log(dayOfWeek);
+    this.setState({ dayOfWeek });
+  };
+
   render() {
     const {
       dealsGroupedByDay,
