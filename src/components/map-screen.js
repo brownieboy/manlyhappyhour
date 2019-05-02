@@ -64,7 +64,7 @@ const placeholder = {
   color: "#9EA0A4"
 };
 
-class MapFilter extends Component {
+export class MapFilter extends Component {
   // handlePickerLinePress = () => {
   //   this._pickerSelect.togglePicker();
   // };
@@ -75,27 +75,13 @@ class MapFilter extends Component {
       // handleTapMenu,
       menuOptionExpanded,
       dealTypeFilters,
-      toggleDealTypeFilter
+      toggleDealTypeFilter,
+      topPos = 10
     } = this.props;
-    // console.log("MapFilter..props");
-    // console.log(this.props);
-    const summaryText =
-      filterDay === "all"
-        ? "Showing deals for all days"
-        : `Showing deals for ${filterDay}`;
-
-    let filterTypesSummary = "all types";
-    if (dealTypeFilters.length < 4) {
-      // filterTypesSummary = dealTypeFilters.join(", ");
-      filterTypesSummary = [
-        dealTypeFilters.slice(0, -1).join(", "),
-        dealTypeFilters.slice(-1)[0]
-      ].join(dealTypeFilters.length < 2 ? "" : " and ");
-    }
 
     return (
       <Fragment>
-        <View
+        {/* <View
           style={{
             position: "absolute",
             top: 10,
@@ -111,16 +97,18 @@ class MapFilter extends Component {
           <Text
             style={{ fontSize: 11 }}
           >{`${summaryText}: ${filterTypesSummary}`}</Text>
-        </View>
+        </View> */}
         <View
           style={{
             position: "absolute",
-            top: 10,
+            top: topPos,
             left: "5%",
             right: "5%",
-            padding: 3,
+            padding: menuOptionExpanded ? 3 : 0,
             height: menuOptionExpanded ? 310 : 0,
-            backgroundColor: "white"
+            backgroundColor: "white",
+            borderWidth: menuOptionExpanded ? 1 : 0,
+            borderRadius: menuOptionExpanded ? 10 : 0
           }}
         >
           {menuOptionExpanded ? (
@@ -407,7 +395,9 @@ class MapScreen extends Component {
                   justifyContent: "space-between"
                 }}
               >
-                <Text style={{ fontWeight: "bold", flex: 1 }}>{venue.name}</Text>
+                <Text style={{ fontWeight: "bold", flex: 1 }}>
+                  {venue.name}
+                </Text>
                 <Icon name="arrow-forward" style={{ fontSize: 18 }} />
               </View>
               {/* </TouchableOpacity> */}
@@ -433,6 +423,20 @@ class MapScreen extends Component {
     const { dayOfWeek, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
+    const summaryText =
+      dayOfWeek === "all"
+        ? "Showing deals for all days"
+        : `Showing deals for ${dayOfWeek}`;
+
+    let filterTypesSummary = "all types";
+    if (dealTypeFilters.length < 4) {
+      // filterTypesSummary = dealTypeFilters.join(", ");
+      filterTypesSummary = [
+        dealTypeFilters.slice(0, -1).join(", "),
+        dealTypeFilters.slice(-1)[0]
+      ].join(dealTypeFilters.length < 2 ? "" : " and ");
+    }
+
     return (
       <Container>
         <Header
@@ -489,6 +493,25 @@ class MapScreen extends Component {
             toggleDealTypeFilter={toggleDealTypeFilter}
             // selectedFilter={selectedFilter}
           />
+          {!menuOptionExpanded && (
+            <View
+              style={{
+                position: "absolute",
+                top: 10,
+                left: "5%",
+                right: "5%",
+                height: 20,
+                padding: 3,
+                backgroundColor: "white",
+                flexDirection: "row",
+                justifyContent: "space-between"
+              }}
+            >
+              <Text
+                style={{ fontSize: 11 }}
+              >{`${summaryText}: ${filterTypesSummary}`}</Text>
+            </View>
+          )}
         </View>
       </Container>
     );

@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import {
+  Dimensions,
+  LayoutAnimation,
+  NativeModules,
+  SectionList,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import { Dimensions, SectionList, Text, View } from "react-native";
 import panelStyles from "../styles/appColours";
 import { getTimeText } from "../helper-functions/dateTime.js";
 import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
+import { MapFilter } from "./map-screen.js";
 
 import {
   Container,
@@ -21,6 +31,11 @@ import {
 
 import appColours from "../styles/appColours.js";
 
+const { UIManager } = NativeModules;
+
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+
 export default class DealsListScreen extends Component {
   constructor(props) {
     super(props);
@@ -28,13 +43,28 @@ export default class DealsListScreen extends Component {
       dimensions: Dimensions.get("window"),
       fullScreenPhotoCard: false,
       internalStateChanged: false,
-      orientation: "unknown"
+      orientation: "unknown",
+      dayOfWeek: "all",
+      menuOptionExpanded: false
     };
     this.handleOnLayout = handleOnLayout.bind(this);
   }
+
+  handleTapMenu = () => {
+    // console.log("handleTapMenu");
+    // LayoutAnimation.spring();
+    LayoutAnimation.easeInEaseOut();
+    this.setState({ menuOptionExpanded: !this.state.menuOptionExpanded });
+  };
+
   render() {
-    const { dealsGroupedByDay, navigation } = this.props;
-    const { orientation } = this.state;
+    const {
+      dealsGroupedByDay,
+      navigation,
+      dealTypeFilters,
+      toggleDealTypeFilter
+    } = this.props;
+    const { dayOfWeek, menuOptionExpanded, orientation } = this.state;
     // console.log("DealsListScreen, dealsGroupedByDay:");
     // console.log(dealsGroupedByDay);
 
@@ -57,7 +87,15 @@ export default class DealsListScreen extends Component {
                 Deals
               </Title>
             </Body>
-            <Right />
+            <Right>
+              <TouchableOpacity onPress={this.handleTapMenu}>
+                <MaterialCommunityIcons
+                  name="filter"
+                  size={25}
+                  style={{ color: "white" }}
+                />
+              </TouchableOpacity>
+            </Right>
           </Header>
         )}
         <View style={{ flex: 1 }}>
@@ -117,6 +155,15 @@ export default class DealsListScreen extends Component {
             stickySectionHeadersEnabled={true}
           />
         </View>
+        <MapFilter
+          handleDayChange={this.handleDayChange}
+          handleTapMenu={this.handleTapMenu}
+          filterDay={dayOfWeek}
+          menuOptionExpanded={menuOptionExpanded}
+          dealTypeFilters={dealTypeFilters}
+          toggleDealTypeFilter={toggleDealTypeFilter}
+          topPos={70}
+        />
         <View
           onLayout={() => {
             this.handleOnLayout(Dimensions);
