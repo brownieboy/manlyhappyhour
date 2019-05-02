@@ -93,7 +93,7 @@ export default class DealsListScreen extends Component {
                   })
                 }
               >
-                <Left style={{ flex: 4 }}>
+                <Left style={{ flex: 3 }}>
                   <Text style={{ fontSize: 12 }}>
                     {`${getTimeText(item.start)}${
                       orientation !== "landscape" ? "\n" : ""
@@ -101,12 +101,10 @@ export default class DealsListScreen extends Component {
                   </Text>
                 </Left>
                 <Body style={{ flex: 10 }}>
-                  <Text
-                    style={{ fontSize: 13, color: "#404040"}}
-                  >
-                    {item.venue.name}
+                  <Text style={{ fontSize: 15 }}>{item.venue.name}</Text>
+                  <Text style={{ fontSize: 13, color: "grey" }}>
+                    {item.shortDesc}
                   </Text>
-                  <Text style={{ fontSize: 13 }}>{item.desc}</Text>
                 </Body>
                 <Right style={{ flex: 1 }}>
                   <Icon
