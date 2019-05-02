@@ -67,11 +67,10 @@ class VenueScreen extends Component {
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
     const { orientation } = this.state;
-    console.log("venue-screen render, props");
-    console.log(this.props);
+    // console.log("venue-screen render, props");
+    // console.log(this.props);
 
     const { id, parentList } = navigation.state.params;
-    console.log("parentList: " + parentList);
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
     // console.log("venueDetails:");
@@ -96,7 +95,7 @@ class VenueScreen extends Component {
             <Left style={{ flex: 4 }}>
               <HeaderBackArrow navCallback={navigation.goBack}>
                 <Text style={{ fontSize: 11, color: "white", marginLeft: 4 }}>
-                  Back to {parentList === "map" ? "Map" : "Venues"}
+                  Back to {parentList}
                 </Text>
               </HeaderBackArrow>
             </Left>

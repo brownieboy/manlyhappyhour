@@ -4,11 +4,14 @@
 
 import { createSelector } from "reselect";
 import createCachedSelector from "re-reselect";
+import * as d3 from "d3-collection";
+
 // import dateFnsParse from "date-fns/parse";
 
 import { stringSortIgnoreArticle } from "../helper-functions/sorting.js";
 // import { daysArray } from "../constants/general.js";
 import { getLowestDayNumberFromDealDays } from "../helper-functions/dateTime.js";
+import { getDayObjForShortDay, getDayObjForDay } from "../constants/general.js";
 
 const getVenues = state => state.venuesState.venuesList; // not actually a selector
 const getId = (state, props) => props.navigation.state.params.id;
@@ -43,6 +46,57 @@ export const selectDealsSortedByDay = createSelector(
     });
     return dealsListSorted;
   }
+);
+
+const selectDealItems = createSelector(
+  [getDeals, getVenues],
+  (dealsList, venuesList) => {
+    const dealItemsListItemsArray = [];
+    // const dealsListItemsArray = dealsList.map(deal => {
+    //   console.log("deal:");
+    //   console.log(deal);
+    //   const dealsItems = deal.days.map(dealDay => {
+    //     return { day: dealDay, ...deal };
+    //   });
+    //   return dealsItems;
+    // });
+
+    for (let deal of dealsList) {
+      for (let dealDay of deal.days) {
+        dealItemsListItemsArray.push({
+          day: getDayObjForShortDay(dealDay).name,
+          ...deal,
+          venue: venuesList.filter(venue => venue.id === deal.venueId)[0]
+        });
+      }
+    }
+
+    // console.log("selectDealItems, dealItemsListItemsArray");
+    // console.log(dealItemsListItemsArray);
+    return dealItemsListItemsArray;
+  }
+);
+
+const selectDealItemsSortedByStartTime = createSelector(
+  [selectDealItems],
+  dealItemsList =>
+    [...dealItemsList].sort(
+      (dealItemA, dealItemB) =>
+        new Date(`01 Jan 1970 ${dealItemA.start}`) -
+        new Date(`01 Jan 1970 ${dealItemB.start}`)
+    )
+);
+
+export const selectDealsGroupedByDay = createSelector(
+  [selectDealItemsSortedByStartTime],
+  dealsItemsList =>
+    d3
+      .nest()
+      .key(dealItem => dealItem.day)
+      .sortKeys(
+        (a, b) => getDayObjForDay(a).sortOrder - getDayObjForDay(b).sortOrder
+      )
+      .entries(dealsItemsList)
 );
 
 export const selectDealTypeFilters = createSelector(

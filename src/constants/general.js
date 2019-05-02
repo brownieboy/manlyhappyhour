@@ -18,3 +18,12 @@ export const daysPicker = [
   { label: "Saturday", value: "Sat" },
   { label: "Sunday", value: "Sun" }
 ];
+
+export const getDayObjForShortDay = shortDay =>
+  daysArray.filter(dayObj => dayObj.shortName === shortDay)[0];
+
+export const getDayObjForDay = day =>
+  daysArray.filter(dayObj => dayObj.name === day)[0];
+
+// export const getFullDayForShortDay = shortDay =>
+//   daysArray.filter(dayObj => dayObj.shortName === shortDay).name;
