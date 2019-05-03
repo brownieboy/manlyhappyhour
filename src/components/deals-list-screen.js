@@ -21,7 +21,7 @@ import {
   Header,
   Icon,
   Title,
-  Content,
+  // Content,
   ListItem,
   Left,
   Right,
@@ -68,11 +68,14 @@ export default class DealsListScreen extends Component {
       dealsGroupedByDay,
       navigation,
       dealTypeFilters,
+      filteredDealItems,
       toggleDealTypeFilter
     } = this.props;
     const { dayOfWeek, menuOptionExpanded, orientation } = this.state;
     // console.log("DealsListScreen, dealsGroupedByDay:");
     // console.log(dealsGroupedByDay);
+
+    const filteredDealItemsList = filteredDealItems(dayOfWeek);
 
     return (
       <Container>

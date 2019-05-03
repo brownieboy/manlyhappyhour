@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
   // selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
   dealTypeFilters: selectDealTypeFilters(state),
   dealsGroupedByDay: selectDealsGroupedByDay(state),
-  filteredDeals: selectFilteredDealItemsByDayAndDealType(state)
+  filteredDealItems: filterDay => selectFilteredDealItemsByDayAndDealType(state, filterDay)
 });
 
 const DealsListScreenConn = connect(
