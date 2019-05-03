@@ -7,7 +7,8 @@ import DealsListScreen from "../components/deals-list-screen.js";
 import {
   // selectFilteredVenuesByDayAndDealType,
   selectDealsGroupedByDay,
-  selectDealTypeFilters
+  selectDealTypeFilters,
+  selectFilteredDealItemsByDayAndDealType
 } from "../dux/selectors.js";
 import {
   toggleDealTypeFilter
@@ -20,7 +21,8 @@ const mapDispatchToProps = dispatch =>
 const mapStateToProps = state => ({
   // selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
   dealTypeFilters: selectDealTypeFilters(state),
-  dealsGroupedByDay: selectDealsGroupedByDay(state)
+  dealsGroupedByDay: selectDealsGroupedByDay(state),
+  filteredDeals: selectFilteredDealItemsByDayAndDealType(state)
 });
 
 const DealsListScreenConn = connect(
