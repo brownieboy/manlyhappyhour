@@ -10,6 +10,7 @@ import {
   View
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+// import EvilIcons from "react-native-vector-icons/EvilIcons";
 import {
   Container,
   Header,
@@ -161,18 +162,27 @@ export default class DealsListScreen extends Component {
                   </Text>
                 </Left>
                 <Body style={{ flex: 10 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text style={{ fontSize: 15, marginRight: 10 }}>{item.venue.name}</Text>
-                    <DealFilterIcons
-                      iconTypes={item.types}
-                      iconStyle={{
-                        marginRight: 4,
-                        fontSize: 14
-                      }}
-                    />
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between"
+                    }}
+                  >
+                    <Text style={{ fontSize: 15, marginRight: 10 }}>
+                      {item.venue.name}
+                    </Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <DealFilterIcons
+                        iconTypes={item.types}
+                        iconStyle={{
+                          marginRight: 4,
+                          fontSize: 14
+                        }}
+                      />
+                    </View>
                   </View>
                   <Text style={{ fontSize: 13, color: "grey" }}>
-                    {item.shortDesc}
+                    {item.desc}
                   </Text>
                 </Body>
                 <Right style={{ flex: 1 }}>

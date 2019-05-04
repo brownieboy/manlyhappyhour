@@ -5,7 +5,9 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import IconAntDesign from "react-native-vector-icons/AntDesign";
 
-import { Icon } from "native-base";
+// import { Icon } from "native-base";
+
+import { IcoMoonIcon } from "./custom-vector-icons.js";
 
 // tintColor passed in is an object
 export const DealsTabIcon = React.memo(({ tintColor }) => (
@@ -32,10 +34,18 @@ MapTabIcon.propTypes = {
   tintColor: PropTypes.string.isRequired
 };
 
+// export const VenueTabIcon = React.memo(({ tintColor }) => (
+//   <Icon
+//     name="wine"
+//     size={Platform.OS === "android" ? 26 : 30}
+//     style={{ color: tintColor }}
+//   />
+// ));
+
 export const VenueTabIcon = React.memo(({ tintColor }) => (
-  <Icon
-    name="wine"
-    size={Platform.OS === "android" ? 26 : 30}
+  <IcoMoonIcon
+    name="couple-drinking-in-a-bar-svgrepo-com"
+    size={33}
     style={{ color: tintColor }}
   />
 ));
