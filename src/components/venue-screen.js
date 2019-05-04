@@ -8,11 +8,11 @@ import nodeEmoji from "node-emoji";
 import {
   CardItem,
   Container,
-  Icon,
+  // Icon,
   Header,
   Title,
   Content,
-  ListItem,
+  // ListItem,
   Left,
   Right,
   Body
@@ -29,6 +29,7 @@ import {
   getDaysLabel
 } from "../helper-functions/deal-line-processing.js";
 import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
+import { getTimeText } from "../helper-functions/dateTime.js";
 
 class VenueScreen extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class VenueScreen extends Component {
           </Text>
           {dealObj.start && dealObj.finish && (
             <Text style={{ fontSize: 11 }}>
-              {`${dealObj.start}-${dealObj.finish}: `}
+              {`${getTimeText(dealObj.start)}-${getTimeText(dealObj.finish)}: `}
             </Text>
           )}
           <Text style={{ fontSize: 13 }}>
@@ -66,11 +67,10 @@ class VenueScreen extends Component {
   render() {
     const { navigation, venueDetails, venueDeals = [] } = this.props;
     const { orientation } = this.state;
-    console.log("venue-screen render, props");
-    console.log(this.props);
+    // console.log("venue-screen render, props");
+    // console.log(this.props);
 
     const { id, parentList } = navigation.state.params;
-    console.log("parentList: " + parentList);
     const imageWidth = Dimensions.get("window").width;
     const imageHeight = imageWidth / 1.6;
     // console.log("venueDetails:");
@@ -81,6 +81,11 @@ class VenueScreen extends Component {
       ) : (
         <Text>No deals currently listed</Text>
       );
+
+    let backToText = "Venues";
+    if (parentList === "map") {
+      backToText = "Map";
+    }
 
     // console.log("venueDeals");
     // console.log(venueDeals);
@@ -94,12 +99,18 @@ class VenueScreen extends Component {
           >
             <Left style={{ flex: 4 }}>
               <HeaderBackArrow navCallback={navigation.goBack}>
-                <Text style={{ fontSize: 11, color: "white", marginLeft: 4 }}>
-                  Back to {parentList === "map" ? "Map" : "Venues"}
+                <Text
+                  style={{
+                    fontSize: appColours.panelTopFontSize,
+                    color: appColours.panelTextColor,
+                    marginLeft: 4
+                  }}
+                >
+                  Back to {backToText}
                 </Text>
               </HeaderBackArrow>
             </Left>
-            <Right style={{ flex: 11 }}>
+            <Right style={{ flex: 9 }}>
               <Title
                 style={{
                   color: appColours.panelTextColor

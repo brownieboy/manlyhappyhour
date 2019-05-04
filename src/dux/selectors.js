@@ -4,11 +4,14 @@
 
 import { createSelector } from "reselect";
 import createCachedSelector from "re-reselect";
+import * as d3 from "d3-collection";
+
 // import dateFnsParse from "date-fns/parse";
 
 import { stringSortIgnoreArticle } from "../helper-functions/sorting.js";
 // import { daysArray } from "../constants/general.js";
 import { getLowestDayNumberFromDealDays } from "../helper-functions/dateTime.js";
+import { getDayObjForShortDay, getDayObjForDay } from "../constants/general.js";
 
 const getVenues = state => state.venuesState.venuesList; // not actually a selector
 const getId = (state, props) => props.navigation.state.params.id;
@@ -18,6 +21,11 @@ const getDealTypeFilters = state => state.settingsState.dealTypeFilters;
 const getVenueId = (state, venueId) => venueId;
 // const getFilterDay = (state, venueId, filterDay) => filterDay;
 const getFilterDay = (state, filterDay) => filterDay;
+
+export const selectDealTypeFilters = createSelector(
+  [getDealTypeFilters],
+  dealTypeFilters => dealTypeFilters
+);
 
 export const selectVenues = createSelector(
   [getVenues],
@@ -45,9 +53,93 @@ export const selectDealsSortedByDay = createSelector(
   }
 );
 
-export const selectDealTypeFilters = createSelector(
-  [getDealTypeFilters],
-  dealTypeFilters => dealTypeFilters
+const selectDealItems = createSelector(
+  [getDeals, getVenues],
+  (dealsList, venuesList) => {
+    const dealItemsListItemsArray = [];
+
+    for (let deal of dealsList) {
+      for (let dealDay of deal.days) {
+        dealItemsListItemsArray.push({
+          day: getDayObjForShortDay(dealDay).name,
+          ...deal,
+          venue: venuesList.filter(venue => venue.id === deal.venueId)[0]
+        });
+      }
+    }
+    // console.log("selectDealItems, dealItemsListItemsArray");
+    // console.log(dealItemsListItemsArray);
+    return dealItemsListItemsArray;
+  }
+);
+
+const selectDealItemsSortedByStartTime = createSelector(
+  [selectDealItems],
+  dealItemsList =>
+    [...dealItemsList].sort(
+      (dealItemA, dealItemB) =>
+        new Date(`01 Jan 1970 ${dealItemA.start}`) -
+        new Date(`01 Jan 1970 ${dealItemB.start}`)
+    )
+);
+
+export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
+  [selectDealItemsSortedByStartTime, getFilterDay, selectDealTypeFilters],
+  (dealItemsList, filterDay, dealTypeFilters) => {
+    // console.log("selectFilteredVenuesByDay:");
+    // console.log(venuesList);
+    // console.log(dealsList);
+    // console.log("filterDay:");
+    // console.log(filterDay);
+    // console.log(dealTypeFilters);
+
+    const filteredDealItemsArray = dealItemsList.filter(dealItem => {
+      // console.log("dMember:");
+      // console.log(dMember);
+      return (
+        (filterDay === "all" ||
+          dealItem.day === getDayObjForShortDay(filterDay).name) &&
+        dealTypeFilters.some(
+          dealType => dealItem.types && dealItem.types.includes(dealType)
+        )
+      );
+    });
+    return filteredDealItemsArray;
+  }
+)((state, filterDay) => {
+  // console.log("selectFilteredDealItemsByDayAndDealType resolution:");
+  // console.log(state);
+  // const dealFilters = selectDealTypeFilters(state);
+  // console.log(filterDay);
+  // console.log(dealTypeFilters);
+
+  const cacheKey = `${filterDay}~${selectDealTypeFilters(state).join("~")}`;
+  // console.log("selectFilteredDealItemsByDayAndDealType: cacheKey: " + cacheKey);
+  return cacheKey;
+});
+
+export const selectFilteredDealItemsGroupedByDay = createSelector(
+  [selectFilteredDealItemsByDayAndDealType],
+  dealsItemsList =>
+    d3
+      .nest()
+      .key(dealItem => dealItem.day)
+      .sortKeys(
+        (a, b) => getDayObjForDay(a).sortOrder - getDayObjForDay(b).sortOrder
+      )
+      .entries(dealsItemsList)
+);
+
+export const selectDealsGroupedByDay = createSelector(
+  [selectDealItemsSortedByStartTime],
+  dealsItemsList =>
+    d3
+      .nest()
+      .key(dealItem => dealItem.day)
+      .sortKeys(
+        (a, b) => getDayObjForDay(a).sortOrder - getDayObjForDay(b).sortOrder
+      )
+      .entries(dealsItemsList)
 );
 
 export const selectVenueDetails = createCachedSelector(

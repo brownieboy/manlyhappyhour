@@ -45,7 +45,8 @@ class VenuesScreen extends Component {
           <Body>
             <Title
               style={{
-                color: appColours.panelTextColor
+                color: appColours.panelTextColor,
+                fontSize: appColours.panelTopFontSize
               }}
             >
               Venues

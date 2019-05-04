@@ -2,13 +2,13 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import MapScreen from "../components/map-screen.js";
+import DealsListScreen from "../components/deals-list-screen.js";
 // import { selectVenueDetails } from "../dux/selectors.js";
 import {
-  selectVenues,
-  selectVenueDealsForVenueId,
-  selectFilteredVenuesByDayAndDealType,
-  selectDealTypeFilters
+  // selectFilteredVenuesByDayAndDealType,
+  selectDealsGroupedByDay,
+  selectDealTypeFilters,
+  selectFilteredDealItemsGroupedByDay
 } from "../dux/selectors.js";
 import {
   toggleDealTypeFilter, setDayOfWeek, getDayOfWeek
@@ -19,17 +19,16 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ toggleDealTypeFilter, setDayOfWeek }, dispatch);
 
 const mapStateToProps = state => ({
-  // venueDetails: selectVenueDetails(state, props)
-  venuesList: selectVenues(state),
-  selectVenueDeals: id => selectVenueDealsForVenueId(state, id),
-  selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
+  // selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
   dealTypeFilters: selectDealTypeFilters(state),
+  dealsGroupedByDay: selectDealsGroupedByDay(state),
+  selectFilteredDealItemsGroupedByDay: filterDay => selectFilteredDealItemsGroupedByDay(state, filterDay),
   dayOfWeek: getDayOfWeek(state)
 });
 
-const MapScreenConn = connect(
+const DealsListScreenConn = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MapScreen);
+)(DealsListScreen);
 
-export default MapScreenConn;
+export default DealsListScreenConn;

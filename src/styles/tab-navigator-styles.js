@@ -6,7 +6,7 @@ const tabNavigatorStyles = {
   icon: {
     //   activeTintColor: Platform.OS === "ios" ? "blue" : "#fff",
     //   inactiveTintColor: Platform.OS == "ios" ? "gray" : "lightgray"
-    activeTintColor: "#fff",
+    activeTintColor: "white",
     inactiveTineColor: "lightgray"
   },
   tabBar: {

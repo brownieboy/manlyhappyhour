@@ -106,7 +106,7 @@ android {
         applicationId "com.brownieboy.manlyhappyhour"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 28
+        versionCode 34
         versionName "1.0"
     }
     signingConfigs {
@@ -150,6 +150,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-device-info')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-firebase')
     implementation project(':react-native-fast-image')
