@@ -10,12 +10,6 @@ import {
   View
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-import panelStyles from "../styles/appColours";
-import { getTimeText } from "../helper-functions/dateTime.js";
-import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
-import { MapFilter } from "./map-screen.js";
-
 import {
   Container,
   Header,
@@ -29,8 +23,13 @@ import {
   // Thumbnail
 } from "native-base";
 
+import panelStyles from "../styles/appColours";
+import { getTimeText } from "../helper-functions/dateTime.js";
+import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
+import { MapFilter } from "./map-screen.js";
+import DealFilterIcons from "./dealfiltericons.js";
 import appColours from "../styles/appColours.js";
-
+import { getDayObjForShortDay } from "../constants/general.js";
 const { UIManager } = NativeModules;
 
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -72,12 +71,10 @@ export default class DealsListScreen extends Component {
       toggleDealTypeFilter
     } = this.props;
     const { dayOfWeek, menuOptionExpanded, orientation } = this.state;
-    // console.log("DealsListScreen, dealsGroupedByDay:");
-    // console.log(dealsGroupedByDay);
 
     const dealsGroupedByDay = selectFilteredDealItemsGroupedByDay(dayOfWeek);
-    console.log("DealsListScreen, dealsGroupedByDay:");
-    console.log(dealsGroupedByDay);
+    // console.log("DealsListScreen, dealsGroupedByDay:");
+    // console.log(dealsGroupedByDay);
 
     return (
       <Container>
@@ -88,17 +85,25 @@ export default class DealsListScreen extends Component {
               color: appColours.panelTextColor
             }}
           >
-            <Left />
-            <Body>
+            <Left style={{flex: 5}}>
               <Title
                 style={{
                   color: appColours.panelTextColor
                 }}
               >
-                Deals
+                Deals for{" "}
+                {dayOfWeek === "all"
+                  ? "All Days"
+                  : getDayObjForShortDay(dayOfWeek).name}
               </Title>
+            </Left>
+            <Body style={{ flexDirection: "row", flex: 3 }}>
+              <DealFilterIcons
+                filterTypes={dealTypeFilters}
+                iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
+              />
             </Body>
-            <Right>
+            <Right style={{flex: 1}}>
               <TouchableOpacity onPress={this.handleTapMenu}>
                 <MaterialCommunityIcons
                   name="filter"
@@ -187,5 +192,8 @@ export default class DealsListScreen extends Component {
 
 DealsListScreen.propTypes = {
   dealsGroupedByDay: PropTypes.arrayOf(PropTypes.object).isRequired,
-  navigation: PropTypes.object.isRequired
+  navigation: PropTypes.object.isRequired,
+  dealTypeFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectFilteredDealItemsGroupedByDay: PropTypes.func.isRequired,
+  toggleDealTypeFilter: PropTypes.func.isRequired
 };

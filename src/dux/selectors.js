@@ -107,13 +107,14 @@ export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
     return filteredDealItemsArray;
   }
 )((state, filterDay) => {
-  // console.log("selectFilteredVenuesByDayAndDealType resolution:");
+  // console.log("selectFilteredDealItemsByDayAndDealType resolution:");
   // console.log(state);
   // const dealFilters = selectDealTypeFilters(state);
   // console.log(filterDay);
-  // console.log(dealFilters);
+  // console.log(dealTypeFilters);
+
   const cacheKey = `${filterDay}~${selectDealTypeFilters(state).join("~")}`;
-  console.log("selectFilteredDealItemsByDayAndDealType: cacheKey: " + cacheKey);
+  // console.log("selectFilteredDealItemsByDayAndDealType: cacheKey: " + cacheKey);
   return cacheKey;
 });
 

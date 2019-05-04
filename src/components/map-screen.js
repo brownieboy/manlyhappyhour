@@ -35,7 +35,10 @@ import {
 import appColours from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
+import DealFilterIcons from "./dealfiltericons.js";
 import { daysPicker } from "../constants/general.js";
+import { getDayObjForShortDay } from "../constants/general.js";
+
 import {
   // getDealTextObjArray,
   getDaysLabel
@@ -423,10 +426,10 @@ class MapScreen extends Component {
     const { dayOfWeek, menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
-    const summaryText =
-      dayOfWeek === "all"
-        ? "Showing deals for all days"
-        : `Showing deals for ${dayOfWeek}`;
+    // const summaryText =
+    //   dayOfWeek === "all"
+    //     ? "Showing deals for all days"
+    //     : `Showing deals for ${dayOfWeek}`;
 
     let filterTypesSummary = "all types";
     if (dealTypeFilters.length < 4) {
@@ -444,17 +447,25 @@ class MapScreen extends Component {
             backgroundColor: appColours.panelBackgroundColor
           }}
         >
-          <Left />
-          <Body style={{ flex: 11 }}>
+          <Left style={{ flex: 5 }}>
             <Title
               style={{
                 color: appColours.panelTextColor
               }}
             >
-              Map Search
+              Deals for{" "}
+              {dayOfWeek === "all"
+                ? "All Days"
+                : getDayObjForShortDay(dayOfWeek).name}
             </Title>
+          </Left>
+          <Body style={{ flex: 3, flexDirection: "row" }}>
+            <DealFilterIcons
+              filterTypes={dealTypeFilters}
+              iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
+            />
           </Body>
-          <Right>
+          <Right style={{ flex: 1 }}>
             <TouchableOpacity onPress={this.handleTapMenu}>
               <MaterialCommunityIcons
                 name="filter"
@@ -493,7 +504,7 @@ class MapScreen extends Component {
             toggleDealTypeFilter={toggleDealTypeFilter}
             // selectedFilter={selectedFilter}
           />
-          {!menuOptionExpanded && (
+          {/* {!menuOptionExpanded && (
             <View
               style={{
                 position: "absolute",
@@ -511,7 +522,7 @@ class MapScreen extends Component {
                 style={{ fontSize: 11 }}
               >{`${summaryText}: ${filterTypesSummary}`}</Text>
             </View>
-          )}
+          )} */}
         </View>
       </Container>
     );
