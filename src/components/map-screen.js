@@ -75,7 +75,7 @@ export class MapFilter extends Component {
     const {
       filterDay,
       handleDayChange,
-      // handleTapMenu,
+      handleTapMenu,
       menuOptionExpanded,
       dealTypeFilters,
       toggleDealTypeFilter,
@@ -108,7 +108,7 @@ export class MapFilter extends Component {
             left: "5%",
             right: "5%",
             padding: menuOptionExpanded ? 3 : 0,
-            height: menuOptionExpanded ? 310 : 0,
+            height: menuOptionExpanded ? 330 : 0,
             backgroundColor: "white",
             borderWidth: menuOptionExpanded ? 1 : 0,
             borderRadius: menuOptionExpanded ? 10 : 0
@@ -116,8 +116,14 @@ export class MapFilter extends Component {
         >
           {menuOptionExpanded ? (
             <View>
-              <ListItem itemDivider>
+              <ListItem itemDivider style={{ justifyContent: "space-between" }}>
                 <Text>Showing deals for day:</Text>
+                <TouchableOpacity onPress={handleTapMenu}>
+                  <Ionicons
+                    name={`${iconPlatformPrefix}close-circle`}
+                    size={25}
+                  />
+                </TouchableOpacity>
               </ListItem>
               <ListItem
                 icon
@@ -460,7 +466,10 @@ class MapScreen extends Component {
             </Title>
           </Left>
           <Body style={{ flex: 3 }}>
-            <TouchableOpacity onPress={this.handleTapMenu} style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              onPress={this.handleTapMenu}
+              style={{ flexDirection: "row" }}
+            >
               <DealFilterIcons
                 iconTypes={dealTypeFilters}
                 iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
@@ -545,10 +554,11 @@ MapScreen.propTypes = {
 MapFilter.propTypes = {
   filterDay: PropTypes.string.isRequired,
   handleDayChange: PropTypes.func.isRequired,
-  // handleTapMenu,
+  handleTapMenu: PropTypes.func.isRequired,
   menuOptionExpanded: PropTypes.bool.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
-  toggleDealTypeFilter: PropTypes.func.isRequired
+  toggleDealTypeFilter: PropTypes.func.isRequired,
+  topPos: PropTypes.number
 };
 
 export default MapScreen;

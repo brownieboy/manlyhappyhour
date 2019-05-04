@@ -23,7 +23,7 @@ const DealFilterIcons = ({ iconTypes = [], iconStyle }) => (
     {iconTypes.includes("cocktails") && (
       <FontAwesome5Icons
         name="cocktail"
-        style={iconStyle}
+        style={{ ...iconStyle, marginTop: -(iconStyle.fontSize / 9) }}
       />
     )}
   </Fragment>

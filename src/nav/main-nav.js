@@ -46,9 +46,9 @@ DealsListNav.navigationOptions = {
   tabBarIcon: ({ tintColor }) => <DealsTabIcon tintColor={tintColor} />
 };
 
-let TabNavigator;
-if (Platform.OS === "ios") {
-  TabNavigator = createBottomTabNavigator(routes, {
+// let TabNavigator;
+// if (Platform.OS === "ios") {
+  const TabNavigator = createBottomTabNavigator(routes, {
     // animationEnabled: true,
     initialRouteName: "Home",
     lazy: false,
@@ -61,14 +61,14 @@ if (Platform.OS === "ios") {
       inactiveBackgroundColor: tabNavStyles.tabBar.activeBackgroundColor
     }
   });
-} else {
-  TabNavigator = createMaterialBottomTabNavigator(routes, {
-    labeled: true,
-    showLabel: true,
-    barStyle: {
-      backgroundColor: tabNavStyles.tabBar.inactiveBackgroundColor
-    }
-  });
-}
+// } else {
+//   TabNavigator = createMaterialBottomTabNavigator(routes, {
+//     labeled: true,
+//     showLabel: true,
+//     barStyle: {
+//       backgroundColor: tabNavStyles.tabBar.inactiveBackgroundColor
+//     }
+//   });
+// }
 
 export default createAppContainer(TabNavigator);

@@ -138,7 +138,7 @@ export default class DealsListScreen extends Component {
                 >
                   <Text
                     // style={{ color: panelStyles.color, fontWeight: "bold" }}
-                    style={{ fontWeight: "bold" }}
+                    style={{ fontSize: 18, fontWeight: "bold", flex: 1 }}
                   >
                     {section.title}
                   </Text>
