@@ -24,7 +24,6 @@ import {
   // Thumbnail
 } from "native-base";
 
-import panelStyles from "../styles/appColours";
 import { getTimeText } from "../helper-functions/dateTime.js";
 import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
 import { MapFilter } from "./map-screen.js";
@@ -106,7 +105,7 @@ export default class DealsListScreen extends Component {
               >
                 <DealFilterIcons
                   iconTypes={dealTypeFilters}
-                  iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
+                  iconStyle={{ color: appColours.panelTextColor, marginRight: 4, fontSize: 18 }}
                 />
               </TouchableOpacity>
             </Body>
@@ -115,7 +114,7 @@ export default class DealsListScreen extends Component {
                 <MaterialCommunityIcons
                   name="filter"
                   size={25}
-                  style={{ color: "white" }}
+                  style={{ color: appColours.panelTextColor }}
                 />
               </TouchableOpacity>
             </Right>

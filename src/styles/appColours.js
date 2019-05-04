@@ -1,5 +1,5 @@
 const appColours = {
-  panelBackgroundColor: "#7d0002",
-  panelTextColor: "white"
+  panelBackgroundColor: "#acdbfd",
+  panelTextColor: "black"
 };
 export default appColours;

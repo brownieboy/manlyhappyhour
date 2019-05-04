@@ -94,7 +94,7 @@ class VenueScreen extends Component {
           >
             <Left style={{ flex: 4 }}>
               <HeaderBackArrow navCallback={navigation.goBack}>
-                <Text style={{ fontSize: 11, color: "white", marginLeft: 4 }}>
+                <Text style={{ fontSize: 11, color: appColours.panelTextColor, marginLeft: 4 }}>
                   Back to {parentList}
                 </Text>
               </HeaderBackArrow>

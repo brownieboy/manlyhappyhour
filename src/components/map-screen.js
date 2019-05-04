@@ -472,7 +472,7 @@ class MapScreen extends Component {
             >
               <DealFilterIcons
                 iconTypes={dealTypeFilters}
-                iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
+                iconStyle={{ color: appColours.panelTextColor, marginRight: 4, fontSize: 18 }}
               />
             </TouchableOpacity>
           </Body>
@@ -481,7 +481,7 @@ class MapScreen extends Component {
               <MaterialCommunityIcons
                 name="filter"
                 size={25}
-                style={{ color: "white" }}
+                style={{ color: appColours.panelTextColor }}
               />
             </TouchableOpacity>
           </Right>
