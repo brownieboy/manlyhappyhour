@@ -21,7 +21,7 @@ const DealFilterIcons = ({ filterTypes, iconStyle }) => (
       <Ionicons name={`${iconPlatformPrefix}wine`} style={iconStyle} />
     )}
     {filterTypes.includes("cocktails") && (
-      <FontAwesome5Icons name="cocktail" style={iconStyle} />
+      <FontAwesome5Icons name="cocktail" style={{marginTop: -5, ...iconStyle}}/>
     )}
   </Fragment>
 );
