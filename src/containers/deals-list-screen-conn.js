@@ -8,7 +8,7 @@ import {
   // selectFilteredVenuesByDayAndDealType,
   selectDealsGroupedByDay,
   selectDealTypeFilters,
-  selectFilteredDealItemsByDayAndDealType
+  selectFilteredDealItemsGroupedByDay
 } from "../dux/selectors.js";
 import {
   toggleDealTypeFilter
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
   // selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
   dealTypeFilters: selectDealTypeFilters(state),
   dealsGroupedByDay: selectDealsGroupedByDay(state),
-  filteredDealItems: filterDay => selectFilteredDealItemsByDayAndDealType(state, filterDay)
+  selectFilteredDealItemsGroupedByDay: filterDay => selectFilteredDealItemsGroupedByDay(state, filterDay)
 });
 
 const DealsListScreenConn = connect(

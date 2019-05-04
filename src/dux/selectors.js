@@ -22,6 +22,11 @@ const getVenueId = (state, venueId) => venueId;
 // const getFilterDay = (state, venueId, filterDay) => filterDay;
 const getFilterDay = (state, filterDay) => filterDay;
 
+export const selectDealTypeFilters = createSelector(
+  [getDealTypeFilters],
+  dealTypeFilters => dealTypeFilters
+);
+
 export const selectVenues = createSelector(
   [getVenues],
   venuesList => stringSortIgnoreArticle(venuesList, "name")
@@ -78,10 +83,9 @@ const selectDealItemsSortedByStartTime = createSelector(
     )
 );
 
-
 export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
-  [selectVenues, selectDealsSortedByDay, getFilterDay, selectDealTypeFilters],
-  (venuesList, dealItemsList, filterDay, dealTypeFilters) => {
+  [selectDealItemsSortedByStartTime, getFilterDay, selectDealTypeFilters],
+  (dealItemsList, filterDay, dealTypeFilters) => {
     // console.log("selectFilteredVenuesByDay:");
     // console.log(venuesList);
     // console.log(dealsList);
@@ -89,23 +93,18 @@ export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
     // console.log(filterDay);
     // console.log(dealTypeFilters);
 
-    return venuesList.filter(venueMember => {
-      const dealsForVenue = dealsList.filter(
-        dealMember => dealMember.venueId === venueMember.id
+    const filteredDealItemsArray = dealItemsList.filter(dealItem => {
+      // console.log("dMember:");
+      // console.log(dMember);
+      return (
+        (filterDay === "all" ||
+          dealItem.day === getDayObjForShortDay(filterDay).name) &&
+        dealTypeFilters.some(
+          dealType => dealItem.types && dealItem.types.includes(dealType)
+        )
       );
-      const filteredDealsArray = dealsForVenue.filter(dMember => {
-        // console.log("dMember:");
-        // console.log(dMember);
-        return (
-          (filterDay === "all" || dMember.days.includes(filterDay)) &&
-          dealTypeFilters.some(
-            dealType => dMember.types && dMember.types.includes(dealType)
-          )
-        );
-      });
-
-      return filteredDealsArray.length > 0;
     });
+    return filteredDealItemsArray;
   }
 )((state, filterDay) => {
   // console.log("selectFilteredVenuesByDayAndDealType resolution:");
@@ -114,9 +113,21 @@ export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
   // console.log(filterDay);
   // console.log(dealFilters);
   const cacheKey = `${filterDay}~${selectDealTypeFilters(state).join("~")}`;
-  // console.log(cacheKey);
+  console.log("selectFilteredDealItemsByDayAndDealType: cacheKey: " + cacheKey);
   return cacheKey;
 });
+
+export const selectFilteredDealItemsGroupedByDay = createSelector(
+  [selectFilteredDealItemsByDayAndDealType],
+  dealsItemsList =>
+    d3
+      .nest()
+      .key(dealItem => dealItem.day)
+      .sortKeys(
+        (a, b) => getDayObjForDay(a).sortOrder - getDayObjForDay(b).sortOrder
+      )
+      .entries(dealsItemsList)
+);
 
 export const selectDealsGroupedByDay = createSelector(
   [selectDealItemsSortedByStartTime],
@@ -128,11 +139,6 @@ export const selectDealsGroupedByDay = createSelector(
         (a, b) => getDayObjForDay(a).sortOrder - getDayObjForDay(b).sortOrder
       )
       .entries(dealsItemsList)
-);
-
-export const selectDealTypeFilters = createSelector(
-  [getDealTypeFilters],
-  dealTypeFilters => dealTypeFilters
 );
 
 export const selectVenueDetails = createCachedSelector(
