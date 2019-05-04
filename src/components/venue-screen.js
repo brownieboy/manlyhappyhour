@@ -8,11 +8,11 @@ import nodeEmoji from "node-emoji";
 import {
   CardItem,
   Container,
-  Icon,
+  // Icon,
   Header,
   Title,
   Content,
-  ListItem,
+  // ListItem,
   Left,
   Right,
   Body
@@ -82,6 +82,11 @@ class VenueScreen extends Component {
         <Text>No deals currently listed</Text>
       );
 
+    let backToText = "Venues";
+    if (parentList === "map") {
+      backToText = "Map";
+    }
+
     // console.log("venueDeals");
     // console.log(venueDeals);
     return (
@@ -94,12 +99,18 @@ class VenueScreen extends Component {
           >
             <Left style={{ flex: 4 }}>
               <HeaderBackArrow navCallback={navigation.goBack}>
-                <Text style={{ fontSize: 11, color: appColours.panelTextColor, marginLeft: 4 }}>
-                  Back to {parentList}
+                <Text
+                  style={{
+                    fontSize: 11,
+                    color: appColours.panelTextColor,
+                    marginLeft: 4
+                  }}
+                >
+                  Back to {backToText}
                 </Text>
               </HeaderBackArrow>
             </Left>
-            <Right style={{ flex: 11 }}>
+            <Right style={{ flex: 9 }}>
               <Title
                 style={{
                   color: appColours.panelTextColor

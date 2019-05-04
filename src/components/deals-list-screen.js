@@ -105,7 +105,11 @@ export default class DealsListScreen extends Component {
               >
                 <DealFilterIcons
                   iconTypes={dealTypeFilters}
-                  iconStyle={{ color: appColours.panelTextColor, marginRight: 4, fontSize: 18 }}
+                  iconStyle={{
+                    color: appColours.panelTextColor,
+                    marginRight: 4,
+                    fontSize: 18
+                  }}
                 />
               </TouchableOpacity>
             </Body>
@@ -181,7 +185,7 @@ export default class DealsListScreen extends Component {
                     </View>
                   </View>
                   <Text style={{ fontSize: 13, color: "grey" }}>
-                    {item.desc}
+                    {orientation === "landscape" ? item.desc : item.shortDesc}
                   </Text>
                 </Body>
                 <Right style={{ flex: 1 }}>
