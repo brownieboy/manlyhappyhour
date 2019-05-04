@@ -89,7 +89,8 @@ export default class DealsListScreen extends Component {
             <Left style={{ flex: 5 }}>
               <Title
                 style={{
-                  color: appColours.panelTextColor
+                  color: appColours.panelTextColor,
+                  fontSize: appColours.panelTopFontSize
                 }}
               >
                 Deals for{" "}

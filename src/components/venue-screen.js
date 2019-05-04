@@ -101,7 +101,7 @@ class VenueScreen extends Component {
               <HeaderBackArrow navCallback={navigation.goBack}>
                 <Text
                   style={{
-                    fontSize: 11,
+                    fontSize: appColours.panelTopFontSize,
                     color: appColours.panelTextColor,
                     marginLeft: 4
                   }}

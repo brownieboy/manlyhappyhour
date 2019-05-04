@@ -1,5 +1,6 @@
 const appColours = {
   panelBackgroundColor: "#acdbfd",
-  panelTextColor: "black"
+  panelTextColor: "white",
+  panelTopFontSize: 14
 };
 export default appColours;
