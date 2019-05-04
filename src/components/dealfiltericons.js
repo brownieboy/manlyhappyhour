@@ -9,19 +9,22 @@ if (Platform.OS === "android") {
   iconPlatformPrefix = "md-";
 }
 
-const DealFilterIcons = ({ filterTypes, iconStyle }) => (
+const DealFilterIcons = ({ iconTypes = [], iconStyle }) => (
   <Fragment>
-    {filterTypes.includes("food") && (
+    {iconTypes.includes("food") && (
       <MaterialCommunityIcons name="silverware-fork-knife" style={iconStyle} />
     )}
-    {filterTypes.includes("beer") && (
+    {iconTypes.includes("beer") && (
       <Ionicons name={`${iconPlatformPrefix}beer`} style={iconStyle} />
     )}
-    {filterTypes.includes("wine") && (
+    {iconTypes.includes("wine") && (
       <Ionicons name={`${iconPlatformPrefix}wine`} style={iconStyle} />
     )}
-    {filterTypes.includes("cocktails") && (
-      <FontAwesome5Icons name="cocktail" style={{marginTop: -5, ...iconStyle}}/>
+    {iconTypes.includes("cocktails") && (
+      <FontAwesome5Icons
+        name="cocktail"
+        style={iconStyle}
+      />
     )}
   </Fragment>
 );

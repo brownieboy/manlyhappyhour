@@ -10,4 +10,5 @@ const mapIcons = {
   sailing: sailingIcon
 };
 
+
 export default mapIcons;

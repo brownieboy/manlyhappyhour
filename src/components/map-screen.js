@@ -253,7 +253,6 @@ class MapScreen extends Component {
     super(props);
     this.state = {
       extraData: false,
-      dayOfWeek: "all",
       menuOptionExpanded: false
       // dayOfWeek: dateFormat(new Date(), "ddd")
     };
@@ -262,7 +261,8 @@ class MapScreen extends Component {
   handleDayChange = dayOfWeek => {
     // console.log("handleDayChange, dayOfWeek");
     // console.log(dayOfWeek);
-    this.setState({ dayOfWeek });
+    // this.setState({ dayOfWeek });
+    this.props.setDayOfWeek(dayOfWeek);
   };
 
   handleTapMenu = () => {
@@ -303,8 +303,7 @@ class MapScreen extends Component {
   };
 
   addMarkers = () => {
-    const { selectFilteredDeals } = this.props;
-    const { dayOfWeek } = this.state;
+    const { selectFilteredDeals, dayOfWeek } = this.props;
     const filterDay = dayOfWeek;
     // let filteredVenuesList = venuesList;
     // console.log("addMarkers, filterDay:");
@@ -420,10 +419,11 @@ class MapScreen extends Component {
     const {
       venuesList,
       dealTypeFilters,
-      toggleDealTypeFilter
+      toggleDealTypeFilter,
+      dayOfWeek
       // selectFilteredDeals
     } = this.props;
-    const { dayOfWeek, menuOptionExpanded } = this.state;
+    const { menuOptionExpanded } = this.state;
     // console.log("MapScreen..render(), state");
     // console.log(this.state);
     // const summaryText =
@@ -459,11 +459,13 @@ class MapScreen extends Component {
                 : getDayObjForShortDay(dayOfWeek).name}
             </Title>
           </Left>
-          <Body style={{ flex: 3, flexDirection: "row" }}>
-            <DealFilterIcons
-              filterTypes={dealTypeFilters}
-              iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
-            />
+          <Body style={{ flex: 3 }}>
+            <TouchableOpacity onPress={this.handleTapMenu} style={{ flexDirection: "row" }}>
+              <DealFilterIcons
+                iconTypes={dealTypeFilters}
+                iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
+              />
+            </TouchableOpacity>
           </Body>
           <Right style={{ flex: 1 }}>
             <TouchableOpacity onPress={this.handleTapMenu}>
@@ -535,7 +537,9 @@ MapScreen.propTypes = {
   selectVenueDeals: PropTypes.func.isRequired,
   selectFilteredDeals: PropTypes.func.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
-  toggleDealTypeFilter: PropTypes.func.isRequired
+  toggleDealTypeFilter: PropTypes.func.isRequired,
+  dayOfWeek: PropTypes.string.isRequired,
+  setDayOfWeek: PropTypes.func.isRequired
 };
 
 MapFilter.propTypes = {

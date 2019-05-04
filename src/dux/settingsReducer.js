@@ -1,9 +1,11 @@
 export const TOGGLE_DEAL_TYPE_FILTER = "TOGGLE_DEAL_TYPE_FILTER";
 export const FETCH_SETTINGS_SUCCESS = "FETCH_SETTINGS_SUCCESS";
 export const LOAD_SETTINGS_NOW = "LOAD_SETTINGS_NOW";
+export const SET_DAY_OF_WEEK = "SET_DAY_OF_WEEK";
 
 const defaultState = {
-  dealTypeFilters: ["beer", "wine", "cocktails", "food"]
+  dealTypeFilters: ["beer", "wine", "cocktails", "food"],
+  dayOfWeek: "all"
 };
 
 const settingsReducer = (state = defaultState, action) => {
@@ -32,6 +34,9 @@ const settingsReducer = (state = defaultState, action) => {
     case FETCH_SETTINGS_SUCCESS: {
       return payload; // yep, the whole thing is replaced
     }
+    case SET_DAY_OF_WEEK: {
+      return { ...state, dayOfWeek: payload };
+    }
     default:
       return state;
   }
@@ -47,10 +52,16 @@ export const setFetchSettingsSucceeded = settingsState => ({
   payload: settingsState || defaultState
 });
 
+export const setDayOfWeek = dayOfWeek => ({
+  type: SET_DAY_OF_WEEK,
+  payload: dayOfWeek
+});
+
 export const loadSettingsNow = () => ({ type: LOAD_SETTINGS_NOW });
 
 // Getters
 export const getDealTypeFilters = state => state.settingsState.dealTypeFilters;
+export const getDayOfWeek = state => state.settingsState.dayOfWeek;
 // export const getincludeFoodInFilter = state =>
 //   state.uiState.includeFoodInFilter;
 // export const getAppearancesView = state => state.uiState.appearancesView;

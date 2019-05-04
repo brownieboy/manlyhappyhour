@@ -43,7 +43,6 @@ export default class DealsListScreen extends Component {
       fullScreenPhotoCard: false,
       internalStateChanged: false,
       orientation: "unknown",
-      dayOfWeek: "all",
       menuOptionExpanded: false
     };
     this.handleOnLayout = handleOnLayout.bind(this);
@@ -58,19 +57,21 @@ export default class DealsListScreen extends Component {
 
   handleDayChange = dayOfWeek => {
     // console.log("handleDayChange, dayOfWeek");
+    this.props.setDayOfWeek(dayOfWeek);
     // console.log(dayOfWeek);
-    this.setState({ dayOfWeek });
+    // this.setState({ dayOfWeek });
   };
 
   render() {
     const {
       // dealsGroupedByDay,
       navigation,
+      dayOfWeek,
       dealTypeFilters,
       selectFilteredDealItemsGroupedByDay,
       toggleDealTypeFilter
     } = this.props;
-    const { dayOfWeek, menuOptionExpanded, orientation } = this.state;
+    const { menuOptionExpanded, orientation } = this.state;
 
     const dealsGroupedByDay = selectFilteredDealItemsGroupedByDay(dayOfWeek);
     // console.log("DealsListScreen, dealsGroupedByDay:");
@@ -85,7 +86,7 @@ export default class DealsListScreen extends Component {
               color: appColours.panelTextColor
             }}
           >
-            <Left style={{flex: 5}}>
+            <Left style={{ flex: 5 }}>
               <Title
                 style={{
                   color: appColours.panelTextColor
@@ -97,13 +98,18 @@ export default class DealsListScreen extends Component {
                   : getDayObjForShortDay(dayOfWeek).name}
               </Title>
             </Left>
-            <Body style={{ flexDirection: "row", flex: 3 }}>
-              <DealFilterIcons
-                filterTypes={dealTypeFilters}
-                iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
-              />
+            <Body style={{ flex: 3 }}>
+              <TouchableOpacity
+                onPress={this.handleTapMenu}
+                style={{ flexDirection: "row" }}
+              >
+                <DealFilterIcons
+                  iconTypes={dealTypeFilters}
+                  iconStyle={{ color: "white", marginRight: 4, fontSize: 18 }}
+                />
+              </TouchableOpacity>
             </Body>
-            <Right style={{flex: 1}}>
+            <Right style={{ flex: 1 }}>
               <TouchableOpacity onPress={this.handleTapMenu}>
                 <MaterialCommunityIcons
                   name="filter"
@@ -149,13 +155,22 @@ export default class DealsListScreen extends Component {
               >
                 <Left style={{ flex: 3 }}>
                   <Text style={{ fontSize: 12 }}>
-                    {`${getTimeText(item.start)}${
+                    {`${getTimeText(item.start)}-${
                       orientation !== "landscape" ? "\n" : ""
-                    }-${getTimeText(item.finish)}:`}
+                    }${getTimeText(item.finish)}:`}
                   </Text>
                 </Left>
                 <Body style={{ flex: 10 }}>
-                  <Text style={{ fontSize: 15 }}>{item.venue.name}</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text style={{ fontSize: 15, marginRight: 10 }}>{item.venue.name}</Text>
+                    <DealFilterIcons
+                      iconTypes={item.types}
+                      iconStyle={{
+                        marginRight: 4,
+                        fontSize: 14
+                      }}
+                    />
+                  </View>
                   <Text style={{ fontSize: 13, color: "grey" }}>
                     {item.shortDesc}
                   </Text>
@@ -195,5 +210,7 @@ DealsListScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   dealTypeFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectFilteredDealItemsGroupedByDay: PropTypes.func.isRequired,
+  dayOfWeek: PropTypes.string.isRequired,
+  setDayOfWeek: PropTypes.func.isRequired,
   toggleDealTypeFilter: PropTypes.func.isRequired
 };

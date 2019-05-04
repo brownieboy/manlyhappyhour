@@ -11,18 +11,19 @@ import {
   selectFilteredDealItemsGroupedByDay
 } from "../dux/selectors.js";
 import {
-  toggleDealTypeFilter
+  toggleDealTypeFilter, setDayOfWeek, getDayOfWeek
   // getDealTypeFilters
 } from "../dux/settingsReducer.js";
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ toggleDealTypeFilter }, dispatch);
+  bindActionCreators({ toggleDealTypeFilter, setDayOfWeek }, dispatch);
 
 const mapStateToProps = state => ({
   // selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
   dealTypeFilters: selectDealTypeFilters(state),
   dealsGroupedByDay: selectDealsGroupedByDay(state),
-  selectFilteredDealItemsGroupedByDay: filterDay => selectFilteredDealItemsGroupedByDay(state, filterDay)
+  selectFilteredDealItemsGroupedByDay: filterDay => selectFilteredDealItemsGroupedByDay(state, filterDay),
+  dayOfWeek: getDayOfWeek(state)
 });
 
 const DealsListScreenConn = connect(
