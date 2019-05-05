@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform } from "react-native";
+// import { Platform } from "react-native";
 import PropTypes from "prop-types";
 import FastImage from "react-native-fast-image";
 
@@ -18,12 +18,8 @@ import {
   // Thumbnail
 } from "native-base";
 
-import appColours from "../styles/appColours.js";
-export const listStyles = {
-  // alternateRowColour: Platform.OS === "android" ? "#E8E8E8" : "#F5F5F5"
-  // alternateRowColour: Platform.OS === "android" ? "#e4e3f2" : "#efeff7"
-  alternateRowColour: Platform.OS === "android" ? "#efeff7" : "#fafafd"
-};
+import appColours, { listStyles } from "../styles/appColours.js";
+
 
 class VenuesScreen extends Component {
   // componentDidMount() {
