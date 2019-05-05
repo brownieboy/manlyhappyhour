@@ -18,6 +18,7 @@ import {
   setFetchDealsFailed
 } from "../dealsReducer.js";
 import { setFetchHomeSucceeded } from "../homeReducer.js";
+import { setFetchAboutSucceeded } from "../aboutReducer.js";
 
 const preloadImages = imageUrlsArray => {
   const uriObjArray = imageUrlsArray.map(url => ({ uri: url }));
@@ -84,6 +85,7 @@ function* loadDataGen() {
       const venuesArray = dataNormalised.venues;
       const dealsArray = dataNormalised.deals;
       const homeUpdate = dataNormalised.homeUpdates[0] || {};
+      const aboutUpdate = dataNormalised.aboutUpdates[0] || {};
 
       let imageUrls = [];
       venuesArray.forEach(venue => {
@@ -96,6 +98,7 @@ function* loadDataGen() {
       yield all([put(setFetchVenuesSucceeded(venuesArray))]);
       yield all([put(setFetchDealsSucceeded(dealsArray))]);
       yield all([put(setFetchHomeSucceeded(homeUpdate))]);
+      yield all([put(setFetchAboutSucceeded(aboutUpdate))]);
       // yield console.log("loadBandsGen, finished yield all with loaded data");
 
       // console.log("Have restored preloadImage here");
