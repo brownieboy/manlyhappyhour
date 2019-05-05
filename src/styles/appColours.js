@@ -1,7 +1,8 @@
-import {Platform} from "react-native";
+import { Platform } from "react-native";
 
 const appColours = {
-  panelBackgroundColor: Platform.OS === "android" ? "#00BFFF" : "#acdbfd",
+  // panelBackgroundColor: Platform.OS === "android" ? "#2c3c8e" : "#2c3c8e",
+  panelBackgroundColor: "#2c3c8e",
   panelTextColor: "white",
   panelTopFontSize: 14
 };
