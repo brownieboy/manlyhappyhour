@@ -1,28 +1,22 @@
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 // Components
-import HomeScreen from "../components/home-screen.js";
+import AboutScreen from "../components/about-screen.js";
 
 // Dux stuff
-import {
-  loadVenuesNow
-  // selectVenuesAlphabeticalWithFavourites
-} from "../dux/venuesReducer.js";
-// import { selectVenues } from "../dux/selectors.js";
-// import { loadSettingsNow } from "../dux/settingsReducer.js";
-import { homeSelector } from "../dux/homeReducer.js";
+import { aboutSelector } from "../dux/aboutReducer.js";
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ loadVenuesNow }, dispatch);
+const mapDispatchToProps = dispatch => ({});
+// bindActionCreators({ loadVenuesNow }, dispatch);
 
 const mapStateToProps = state => ({
-  homeData: homeSelector(state)
+  aboutData: aboutSelector(state)
 });
 
-const HomeScreenConn = connect(
+const AboutScreenConn = connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomeScreen);
+)(AboutScreen);
 
-export default HomeScreenConn;
+export default AboutScreenConn;
