@@ -85,6 +85,8 @@ class VenueScreen extends Component {
     let backToText = "Venues";
     if (parentList === "map") {
       backToText = "Map";
+    } else if (parentList === "deals") {
+      backToText = "Deals";
     }
 
     // console.log("venueDeals");

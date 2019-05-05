@@ -118,12 +118,15 @@ export class MapFilter extends Component {
             <View>
               <ListItem itemDivider style={{ justifyContent: "space-between" }}>
                 <Text>Showing deals for day:</Text>
-                <TouchableOpacity onPress={handleTapMenu}>
+                <Button small primary onPress={handleTapMenu} style={{alignItems: "center", paddingLeft: 10, paddingRight: 10}}>
+                  <Text style={{color: "white"}}>Done</Text>
+                </Button>
+                {/* <TouchableOpacity onPress={handleTapMenu}>
                   <Ionicons
                     name={`${iconPlatformPrefix}close-circle`}
                     size={25}
                   />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </ListItem>
               <ListItem
                 icon
@@ -527,7 +530,11 @@ class MapScreen extends Component {
             >
               <DealFilterIcons
                 iconTypes={dealTypeFilters}
-                iconStyle={{ color: appColours.panelTextColor, marginRight: 4, fontSize: 18 }}
+                iconStyle={{
+                  color: appColours.panelTextColor,
+                  marginRight: 4,
+                  fontSize: 18
+                }}
               />
             </TouchableOpacity>
           </Body>

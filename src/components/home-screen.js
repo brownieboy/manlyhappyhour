@@ -73,7 +73,7 @@ class HomeScreen extends Component {
         <Content>
           <CardItem>
             <ParsedTextFormatted>
-              {homeData.blurb ? homeData.blurb : "Home description"}
+              {homeData.blurb ? homeData.blurb : "Please wait, getting latest updates..."}
             </ParsedTextFormatted>
           </CardItem>
         </Content>

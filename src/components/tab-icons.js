@@ -29,7 +29,7 @@ AboutTabIcon.propTypes = {
 
 export const DealsTabIcon = React.memo(({ tintColor }) => (
   <FontAwesome5Icons
-    name="search-dollar"
+    name="dollar-sign"
     size={Platform.OS === "android" ? 26 : 26}
     style={{ color: tintColor }}
   />

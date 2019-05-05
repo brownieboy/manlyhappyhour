@@ -188,7 +188,7 @@ export default class DealsListScreen extends Component {
                         iconTypes={item.types}
                         iconStyle={{
                           marginRight: 4,
-                          fontSize: 14
+                          fontSize: 20
                         }}
                       />
                     </View>
