@@ -12,8 +12,12 @@ import {
   setFetchVenuesRequest
 } from "../venuesReducer.js";
 
-import { setFetchDealsSucceeded, setFetchDealsRequest, setFetchDealsFailed } from "../dealsReducer.js"; 
-
+import {
+  setFetchDealsSucceeded,
+  setFetchDealsRequest,
+  setFetchDealsFailed
+} from "../dealsReducer.js";
+import { setFetchHomeSucceeded } from "../homeReducer.js";
 
 const preloadImages = imageUrlsArray => {
   const uriObjArray = imageUrlsArray.map(url => ({ uri: url }));
@@ -54,26 +58,32 @@ function* loadDataGen() {
       // down from Firebase
       // console.log("imageUrls");
       // console.log(JSON.stringify(imageUrls, null, 2));
-      const venuesObj = dataNormalised.venues;
+      // const venuesObj = dataNormalised.venues;
       // const imageUrls = dataNormalised.imageUrls;
       // console.log("venuesObj:");
       // console.log(venuesObj);
 
       // "Arrays" in Firebase are actually objects.  So we need to turn the object
       // into a "proper" array, like so, before passing to Redux.
-      const venuesArray = Object.keys(venuesObj).map(key => ({
-        id: key,
-        ...venuesObj[key]
-      }));
+      // const venuesArray = Object.keys(venuesObj).map(key => ({
+      //   id: key,
+      //   ...venuesObj[key]
+      // }));
 
-      const dealsObj = dataNormalised.deals;
-      const dealsArray = Object.keys(dealsObj).map(key => ({
-        id: key,
-        ...dealsObj[key]
-      }));
+      // const dealsObj = dataNormalised.deals;
+      // const dealsArray = Object.keys(dealsObj).map(key => ({
+      //   id: key,
+      //   ...dealsObj[key]
+      // }));
 
       // console.log("venuesArray:");
       // console.log(venuesArray);
+
+      // Published data from firebase are "proper" arrays now, so don't
+      // need to do all the conversion here
+      const venuesArray = dataNormalised.venues;
+      const dealsArray = dataNormalised.deals;
+      const homeUpdate = dataNormalised.homeUpdates[0] || {};
 
       let imageUrls = [];
       venuesArray.forEach(venue => {
@@ -85,6 +95,7 @@ function* loadDataGen() {
       // yield console.log("loadBandsGen, about to yield all with loaded data");
       yield all([put(setFetchVenuesSucceeded(venuesArray))]);
       yield all([put(setFetchDealsSucceeded(dealsArray))]);
+      yield all([put(setFetchHomeSucceeded(homeUpdate))]);
       // yield console.log("loadBandsGen, finished yield all with loaded data");
 
       // console.log("Have restored preloadImage here");

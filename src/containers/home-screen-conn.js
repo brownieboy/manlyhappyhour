@@ -10,13 +10,14 @@ import {
   // selectVenuesAlphabeticalWithFavourites
 } from "../dux/venuesReducer.js";
 // import { selectVenues } from "../dux/selectors.js";
-import {loadSettingsNow} from "../dux/settingsReducer.js";
+// import { loadSettingsNow } from "../dux/settingsReducer.js";
+import { homeSelector } from "../dux/homeReducer.js";
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ loadVenuesNow, loadSettingsNow }, dispatch);
+  bindActionCreators({ loadVenuesNow }, dispatch);
 
 const mapStateToProps = state => ({
-  // venuesList: selectVenues(state)
+  homeData: homeSelector(state)
 });
 
 const HomeScreenConn = connect(

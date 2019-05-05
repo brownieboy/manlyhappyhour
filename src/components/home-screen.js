@@ -5,11 +5,14 @@ import React, { Component } from "react";
 import { Text, View } from "react-native";
 class HomeScreen extends Component {
   componentDidMount() {
-    const { loadVenuesNow, loadSettingsNow } = this.props;
+    const { loadVenuesNow } = this.props;
     loadVenuesNow();
-    loadSettingsNow();
+    // loadSettingsNow();
   }
   render() {
+    const { homeData } = this.props;
+    console.log("homeData:");
+    console.log(homeData);
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>App Home Screen</Text>
@@ -22,8 +25,8 @@ class HomeScreen extends Component {
 }
 
 HomeScreen.propTypes = {
-  loadVenuesNow: PropTypes.func.isRequired,
-  loadSettingsNow: PropTypes.func.isRequired
+  loadVenuesNow: PropTypes.func.isRequired
+  // loadSettingsNow: PropTypes.func.isRequired
 };
 
 export default HomeScreen;

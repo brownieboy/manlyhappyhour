@@ -1,6 +1,6 @@
 export const TOGGLE_DEAL_TYPE_FILTER = "TOGGLE_DEAL_TYPE_FILTER";
 export const FETCH_SETTINGS_SUCCESS = "FETCH_SETTINGS_SUCCESS";
-export const LOAD_SETTINGS_NOW = "LOAD_SETTINGS_NOW";
+// export const LOAD_SETTINGS_NOW = "LOAD_SETTINGS_NOW";
 export const SET_DAY_OF_WEEK = "SET_DAY_OF_WEEK";
 
 const defaultState = {
@@ -57,7 +57,7 @@ export const setDayOfWeek = dayOfWeek => ({
   payload: dayOfWeek
 });
 
-export const loadSettingsNow = () => ({ type: LOAD_SETTINGS_NOW });
+// export const loadSettingsNow = () => ({ type: LOAD_SETTINGS_NOW });
 
 // Getters
 export const getDealTypeFilters = state => state.settingsState.dealTypeFilters;

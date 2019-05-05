@@ -5,7 +5,7 @@ import firebaseSagas from "./firebaseSagas.js";
 // import uiSagas from "./uiSagas.js";
 // import favouritesSagas from "./favouritesSagas.js";
 import loadDataToUISagas from "./loadDataToUiSagas.js";
-import settingsSagas from "./settingsSagas.js";
+// import settingsSagas from "./settingsSagas.js";
 
 // Combine sagas solution taken from Andarist's comment at:
 // https://github.com/redux-saga/redux-saga/issues/160
@@ -14,8 +14,8 @@ function* sagas() {
     // ...dataSagas,
     ...firebaseSagas,
     // ...favouritesSagas,
-    ...loadDataToUISagas,
-    ...settingsSagas
+    ...loadDataToUISagas
+    // ...settingsSagas
   ]);
 }
 export default sagas;

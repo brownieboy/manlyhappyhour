@@ -237,15 +237,8 @@ export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
   return cacheKey;
 });
 
-/*
-    if (filterDay !== "all") {
-      filteredVenuesList = venuesList.filter(venue => {
-        const dealsArray = this.props.selectVenueDeals(venue.id);
-        const filteredDealsArray = dealsArray.filter(dealMember =>
-          dealMember.days.includes(filterDay)
-        );
-        return filteredDealsArray.length > 0;
-      });
-    }
+export const getCommonStateObject = localState => ({
+  fetchStatus: localState.fetchStatus,
+  fetchError: localState.fetchError
+});
 
-*/
