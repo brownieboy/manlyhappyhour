@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 // import { Button } from "native-base";
 
-import { Text, View } from "react-native";
+import { Dimensions, Image, Text, View } from "react-native";
 import {
   Body,
   Button,
@@ -20,8 +20,21 @@ import {
 
 import appColours from "../styles/appColours.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
+import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
+
+const manlyFerry = require("../../resources/img/16-Manly-Wharf-DNSW.jpg");
 
 class HomeScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentTab: 0,
+      dimensions: Dimensions.get("window"),
+      fullScreenPhotoCard: false,
+      orientation: "unknown"
+    };
+    this.handleOnLayout = handleOnLayout.bind(this);
+  }
   componentDidMount() {
     const { loadVenuesNow } = this.props;
     loadVenuesNow();
@@ -38,19 +51,25 @@ class HomeScreen extends Component {
             backgroundColor: appColours.panelBackgroundColor
           }}
         >
-          <Left style={{ flex: 1 }} />
+          <Left />
           <Body style={{ flex: 6 }}>
             <Title
               style={{
                 color: appColours.panelTextColor,
-                fontSize: appColours.panelTopFontSize
+                fontSize: 16
               }}
             >
-              Home Screen
+              Manly Happy Hour
             </Title>
           </Body>
-          <Right style={{ flex: 1 }} />
+          <Right  />
         </Header>
+        <View>
+          <Image
+            source={manlyFerry}
+            style={{ width: Dimensions.width, height: 230 }}
+          />
+        </View>
         <Content>
           <CardItem>
             <ParsedTextFormatted>
@@ -58,6 +77,11 @@ class HomeScreen extends Component {
             </ParsedTextFormatted>
           </CardItem>
         </Content>
+        <View
+          onLayout={() => {
+            this.handleOnLayout(Dimensions);
+          }}
+        />
       </Container>
     );
   }

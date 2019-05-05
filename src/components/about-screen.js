@@ -31,8 +31,8 @@ import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
 let segmentIconColourSelected = "white";
 let segmentIconColourNotSelected = "#A8A8A8"; // Shades lighter than grey
 if (Platform.OS === "ios") {
-  segmentIconColourSelected = "blue";
-  segmentIconColourNotSelected = "black";
+  segmentIconColourSelected = "white";
+  segmentIconColourNotSelected = "#A8A8A8";
 }
 
 const itCrowd = require("../../resources/img/it-crowd.gif");
@@ -82,7 +82,7 @@ class AboutScreen extends Component {
         <Tabs onChangeTab={({ i }) => this.setState({ currentTab: i })}>
           <Tab
             heading={
-              <TabHeading>
+              <TabHeading style={{backgroundColor: appColours.panelBackgroundColor}}>
                 <Ionicons
                   name={
                     Platform.OS === "android"
@@ -125,7 +125,7 @@ class AboutScreen extends Component {
           </Tab>
           <Tab
             heading={
-              <TabHeading>
+              <TabHeading style={{backgroundColor: appColours.panelBackgroundColor}}>
                 <IconFontAwesome5
                   name="code"
                   style={{
@@ -159,6 +159,13 @@ class AboutScreen extends Component {
             <Content padder>
               <ParsedTextFormatted>{aboutData.blurb}</ParsedTextFormatted>
             </Content>
+            <View style={{ marginTop: 50, marginBottom: 50, marginLeft: 15 }}>
+              <Text style={{ fontSize: 11 }}>
+              {DeviceInfo.getApplicationName()} version{" "}
+                {DeviceInfo.getVersion()}, build {DeviceInfo.getBuildNumber()}{" "}
+                is running in {process.env.NODE_ENV} mode.
+              </Text>
+            </View>
           </Tab>
         </Tabs>
         <View
