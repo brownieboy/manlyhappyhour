@@ -4,12 +4,29 @@ import { Platform } from "react-native";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import IconAntDesign from "react-native-vector-icons/AntDesign";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 // import { Icon } from "native-base";
 
 import { IcoMoonIcon } from "./custom-vector-icons.js";
 
+// let iconPlatformPrefix = "ios-";
+// if (Platform.OS === "android") {
+//   iconPlatformPrefix = "md-";
+
 // tintColor passed in is an object
+export const AboutTabIcon = React.memo(({ tintColor }) => (
+  <Ionicons
+    name={Platform.OS === "android" ? "md-information-circle" : "ios-information-circle"}
+    size={Platform.OS === "android" ? 26 : 26}
+    style={{ color: tintColor }}
+  />
+));
+
+AboutTabIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired
+};
+
 export const DealsTabIcon = React.memo(({ tintColor }) => (
   <FontAwesome5Icons
     name="search-dollar"

@@ -9,11 +9,14 @@ import VenuesListNav from "../nav/venues-nav.js";
 import DealsListNav from "../nav/deals-nav.js";
 // import MapScreen from "../containers/map-screen-conn.js";
 import MapNav from "../nav/map-nav.js";
+import AboutScreen from "../containers/about-screen-conn.js";
+
 import {
   HomeTabIcon,
   MapTabIcon,
   VenueTabIcon,
-  DealsTabIcon
+  DealsTabIcon,
+  AboutTabIcon
 } from "../components/tab-icons.js";
 
 // Styles
@@ -28,7 +31,8 @@ const routes = {
   Home: HomeScreen,
   Venues: VenuesListNav,
   Deals: DealsListNav,
-  Maps: MapNav
+  Maps: MapNav,
+  About: AboutScreen
 };
 
 VenuesListNav.navigationOptions = {
@@ -44,6 +48,11 @@ MapNav.navigationOptions = {
 DealsListNav.navigationOptions = {
   tabBarLabel: "Map",
   tabBarIcon: ({ tintColor }) => <DealsTabIcon tintColor={tintColor} />
+};
+
+AboutScreen.navigationOptions = {
+  tabBarLabel: "Info",
+  tabBarIcon: ({ tintColor }) => <AboutTabIcon tintColor={tintColor} />
 };
 
 // let TabNavigator;
