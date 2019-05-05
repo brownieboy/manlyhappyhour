@@ -28,7 +28,7 @@ import { getTimeText } from "../helper-functions/dateTime.js";
 import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
 import { MapFilter } from "./map-screen.js";
 import DealFilterIcons from "./dealfiltericons.js";
-import appColours, { listStyles }  from "../styles/appColours.js";
+import appColours, { listStyles } from "../styles/appColours.js";
 import { getDayObjForShortDay } from "../constants/general.js";
 const { UIManager } = NativeModules;
 
@@ -158,6 +158,8 @@ export default class DealsListScreen extends Component {
                   })
                 }
                 style={{
+                  paddingTop: 5,
+                  paddingBottom: 5,
                   backgroundColor:
                     index % 2 === 0
                       ? "transparent"
