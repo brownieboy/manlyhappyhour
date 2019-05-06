@@ -57,7 +57,7 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 
 const styles = StyleSheet.create({
   plainView: {
-    width: 200
+    width: 300
   }
 });
 
