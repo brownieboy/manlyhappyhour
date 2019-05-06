@@ -139,14 +139,19 @@ export default class DealsListScreen extends Component {
               return (
                 <ListItem
                   style={{
-                    // backgroundColor: panelStyles.backgroundColor,
+                    backgroundColor: appColours.panelBackgroundColor,
                     paddingLeft: 10
                   }}
                   itemDivider
                 >
                   <Text
                     // style={{ color: panelStyles.color, fontWeight: "bold" }}
-                    style={{ fontSize: 18, fontWeight: "bold", flex: 1 }}
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      color: appColours.panelTextColor
+                    }}
                   >
                     {section.title}
                   </Text>
