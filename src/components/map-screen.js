@@ -57,7 +57,7 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 
 const styles = StyleSheet.create({
   plainView: {
-    width: 300
+    width: 200
   }
 });
 
@@ -362,17 +362,21 @@ class MapScreen extends Component {
   getDealsTextItems = dealsArray => {
     const dealTextItems = dealsArray.map(dealObj => {
       return (
-        <Text key={dealObj.id}>
-          <Text style={{ fontSize: 11 }}>
-            {dealObj.days ? getDaysLabel(dealObj.days) : "Day?"}{" "}
-          </Text>
-          {dealObj.start && dealObj.finish && (
+        <View key={dealObj.id} style={{marginBottom: 3}}>
+          <View style={{flexDirection: "row"}}>
             <Text style={{ fontSize: 11 }}>
-              {`${getTimeText(dealObj.start)}-${getTimeText(dealObj.finish)}: `}
+              {dealObj.days ? getDaysLabel(dealObj.days) : "Day?"}{" "}
             </Text>
-          )}
+            {dealObj.start && dealObj.finish && (
+              <Text style={{ fontSize: 11 }}>
+                {`${getTimeText(dealObj.start)}-${getTimeText(
+                  dealObj.finish
+                )}: `}
+              </Text>
+            )}
+          </View>
           <Text style={{ fontSize: 13 }}>{dealObj.shortDesc}</Text>
-        </Text>
+        </View>
       );
     });
     return dealTextItems;
