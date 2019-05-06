@@ -363,7 +363,7 @@ class MapScreen extends Component {
   getDealsTextItems = dealsArray => {
     let x = -1;
     const dealTextItems = dealsArray.map(dealObj => {
-      x
+      x++;
       return (
         <View
           key={dealObj.id}
