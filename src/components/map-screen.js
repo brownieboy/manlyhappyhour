@@ -32,7 +32,7 @@ import {
   Right,
   Title
 } from "native-base";
-import appColours from "../styles/appColours.js";
+import appColours, { listStyles } from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
 import DealFilterIcons from "./dealfiltericons.js";
@@ -45,6 +45,7 @@ import {
 } from "../helper-functions/deal-line-processing.js";
 
 import { getTimeText } from "../helper-functions/dateTime.js";
+import { List } from "react-native-paper";
 
 const { UIManager } = NativeModules;
 let iconPlatformPrefix = "ios-";
@@ -360,10 +361,26 @@ class MapScreen extends Component {
   }
 
   getDealsTextItems = dealsArray => {
+    let x = -1;
     const dealTextItems = dealsArray.map(dealObj => {
+      x++;
       return (
-        <View key={dealObj.id} style={{marginBottom: 3}}>
-          <View style={{flexDirection: "row"}}>
+        <View
+          key={dealObj.id}
+          style={{
+            margin: 0,
+            flexDirection: "column",
+            paddingTop: 3,
+            paddingBottom: 3,
+            borderBottomWidth: 1,
+            borderColor: "lightgrey",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor:
+              x % 2 === 0 ? "transparent" : listStyles.alternateRowColour
+          }}
+        >
+          <View style={{ flexDirection: "row" }}>
             <Text style={{ fontSize: 11 }}>
               {dealObj.days ? getDaysLabel(dealObj.days) : "Day?"}{" "}
             </Text>
@@ -375,12 +392,13 @@ class MapScreen extends Component {
               </Text>
             )}
           </View>
-          <Text style={{ fontSize: 13 }}>{dealObj.shortDesc}</Text>
+          <Text style={{ fontSize: 12 }}>{dealObj.shortDesc}</Text>
         </View>
       );
     });
     return dealTextItems;
   };
+  // listStyles.alternateRowColour
 
   addMarkers = () => {
     const { selectFilteredDeals, dayOfWeek } = this.props;
