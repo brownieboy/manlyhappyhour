@@ -118,8 +118,17 @@ export class MapFilter extends Component {
             <View>
               <ListItem itemDivider style={{ justifyContent: "space-between" }}>
                 <Text>Showing deals for day:</Text>
-                <Button small primary onPress={handleTapMenu} style={{alignItems: "center", paddingLeft: 10, paddingRight: 10}}>
-                  <Text style={{color: "white"}}>Done</Text>
+                <Button
+                  small
+                  primary
+                  onPress={handleTapMenu}
+                  style={{
+                    alignItems: "center",
+                    paddingLeft: 10,
+                    paddingRight: 10
+                  }}
+                >
+                  <Text style={{ color: "white" }}>Done</Text>
                 </Button>
                 {/* <TouchableOpacity onPress={handleTapMenu}>
                   <Ionicons
@@ -325,7 +334,11 @@ class MapScreen extends Component {
     // console.log("handleDayChange, dayOfWeek");
     // console.log(dayOfWeek);
     // this.setState({ dayOfWeek });
-    this.props.setDayOfWeek(dayOfWeek);
+    if (dayOfWeek) {
+      // If the user picks the RNPickerSelect's placeholder text, then we'll
+      // have undefined passed here and the app will crash
+      this.props.setDayOfWeek(dayOfWeek);
+    }
   };
 
   handleTapMenu = () => {

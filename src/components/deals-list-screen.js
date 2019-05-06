@@ -57,7 +57,11 @@ export default class DealsListScreen extends Component {
 
   handleDayChange = dayOfWeek => {
     // console.log("handleDayChange, dayOfWeek");
-    this.props.setDayOfWeek(dayOfWeek);
+    if (dayOfWeek) {
+      // If the user picks the RNPickerSelect's placeholder text, then we'll
+      // have undefined passed here and the app will crash
+      this.props.setDayOfWeek(dayOfWeek);
+    }
     // console.log(dayOfWeek);
     // this.setState({ dayOfWeek });
   };
