@@ -488,7 +488,13 @@ class MapScreen extends Component {
                   resizeMode: "contain"
                   // zIndex: 3
                 }}
-                source={mapIcons[venue.address.mapIcon]}
+                source={
+                  mapIcons[
+                    dealsArray.length > 0
+                      ? venue.address.mapIcon
+                      : `${venue.address.mapIcon}Mono`
+                  ]
+                }
               />
             </View>
             <View
