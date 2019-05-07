@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
   dealTypeFilters: selectDealTypeFilters(state),
   dealsGroupedByDay: selectDealsGroupedByDay(state),
   // selectFilteredDealItemsGroupedByDay: filterDay => selectFilteredDealItemsGroupedByDay(state, filterDay),
-  dealsGroupedByDay: selectFilteredDealItemsGroupedByDay(state),
+  dealsGroupedByDay: selectFilteredDealItemsGroupedByDay(state),  // No longer filter by day on this screen
   dayOfWeek: getDayOfWeek(state)
 });
 

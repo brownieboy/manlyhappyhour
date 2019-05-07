@@ -72,7 +72,7 @@ export default class DealsListScreen extends Component {
       navigation,
       dayOfWeek,
       dealTypeFilters,
-      selectFilteredDealItemsGroupedByDay,
+      // selectFilteredDealItemsGroupedByDay,
       dealsGroupedByDay,
       toggleDealTypeFilter
     } = this.props;
@@ -99,10 +99,7 @@ export default class DealsListScreen extends Component {
                   fontSize: appColours.panelTopFontSize
                 }}
               >
-                Deals for{" "}
-                {dayOfWeek === "all"
-                  ? "All Days"
-                  : getDayObjForShortDay(dayOfWeek).name}
+                Deals List
               </Title>
             </Left>
             <Body style={{ flex: 3 }}>
@@ -232,7 +229,8 @@ export default class DealsListScreen extends Component {
           />
         </View>
         <MapFilter
-          handleDayChange={this.handleDayChange}
+          // handleDayChange={this.handleDayChange}
+          displayDaySelector={false}
           handleTapMenu={this.handleTapMenu}
           filterDay={dayOfWeek}
           menuOptionExpanded={menuOptionExpanded}
@@ -254,7 +252,7 @@ DealsListScreen.propTypes = {
   dealsGroupedByDay: PropTypes.arrayOf(PropTypes.object).isRequired,
   navigation: PropTypes.object.isRequired,
   dealTypeFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectFilteredDealItemsGroupedByDay: PropTypes.func.isRequired,
+  // selectFilteredDealItemsGroupedByDay: PropTypes.func.isRequired,
   dayOfWeek: PropTypes.string.isRequired,
   setDayOfWeek: PropTypes.func.isRequired,
   toggleDealTypeFilter: PropTypes.func.isRequired

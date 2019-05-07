@@ -98,9 +98,11 @@ export class MapFilter extends Component {
       menuOptionExpanded,
       dealTypeFilters,
       toggleDealTypeFilter,
+      displayDaySelector = true,
       topPos = 10
     } = this.props;
 
+    const dialogHeight = displayDaySelector ? 330 : 250;
     return (
       <Fragment>
         {/* <View
@@ -127,7 +129,7 @@ export class MapFilter extends Component {
             left: "5%",
             right: "5%",
             padding: menuOptionExpanded ? 3 : 0,
-            height: menuOptionExpanded ? 330 : 0,
+            height: menuOptionExpanded ? dialogHeight : 0,
             backgroundColor: "white",
             borderWidth: menuOptionExpanded ? 1 : 0,
             borderRadius: menuOptionExpanded ? 10 : 0
@@ -135,60 +137,93 @@ export class MapFilter extends Component {
         >
           {menuOptionExpanded ? (
             <View>
-              <ListItem itemDivider style={{ justifyContent: "space-between" }}>
-                <Text>Showing deals for day:</Text>
-                <Button
-                  small
-                  primary
-                  onPress={handleTapMenu}
-                  style={{
-                    alignItems: "center",
-                    paddingLeft: 10,
-                    paddingRight: 10
-                  }}
-                >
-                  <Text style={{ color: "white" }}>Done</Text>
-                </Button>
-                {/* <TouchableOpacity onPress={handleTapMenu}>
+              {displayDaySelector && (
+                <Fragment>
+                  <ListItem
+                    itemDivider
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <Text>Highlight deals for day:</Text>
+                    <Button
+                      small
+                      primary
+                      onPress={handleTapMenu}
+                      style={{
+                        alignItems: "center",
+                        paddingLeft: 10,
+                        paddingRight: 10
+                      }}
+                    >
+                      <Text style={{ color: "white" }}>Done</Text>
+                    </Button>
+                    {/* <TouchableOpacity onPress={handleTapMenu}>
                   <Ionicons
                     name={`${iconPlatformPrefix}close-circle`}
                     size={25}
                   />
                 </TouchableOpacity> */}
-              </ListItem>
-              <ListItem
-                icon
-                // onPress={() => {
-                //   this._pickerSelect.togglePicker();
-                // }}
-              >
-                <Left>
-                  <Button style={{ backgroundColor: "#FF9501" }}>
-                    <FontAwesome5Icons
-                      active
-                      name="calendar-day"
-                      style={{ color: "white" }}
-                    />
-                  </Button>
-                </Left>
-                <Body>
-                  <RNPickerSelect
-                    placeholder={placeholder}
-                    useNativeAndroidPickerStyle={false}
-                    items={daysPicker}
-                    value={filterDay}
-                    // ref={pickerSelect => (this._pickerSelect = pickerSelect)}
-                    onValueChange={value => {
-                      handleDayChange(value);
+                  </ListItem>
+                  <ListItem
+                    icon
+                    // onPress={() => {
+                    //   this._pickerSelect.togglePicker();
+                    // }}
+                  >
+                    <Left>
+                      <Button style={{ backgroundColor: "#FF9501" }}>
+                        <FontAwesome5Icons
+                          active
+                          name="calendar-day"
+                          style={{ color: "white" }}
+                        />
+                      </Button>
+                    </Left>
+                    <Body>
+                      <RNPickerSelect
+                        placeholder={placeholder}
+                        useNativeAndroidPickerStyle={false}
+                        items={daysPicker}
+                        value={filterDay}
+                        // ref={pickerSelect => (this._pickerSelect = pickerSelect)}
+                        onValueChange={value => {
+                          handleDayChange(value);
+                        }}
+                        style={{
+                          borderWidth: 1,
+                          borderColor: "red",
+                          width: 70
+                        }}
+                      />
+                    </Body>
+                    <Right />
+                  </ListItem>
+                </Fragment>
+              )}
+              {displayDaySelector && (
+                <ListItem itemDivider>
+                  <Text>Where deals include:</Text>
+                </ListItem>
+              )}
+              {!displayDaySelector && (
+                <ListItem
+                  itemDivider
+                  style={{ justifyContent: "space-between" }}
+                >
+                  <Text>Show deals including:</Text>
+                  <Button
+                    small
+                    primary
+                    onPress={handleTapMenu}
+                    style={{
+                      alignItems: "center",
+                      paddingLeft: 10,
+                      paddingRight: 10
                     }}
-                    style={{ borderWidth: 1, borderColor: "red", width: 70 }}
-                  />
-                </Body>
-                <Right />
-              </ListItem>
-              <ListItem itemDivider>
-                <Text>Where deals include:</Text>
-              </ListItem>
+                  >
+                    <Text style={{ color: "white" }}>Done</Text>
+                  </Button>
+                </ListItem>
+              )}
               <ListItem icon>
                 <Left>
                   <Button disabled={!dealTypeFilters.includes("food")}>
@@ -605,7 +640,7 @@ class MapScreen extends Component {
                 fontSize: appColours.panelTopFontSize
               }}
             >
-              Deals for{" "}
+              Highlight deals for{" "}
               {dayOfWeek === "all"
                 ? "All Days"
                 : getDayObjForShortDay(dayOfWeek).name}
@@ -703,7 +738,7 @@ MapScreen.propTypes = {
 
 MapFilter.propTypes = {
   filterDay: PropTypes.string.isRequired,
-  handleDayChange: PropTypes.func.isRequired,
+  handleDayChange: PropTypes.func,
   handleTapMenu: PropTypes.func.isRequired,
   menuOptionExpanded: PropTypes.bool.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
