@@ -82,7 +82,9 @@ class AboutScreen extends Component {
         <Tabs onChangeTab={({ i }) => this.setState({ currentTab: i })}>
           <Tab
             heading={
-              <TabHeading style={{backgroundColor: appColours.panelBackgroundColor}}>
+              <TabHeading
+                style={{ backgroundColor: appColours.panelBackgroundColor }}
+              >
                 <Ionicons
                   name={
                     Platform.OS === "android"
@@ -125,7 +127,9 @@ class AboutScreen extends Component {
           </Tab>
           <Tab
             heading={
-              <TabHeading style={{backgroundColor: appColours.panelBackgroundColor}}>
+              <TabHeading
+                style={{ backgroundColor: appColours.panelBackgroundColor }}
+              >
                 <IconFontAwesome5
                   name="code"
                   style={{
@@ -150,22 +154,24 @@ class AboutScreen extends Component {
               </TabHeading>
             }
           >
-            <View>
-              <Image
-                source={mikeFerry}
-                style={{ width: Dimensions.width, height: 230 }}
-              />
-            </View>
-            <Content padder>
-              <ParsedTextFormatted>{aboutData.blurb}</ParsedTextFormatted>
+            <Content>
+              <View>
+                <Image
+                  source={mikeFerry}
+                  style={{ width: Dimensions.width, height: 230 }}
+                />
+              </View>
+              <Content padder>
+                <ParsedTextFormatted>{aboutData.blurb}</ParsedTextFormatted>
+              </Content>
+              <View style={{ marginTop: 50, marginBottom: 50, marginLeft: 15 }}>
+                <Text style={{ fontSize: 11 }}>
+                  {DeviceInfo.getApplicationName()} version{" "}
+                  {DeviceInfo.getVersion()}, build {DeviceInfo.getBuildNumber()}{" "}
+                  is running in {process.env.NODE_ENV} mode.
+                </Text>
+              </View>
             </Content>
-            <View style={{ marginTop: 50, marginBottom: 50, marginLeft: 15 }}>
-              <Text style={{ fontSize: 11 }}>
-              {DeviceInfo.getApplicationName()} version{" "}
-                {DeviceInfo.getVersion()}, build {DeviceInfo.getBuildNumber()}{" "}
-                is running in {process.env.NODE_ENV} mode.
-              </Text>
-            </View>
           </Tab>
         </Tabs>
         <View
