@@ -643,7 +643,7 @@ class MapScreen extends Component {
               Deals and Venues Map
             </Title>
           </Body>
-          <Right style={{ flex: 8 }}>
+          <Right style={{ flex: 8, alignItems: "center"}}>
             <TouchableOpacity
               onPress={this.handleTapMenu}
               style={{ flexDirection: "row" }}
