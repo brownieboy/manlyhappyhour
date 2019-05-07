@@ -22,7 +22,7 @@ import {
 // import { parseTextFieldToDataTypesArray } from "../helper-functions/textfield-processing.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
 import HeaderBackArrow from "./header-back-arrow.js";
-import appColours from "../styles/appColours.js";
+import appColours, { listStyles } from "../styles/appColours.js";
 import {
   // getDealTextObjArray,
   // getHoursText,
@@ -43,22 +43,63 @@ class VenueScreen extends Component {
     this.handleOnLayout = handleOnLayout.bind(this);
   }
 
+  // getDealsTextItems = dealsArray => {
+  //   const dealTextItems = dealsArray.map(dealObj => {
+  //     return (
+  //       <Text key={dealObj.id}>
+  //         <Text style={{ fontSize: 11 }}>
+  //           {getDaysLabel(dealObj.days ? dealObj.days : [])}{" "}
+  //         </Text>
+  //         {dealObj.start && dealObj.finish && (
+  //           <Text style={{ fontSize: 11 }}>
+  //             {`${getTimeText(dealObj.start)}-${getTimeText(dealObj.finish)}: `}
+  //           </Text>
+  //         )}
+  //         <Text style={{ fontSize: 13 }}>
+  //           {dealObj.desc ? dealObj.desc : "Deal description"}
+  //         </Text>
+  //       </Text>
+  //     );
+  //   });
+  //   return dealTextItems;
+  // };
+
   getDealsTextItems = dealsArray => {
+    let x = 0;
     const dealTextItems = dealsArray.map(dealObj => {
+      x++;
       return (
-        <Text key={dealObj.id}>
-          <Text style={{ fontSize: 11 }}>
-            {getDaysLabel(dealObj.days ? dealObj.days : [])}{" "}
-          </Text>
-          {dealObj.start && dealObj.finish && (
-            <Text style={{ fontSize: 11 }}>
-              {`${getTimeText(dealObj.start)}-${getTimeText(dealObj.finish)}: `}
+        <View
+          key={dealObj.id}
+          style={{
+            margin: 0,
+            flexDirection: "column",
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 5,
+            paddingRight: 5,
+            borderBottomWidth: 1,
+            borderColor: "lightgrey",
+            // justifyContent: "center",
+            // alignItems: "center",
+            backgroundColor:
+              x % 2 === 0 ? "transparent" : listStyles.alternateRowColour
+          }}
+        >
+          <View style={{ flexDirection: "row" }}>
+            <Text style={{ fontSize: 12 }}>
+              {dealObj.days ? getDaysLabel(dealObj.days) : "Day?"}{" "}
             </Text>
-          )}
-          <Text style={{ fontSize: 13 }}>
-            {dealObj.desc ? dealObj.desc : "Deal description"}
-          </Text>
-        </Text>
+            {dealObj.start && dealObj.finish && (
+              <Text style={{ fontSize: 12 }}>
+                {`${getTimeText(dealObj.start)}-${getTimeText(
+                  dealObj.finish
+                )}: `}
+              </Text>
+            )}
+          </View>
+          <Text style={{ fontSize: 14 }}>{dealObj.desc}</Text>
+        </View>
       );
     });
     return dealTextItems;
@@ -220,17 +261,9 @@ class VenueScreen extends Component {
                 : "Venue description"}
             </ParsedTextFormatted>
           </CardItem>
-          <CardItem padder>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start"
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Deals:</Text>
-              {dealsTextItems}
-            </View>
+          <CardItem style={{ flexDirection: "column" }} padder>
+            <Text style={{ fontWeight: "bold", alignSelf: "flex-start" }}>Deals:</Text>
+            <View style={{alignSelf: "stretch"}}>{dealsTextItems}</View>
           </CardItem>
           <View
             onLayout={() => {
