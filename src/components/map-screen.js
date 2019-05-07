@@ -20,8 +20,8 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { IcoMoonIcon } from "./custom-vector-icons.js";
 
-
 import {
+  Badge,
   Body,
   Button,
   Container,
@@ -34,7 +34,6 @@ import {
   Right,
   Title
 } from "native-base";
-
 
 import appColours, { listStyles } from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
@@ -271,6 +270,7 @@ export class MapFilter extends Component {
   }
 }
 
+/*
 class CalloutWrapper extends Component {
   render() {
     const { venue, dealsTextItems, navigate } = this.props;
@@ -324,6 +324,7 @@ class CalloutWrapper extends Component {
     );
   }
 }
+*/
 
 class MapScreen extends Component {
   constructor(props) {
@@ -409,17 +410,19 @@ class MapScreen extends Component {
       selectFilteredDeals,
       // selectVenueDeals,
       dayOfWeek,
-      selectFilteredVenueDeals
+      selectFilteredVenueDeals,
+      venuesList
     } = this.props;
     const filterDay = dayOfWeek;
     // let filteredVenuesList = venuesList;
     // console.log("addMarkers, filterDay:");
     // console.log(filterDay);
-    const filteredVenuesList = selectFilteredDeals(filterDay);
+    // const filteredVenuesList = selectFilteredDeals(filterDay);
     // console.log("addMarkers, filteredVenuesList:");
     // console.log(filteredVenuesList);
 
-    return filteredVenuesList.map(venue => {
+    // return filteredVenuesList.map(venue => {
+    return venuesList.map(venue => {
       // const dealsArray = selectVenueDeals(venue.id);
       const dealsArray = selectFilteredVenueDeals(venue.id);
       // console.log("dealsArray then dealsArray2:");
@@ -429,7 +432,7 @@ class MapScreen extends Component {
         dealsArray.length > 0 ? (
           this.getDealsTextItems(dealsArray)
         ) : (
-          <Text>No deals currently listed</Text>
+          <Text>No deals listed for current filters</Text>
         );
       if (venue.address && venue.address.lat && venue.address.long) {
         return (
@@ -453,12 +456,31 @@ class MapScreen extends Component {
                 // paddingLeft: 5,
                 // paddingRight: 5,
                 padding: 6,
-                backgroundColor: "#FFFFCC",
+                backgroundColor:
+                  dealsArray.length > 0 ? "#FFFFCC" : "lightgray",
                 flex: 1,
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                zIndex: 500
               }}
             >
+              {dealsArray.length > 0 && (
+                <Badge
+                  primary
+                  style={{
+                    position: "absolute",
+                    width: 18,
+                    height: 18,
+                    top: -3,
+                    left: -3,
+                    zIndex: 1000
+                  }}
+                >
+                  <Text style={{ fontSize: 11, color: "white" }}>
+                    {dealsArray.length}
+                  </Text>
+                </Badge>
+              )}
               <Image
                 style={{
                   width: 32,
