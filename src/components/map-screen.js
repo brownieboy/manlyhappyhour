@@ -633,36 +633,44 @@ class MapScreen extends Component {
             backgroundColor: appColours.panelBackgroundColor
           }}
         >
-          <Left style={{ flex: 5 }}>
+          <Body style={{ flex: 8 }}>
             <Title
               style={{
                 color: appColours.panelTextColor,
                 fontSize: appColours.panelTopFontSize
               }}
             >
-              Highlight deals for{" "}
-              {dayOfWeek === "all"
-                ? "All Days"
-                : getDayObjForShortDay(dayOfWeek).name}
+              Deals and Venues Map
             </Title>
-          </Left>
-          <Body style={{ flex: 3 }}>
+          </Body>
+          <Right style={{ flex: 8 }}>
             <TouchableOpacity
               onPress={this.handleTapMenu}
               style={{ flexDirection: "row" }}
             >
+              <Text
+                style={{
+                  color: appColours.panelTextColor,
+                  fontSize: 13,
+                  marginRight: 5
+                }}
+              >
+                {dayOfWeek === "all"
+                  ? "All Days"
+                  : getDayObjForShortDay(dayOfWeek).name}
+              </Text>
               <DealFilterIcons
                 iconTypes={dealTypeFilters}
                 iconStyle={{
                   color: appColours.panelTextColor,
-                  marginRight: 4,
                   fontSize: 18
                 }}
               />
             </TouchableOpacity>
-          </Body>
-          <Right style={{ flex: 1 }}>
-            <TouchableOpacity onPress={this.handleTapMenu}>
+            <TouchableOpacity
+              onPress={this.handleTapMenu}
+              style={{ marginLeft: 10 }}
+            >
               <MaterialCommunityIcons
                 name="filter"
                 size={25}
