@@ -20,7 +20,6 @@ import {
 
 import appColours, { listStyles } from "../styles/appColours.js";
 
-
 class VenuesScreen extends Component {
   // componentDidMount() {
   //   const { loadVenuesNow } = this.props;
@@ -65,35 +64,46 @@ class VenuesScreen extends Component {
                   })
                 }
                 style={{
-                  backgroundColor:
+                     backgroundColor:
                     index % 2 === 0
                       ? "transparent"
                       : listStyles.alternateRowColour,
                   marginLeft: 0,
                   paddingLeft: 10,
-                  paddingTop: 8,
-                  paddingBottom: 8,
+                  paddingTop: 5,
+                  paddingBottom: 5,
                   paddingRight: 0,
                   borderBottomColor: "lightgrey",
                   borderBottomWidth: 0.2,
                   justifyContent: "space-between"
                 }}
               >
-                {item.thumbFullUrl && <View style={{ flex: 3 }}>
-                  <FastImage
-                    source={{ uri: item.thumbFullUrl }}
-                    style={{ width: 55, height: 55, borderRadius: 27.5 }}
-                  />
-                </View>}
+                {item.thumbFullUrl && (
+                  <View style={{ flex: 3 }}>
+                    <FastImage
+                      source={{ uri: item.thumbFullUrl }}
+                      style={{ width: 50 , height: 50, borderRadius: 25 }}
+                    />
+                  </View>
+                )}
                 <View style={{ flex: 11 }}>
-                  <Text style={{ fontSize: 18 }}>{item.name ? item.name : "Venue name"}</Text>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: appColours.venueListFontColor
+                    }}
+                  >
+                    {item.name ? item.name : "Venue name"}
+                  </Text>
                   <Text
                     numberOfLines={2}
                     note
-                    style={{ fontSize: 14, color: "#696969" }}
+                    style={{ fontSize: 13, color: "#696969" }}
                   >
                     {/* {item.styles.join(", ")} */}
-                    {item.shortDesc ? item.shortDesc : "Venue short description"}
+                    {item.shortDesc
+                      ? item.shortDesc
+                      : "Venue short description"}
                   </Text>
                 </View>
                 <View style={{ flex: 1 }}>

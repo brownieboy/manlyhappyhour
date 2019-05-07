@@ -4,7 +4,8 @@ const appColours = {
   // panelBackgroundColor: Platform.OS === "android" ? "#2c3c8e" : "#2c3c8e",
   panelBackgroundColor: "#2c3c8e",
   panelTextColor: "white",
-  panelTopFontSize: 14
+  panelTopFontSize: 14,
+  venueListFontColor: "#003366"
 };
 
 export const listStyles = {

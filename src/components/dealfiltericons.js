@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { IcoMoonIcon } from "./custom-vector-icons.js";
 
 let iconPlatformPrefix = "ios-";
 if (Platform.OS === "android") {
@@ -15,7 +16,10 @@ const DealFilterIcons = ({ iconTypes = [], iconStyle }) => (
       <MaterialCommunityIcons name="silverware-fork-knife" style={iconStyle} />
     )}
     {iconTypes.includes("beer") && (
-      <Ionicons name={`${iconPlatformPrefix}beer`} style={iconStyle} />
+      <IcoMoonIcon
+        name="beer-straight-glass"
+        style={{ ...iconStyle, fontSize: iconStyle.fontSize * 0.95 }}
+      />
     )}
     {iconTypes.includes("wine") && (
       <Ionicons name={`${iconPlatformPrefix}wine`} style={iconStyle} />
@@ -23,7 +27,11 @@ const DealFilterIcons = ({ iconTypes = [], iconStyle }) => (
     {iconTypes.includes("cocktails") && (
       <FontAwesome5Icons
         name="cocktail"
-        style={{ ...iconStyle, marginTop: -(iconStyle.fontSize / 9) }}
+        style={{
+          ...iconStyle,
+          // marginTop: -(iconStyle.fontSize / 9),
+          fontSize: iconStyle.fontSize * 0.95
+        }}
       />
     )}
   </Fragment>

@@ -183,13 +183,24 @@ export default class DealsListScreen extends Component {
                   </Text>
                 </Left>
                 <Body style={{ flex: 10 }}>
+                  <Text style={{ fontSize: 13 }}>
+                    {/* {orientation === "landscape" ? item.desc : item.desc} */}
+                    {item.desc}
+                  </Text>
                   <View
                     style={{
                       flexDirection: "row",
-                      justifyContent: "space-between"
+                      justifyContent: "space-between",
+                      alignItems: "center"
                     }}
                   >
-                    <Text style={{ fontSize: 15, marginRight: 10 }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        marginRight: 10,
+                        color: appColours.venueListFontColor
+                      }}
+                    >
                       {item.venue.name}
                     </Text>
                     <View style={{ flexDirection: "row" }}>
@@ -202,9 +213,6 @@ export default class DealsListScreen extends Component {
                       />
                     </View>
                   </View>
-                  <Text style={{ fontSize: 13, color: "grey" }}>
-                    {orientation === "landscape" ? item.desc : item.shortDesc}
-                  </Text>
                 </Body>
                 <Right style={{ flex: 1 }}>
                   <Icon

@@ -8,10 +8,13 @@ import {
   selectVenues,
   selectVenueDealsForVenueId,
   selectFilteredVenuesByDayAndDealType,
+  selectFilteredVenueDealsForVenueId,
   selectDealTypeFilters
 } from "../dux/selectors.js";
 import {
-  toggleDealTypeFilter, setDayOfWeek, getDayOfWeek
+  toggleDealTypeFilter,
+  setDayOfWeek,
+  getDayOfWeek
   // getDealTypeFilters
 } from "../dux/settingsReducer.js";
 
@@ -22,7 +25,10 @@ const mapStateToProps = state => ({
   // venueDetails: selectVenueDetails(state, props)
   venuesList: selectVenues(state),
   selectVenueDeals: id => selectVenueDealsForVenueId(state, id),
-  selectFilteredDeals: filterDay => selectFilteredVenuesByDayAndDealType(state, filterDay),
+  selectFilteredVenueDeals: venueId =>
+    selectFilteredVenueDealsForVenueId(state, venueId),
+  selectFilteredDeals: filterDay =>
+    selectFilteredVenuesByDayAndDealType(state, filterDay),
   dealTypeFilters: selectDealTypeFilters(state),
   dayOfWeek: getDayOfWeek(state)
 });

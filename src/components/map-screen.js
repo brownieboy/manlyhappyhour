@@ -18,6 +18,8 @@ import RNPickerSelect from "react-native-picker-select";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { IcoMoonIcon } from "./custom-vector-icons.js";
+
 
 import {
   Body,
@@ -32,6 +34,8 @@ import {
   Right,
   Title
 } from "native-base";
+
+
 import appColours, { listStyles } from "../styles/appColours.js";
 import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
@@ -196,8 +200,8 @@ export class MapFilter extends Component {
               <ListItem icon>
                 <Left>
                   <Button disabled={!dealTypeFilters.includes("beer")}>
-                    <Ionicons
-                      name={`${iconPlatformPrefix}beer`}
+                    <IcoMoonIcon
+                      name="beer-straight-glass"
                       style={{ color: "white", fontSize: 15 }}
                     />
                   </Button>
@@ -392,7 +396,7 @@ class MapScreen extends Component {
               </Text>
             )}
           </View>
-          <Text style={{ fontSize: 12 }}>{dealObj.shortDesc}</Text>
+          <Text style={{ fontSize: 12 }}>{dealObj.desc}</Text>
         </View>
       );
     });
@@ -401,7 +405,12 @@ class MapScreen extends Component {
   // listStyles.alternateRowColour
 
   addMarkers = () => {
-    const { selectFilteredDeals, dayOfWeek } = this.props;
+    const {
+      selectFilteredDeals,
+      // selectVenueDeals,
+      dayOfWeek,
+      selectFilteredVenueDeals
+    } = this.props;
     const filterDay = dayOfWeek;
     // let filteredVenuesList = venuesList;
     // console.log("addMarkers, filterDay:");
@@ -411,7 +420,11 @@ class MapScreen extends Component {
     // console.log(filteredVenuesList);
 
     return filteredVenuesList.map(venue => {
-      const dealsArray = this.props.selectVenueDeals(venue.id);
+      // const dealsArray = selectVenueDeals(venue.id);
+      const dealsArray = selectFilteredVenueDeals(venue.id);
+      // console.log("dealsArray then dealsArray2:");
+      // console.log(dealsArray);
+      // console.log(dealsArray2);
       const dealsTextItems =
         dealsArray.length > 0 ? (
           this.getDealsTextItems(dealsArray)
@@ -641,7 +654,7 @@ MapScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   venuesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectVenueDeals: PropTypes.func.isRequired,
-  selectFilteredDeals: PropTypes.func.isRequired,
+  selectFilteredVenueDeals: PropTypes.func.isRequired,
   dealTypeFilters: PropTypes.array.isRequired,
   toggleDealTypeFilter: PropTypes.func.isRequired,
   dayOfWeek: PropTypes.string.isRequired,

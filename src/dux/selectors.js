@@ -21,6 +21,7 @@ const getDealTypeFilters = state => state.settingsState.dealTypeFilters;
 const getVenueId = (state, venueId) => venueId;
 // const getFilterDay = (state, venueId, filterDay) => filterDay;
 const getFilterDay = (state, filterDay) => filterDay;
+const getDayOfWeek = state => state.settingsState.dayOfWeek;
 
 export const selectDealTypeFilters = createSelector(
   [getDealTypeFilters],
@@ -33,7 +34,7 @@ export const selectVenues = createSelector(
   //   venuesList => venuesList
 );
 
-export const selectDealsSortedByDay = createSelector(
+const selectDealsSortedByDayAndTime = createSelector(
   [getDeals],
   dealsList => {
     const dealsListSorted = [...dealsList].sort((dealA, dealB) => {
@@ -93,7 +94,7 @@ export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
     // console.log(filterDay);
     // console.log(dealTypeFilters);
 
-    const filteredDealItemsArray = dealItemsList.filter(dealItem => {
+    const filteredDealsArray = dealItemsList.filter(dealItem => {
       // console.log("dMember:");
       // console.log(dMember);
       return (
@@ -104,7 +105,7 @@ export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
         )
       );
     });
-    return filteredDealItemsArray;
+    return filteredDealsArray;
   }
 )((state, filterDay) => {
   // console.log("selectFilteredDealItemsByDayAndDealType resolution:");
@@ -154,12 +155,71 @@ export const selectDeals = createSelector(
 );
 
 export const selectVenueDeals = createCachedSelector(
-  [selectDealsSortedByDay, getId],
+  [selectDealsSortedByDayAndTime, getId],
   (dealsList, id) => dealsList.filter(dealMember => dealMember.venueId === id) // Mutliple deals, so return them all
 )((state, props) => getId(state, props));
 
+// Here
+export const selectFilteredDealsByDayAndDealType = createCachedSelector(
+  [selectDealsSortedByDayAndTime, getDayOfWeek, selectDealTypeFilters],
+  (dealsList, filterDay, dealTypeFilters) => {
+    console.log("selectFilteredDealsByDayAndDealType:");
+    console.log(dealsList);
+    console.log("filterDay:");
+    console.log(filterDay);
+    console.log(dealTypeFilters);
+
+    const filteredDealsArray = dealsList.filter(deal => {
+      // console.log("dMember:");
+      // console.log(dMember);
+      return (
+        (filterDay === "all" || deal.days.includes(filterDay)) &&
+        dealTypeFilters.some(
+          dealType => deal.types && deal.types.includes(dealType)
+        )
+      );
+    });
+    console.log("filteredDealsArray:");
+    console.log(filteredDealsArray);
+
+    return filteredDealsArray;
+  }
+)((state, filterDay) => {
+  console.log("selectFilteredDealsByDayAndDealType resolution:");
+  // console.log(state);
+  // const dealFilters = selectDealTypeFilters(state);
+  // console.log(filterDay);
+  // console.log(dealTypeFilters);
+
+  const cacheKey = `${filterDay}~${selectDealTypeFilters(state).join("~")}`;
+  console.log("cacheKey: " + cacheKey);
+  return cacheKey;
+});
+
+// and here
+export const selectFilteredVenueDealsForVenueId = createCachedSelector(
+  [selectFilteredDealsByDayAndDealType, getVenueId],
+  (dealsList, id) => {
+    console.log("selectFilteredVenueDealsForVenueId:");
+    console.log(dealsList);
+    console.log("Venue id: " + id);
+    return dealsList.filter(dealMember => dealMember.venueId === id); // Mutliple deals, so return them all
+  }
+)((state, venueId) => {
+  console.log("selectFilteredVenueDealsForVenueId resolution:");
+  // console.log(state);
+  // const dealFilters = selectDealTypeFilters(state);
+  // console.log(filterDay);
+  // console.log(dealTypeFilters);
+
+  const cacheKey = `${venueId}~${selectDealTypeFilters(state).join("~")}`;
+  // console.log("selectFilteredDealItemsByDayAndDealType: cacheKey: " + cacheKey);
+  return cacheKey;
+});
+
+// No
 export const selectVenueDealsForVenueId = createCachedSelector(
-  [selectDealsSortedByDay, getVenueId],
+  [selectDealsSortedByDayAndTime, getVenueId],
   (dealsList, venueId) =>
     dealsList.filter(dealMember => dealMember.venueId === venueId) // Mutliple deals, so return them all
 )((state, venueId) => getVenueId(state, venueId));
@@ -199,7 +259,12 @@ export const selectVenueDealsForVenueId = createCachedSelector(
 //const found = arr1.some(r=> arr2.includes(r))
 
 export const selectFilteredVenuesByDayAndDealType = createCachedSelector(
-  [selectVenues, selectDealsSortedByDay, getFilterDay, selectDealTypeFilters],
+  [
+    selectVenues,
+    selectDealsSortedByDayAndTime,
+    getFilterDay,
+    selectDealTypeFilters
+  ],
   (venuesList, dealsList, filterDay, dealTypeFilters) => {
     // console.log("selectFilteredVenuesByDay:");
     // console.log(venuesList);
@@ -241,4 +306,3 @@ export const getCommonStateObject = localState => ({
   fetchStatus: localState.fetchStatus,
   fetchError: localState.fetchError
 });
-
