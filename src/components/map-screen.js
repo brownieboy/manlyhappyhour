@@ -460,8 +460,7 @@ class MapScreen extends Component {
                   dealsArray.length > 0 ? "#FFFFCC" : "lightgray",
                 flex: 1,
                 justifyContent: "center",
-                alignItems: "center",
-                zIndex: 500
+                alignItems: "center"
               }}
             >
               {dealsArray.length > 0 && (
@@ -471,8 +470,8 @@ class MapScreen extends Component {
                     position: "absolute",
                     width: 18,
                     height: 18,
-                    top: -3,
-                    left: -3,
+                    top: Platform.OS === "android" ? 0 : -3,
+                    left: Platform.OS === "android" ? 0 : -3,
                     zIndex: 1000
                   }}
                 >
