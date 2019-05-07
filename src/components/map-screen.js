@@ -71,6 +71,21 @@ const placeholder = {
   color: "#9EA0A4"
 };
 
+const MapBadge = ({ dealsCount, styles, children }) => {
+  if (dealsCount > 0) {
+    return (
+      <Badge primary style={styles}>
+        {children}
+      </Badge>
+    );
+  }
+  return (
+    <Badge warning style={styles}>
+      {children}
+    </Badge>
+  );
+};
+
 export class MapFilter extends Component {
   // handlePickerLinePress = () => {
   //   this._pickerSelect.togglePicker();
@@ -463,23 +478,21 @@ class MapScreen extends Component {
                 alignItems: "center"
               }}
             >
-              {dealsArray.length > 0 && (
-                <Badge
-                  primary
-                  style={{
-                    position: "absolute",
-                    width: 18,
-                    height: 18,
-                    top: Platform.OS === "android" ? 0 : -3,
-                    left: Platform.OS === "android" ? 0 : -3,
-                    zIndex: 1000
-                  }}
-                >
-                  <Text style={{ fontSize: 11, color: "white" }}>
-                    {dealsArray.length}
-                  </Text>
-                </Badge>
-              )}
+              <MapBadge
+                dealsCount={dealsArray.length}
+                styles={{
+                  position: "absolute",
+                  width: 18,
+                  height: 18,
+                  top: Platform.OS === "android" ? 0 : -3,
+                  left: Platform.OS === "android" ? 0 : -3,
+                  zIndex: 1000
+                }}
+              >
+                <Text style={{ fontSize: 11, color: "white" }}>
+                  {dealsArray.length}
+                </Text>
+              </MapBadge>
               <Image
                 style={{
                   width: 32,
