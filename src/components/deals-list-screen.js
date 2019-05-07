@@ -139,7 +139,7 @@ export default class DealsListScreen extends Component {
               return (
                 <ListItem
                   style={{
-                    backgroundColor: appColours.panelBackgroundColor,
+                    // backgroundColor: appColours.panelBackgroundColor,
                     paddingLeft: 10
                   }}
                   itemDivider
@@ -149,8 +149,8 @@ export default class DealsListScreen extends Component {
                     style={{
                       fontSize: 18,
                       fontWeight: "bold",
-                      flex: 1,
-                      color: appColours.panelTextColor
+                      flex: 1
+                      // color: appColours.panelTextColor
                     }}
                   >
                     {section.title}
@@ -160,6 +160,7 @@ export default class DealsListScreen extends Component {
             }}
             renderItem={({ item, index }) => (
               <ListItem
+                auto
                 onPress={() =>
                   navigation.navigate("VenueScreen", {
                     id: item.venueId,
@@ -167,8 +168,11 @@ export default class DealsListScreen extends Component {
                   })
                 }
                 style={{
+                  marginLeft: 0,
+                  // alignSelf: "stretch",
                   paddingTop: 5,
                   paddingBottom: 5,
+                  paddingLeft: 5, 
                   backgroundColor:
                     index % 2 === 0
                       ? "transparent"
@@ -182,7 +186,7 @@ export default class DealsListScreen extends Component {
                     }${getTimeText(item.finish)}:`}
                   </Text>
                 </Left>
-                <Body style={{ flex: 10 }}>
+                <Body style={{ flex: 12 }}>
                   <Text style={{ fontSize: 13 }}>
                     {/* {orientation === "landscape" ? item.desc : item.desc} */}
                     {item.desc}

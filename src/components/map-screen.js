@@ -237,7 +237,7 @@ export class MapFilter extends Component {
                 <Left>
                   <Button disabled={!dealTypeFilters.includes("wine")}>
                     <Ionicons
-                      name={`${iconPlatformPrefix}wine`}
+                      name="ios-wine"
                       style={{ color: "white", fontSize: 20 }}
                     />
                   </Button>

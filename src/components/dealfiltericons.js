@@ -22,7 +22,7 @@ const DealFilterIcons = ({ iconTypes = [], iconStyle }) => (
       />
     )}
     {iconTypes.includes("wine") && (
-      <Ionicons name={`${iconPlatformPrefix}wine`} style={iconStyle} />
+      <Ionicons name="ios-wine" style={iconStyle} />
     )}
     {iconTypes.includes("cocktails") && (
       <FontAwesome5Icons
