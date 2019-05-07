@@ -73,11 +73,13 @@ export default class DealsListScreen extends Component {
       dayOfWeek,
       dealTypeFilters,
       selectFilteredDealItemsGroupedByDay,
+      dealsGroupedByDay,
       toggleDealTypeFilter
     } = this.props;
     const { menuOptionExpanded, orientation } = this.state;
 
-    const dealsGroupedByDay = selectFilteredDealItemsGroupedByDay(dayOfWeek);
+    // const dealsGroupedByDay = selectFilteredDealItemsGroupedByDay(dayOfWeek);
+
     // console.log("DealsListScreen, dealsGroupedByDay:");
     // console.log(dealsGroupedByDay);
 

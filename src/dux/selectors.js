@@ -84,6 +84,40 @@ const selectDealItemsSortedByStartTime = createSelector(
     )
 );
 
+export const selectFilteredDealItemsByType = createCachedSelector(
+  [selectDealItemsSortedByStartTime, getFilterDay, selectDealTypeFilters],
+  (dealItemsList, filterDay, dealTypeFilters) => {
+    // console.log("selectFilteredVenuesByDay:");
+    // console.log(venuesList);
+    // console.log(dealsList);
+    // console.log("filterDay:");
+    // console.log(filterDay);
+    // console.log(dealTypeFilters);
+
+    const filteredDealsArray = dealItemsList.filter(dealItem => {
+      // console.log("dMember:");
+      // console.log(dMember);
+      return (
+        dealTypeFilters.some(
+          dealType => dealItem.types && dealItem.types.includes(dealType)
+        )
+      );
+    });
+    return filteredDealsArray;
+  }
+)((state) => {
+  // console.log("selectFilteredDealItemsByDayAndDealType resolution:");
+  // console.log(state);
+  // const dealFilters = selectDealTypeFilters(state);
+  // console.log(filterDay);
+  // console.log(dealTypeFilters);
+
+  const cacheKey = `${selectDealTypeFilters(state).join("~")}`;
+  // console.log("selectFilteredDealItemsByDayAndDealType: cacheKey: " + cacheKey);
+  return cacheKey;
+});
+
+
 export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
   [selectDealItemsSortedByStartTime, getFilterDay, selectDealTypeFilters],
   (dealItemsList, filterDay, dealTypeFilters) => {
@@ -120,7 +154,7 @@ export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
 });
 
 export const selectFilteredDealItemsGroupedByDay = createSelector(
-  [selectFilteredDealItemsByDayAndDealType],
+  [selectFilteredDealItemsByType],
   dealsItemsList =>
     d3
       .nest()
