@@ -267,13 +267,13 @@ export const selectFilteredDealsByDayAndDealType = createCachedSelector(
         )
       );
     });
-    console.log("filteredDealsArray:");
-    console.log(filteredDealsArray);
+    // console.log("filteredDealsArray:");
+    // console.log(filteredDealsArray);
 
     return filteredDealsArray;
   }
 )((state, filterDay) => {
-  console.log("selectFilteredDealsByDayAndDealType resolution:");
+  // console.log("selectFilteredDealsByDayAndDealType resolution:");
   // console.log(state);
   // const dealFilters = selectDealTypeFilters(state);
   // console.log(filterDay);

@@ -1,6 +1,7 @@
+
 export const TOGGLE_DEAL_TYPE_FILTER = "TOGGLE_DEAL_TYPE_FILTER";
 export const FETCH_SETTINGS_SUCCESS = "FETCH_SETTINGS_SUCCESS";
-// export const LOAD_SETTINGS_NOW = "LOAD_SETTINGS_NOW";
+export const LOAD_SETTINGS_NOW = "LOAD_SETTINGS_NOW";
 export const SET_DAY_OF_WEEK = "SET_DAY_OF_WEEK";
 
 const defaultState = {
@@ -32,7 +33,10 @@ const settingsReducer = (state = defaultState, action) => {
 
       return { ...state };
     case FETCH_SETTINGS_SUCCESS: {
-      return payload; // yep, the whole thing is replaced
+      const newState = {...state, ...payload};
+      // console.log("newState:");
+      // console.log(newState);
+      return newState;
     }
     case SET_DAY_OF_WEEK: {
       return { ...state, dayOfWeek: payload };
@@ -57,11 +61,17 @@ export const setDayOfWeek = dayOfWeek => ({
   payload: dayOfWeek
 });
 
-// export const loadSettingsNow = () => ({ type: LOAD_SETTINGS_NOW });
+export const loadSettingsNow = () => ({ type: LOAD_SETTINGS_NOW });
 
 // Getters
 export const getDealTypeFilters = state => state.settingsState.dealTypeFilters;
 export const getDayOfWeek = state => state.settingsState.dayOfWeek;
+
+export const getPersistedSettings = state => {
+  // We persist everything except dayOfWeekd
+  const { dayOfWeek, ...persistantState } = state.settingsState;
+  return persistantState;
+};
 // export const getincludeFoodInFilter = state =>
 //   state.uiState.includeFoodInFilter;
 // export const getAppearancesView = state => state.uiState.appearancesView;

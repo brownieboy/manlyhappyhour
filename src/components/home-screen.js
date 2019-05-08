@@ -36,9 +36,9 @@ class HomeScreen extends Component {
     this.handleOnLayout = handleOnLayout.bind(this);
   }
   componentDidMount() {
-    const { loadVenuesNow } = this.props;
+    const { loadVenuesNow, loadSettingsNow } = this.props;
     loadVenuesNow();
-    // loadSettingsNow();
+    loadSettingsNow();
   }
   render() {
     const { homeData } = this.props;
@@ -88,8 +88,8 @@ class HomeScreen extends Component {
 }
 
 HomeScreen.propTypes = {
-  loadVenuesNow: PropTypes.func.isRequired
-  // loadSettingsNow: PropTypes.func.isRequired
+  loadVenuesNow: PropTypes.func.isRequired,
+  loadSettingsNow: PropTypes.func.isRequired
 };
 
 export default HomeScreen;
