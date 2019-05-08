@@ -22,6 +22,8 @@ const getVenueId = (state, venueId) => venueId;
 // const getFilterDay = (state, venueId, filterDay) => filterDay;
 const getFilterDay = (state, filterDay) => filterDay;
 const getDayOfWeek = state => state.settingsState.dayOfWeek;
+export const getSortDealItemsTowards = state =>
+  state.settingsState.sortDealItemsTowards;
 
 const calculateDealTimeSortByFirstStart = (dealA, dealB) => {
   // We'll assume that day sorting has been done before we've
@@ -74,8 +76,8 @@ export const selectVenues = createSelector(
 );
 
 const selectDealsSortedByDayAndTime = createSelector(
-  [getDeals],
-  dealsList => {
+  [getDeals, getSortDealItemsTowards],
+  (dealsList, sortDealItemsTowards) => {
     const dealsListSorted = [...dealsList].sort((dealA, dealB) => {
       const lowDayNumberA = getLowestDayNumberFromDealDays(dealA.days);
       const lowDayNumberB = getLowestDayNumberFromDealDays(dealB.days);
@@ -93,6 +95,9 @@ const selectDealsSortedByDayAndTime = createSelector(
         //   return finishTimeB - finishTimeA;
         // }
         // return startTimeA - startTimeB;
+        if (sortDealItemsTowards === "finishTime") {
+          return calculateDealTimeSortByLastFinish(dealA, dealB);
+        }
         return calculateDealTimeSortByFirstStart(dealA, dealB);
       }
       return lowDayNumberA - lowDayNumberB;
@@ -123,15 +128,20 @@ const selectDealItems = createSelector(
 );
 
 const selectDealItemsSortedByStartTime = createSelector(
-  [selectDealItems],
-  dealItemsList =>
+  [selectDealItems, getSortDealItemsTowards],
+  (dealItemsList, sortDealItemsTowards) =>
     [...dealItemsList].sort(
       (dealItemA, dealItemB) => {
         // const daySortOrderA = getDayObjForDay(dealItemA.day);
         // const daySortOrderB = getDayObjForDay(dealItemB.day);
 
         // if (daySortOrderA === daySortOrderB) {
-        return calculateDealTimeSortByLastFinish(dealItemA, dealItemB);  
+
+        if (sortDealItemsTowards === "finishTime") {
+          return calculateDealTimeSortByLastFinish(dealItemA, dealItemB);
+        }
+        return calculateDealTimeSortByFirstStart(dealItemA, dealItemB);
+
         // return calculateDealTimeSortByFirstStart(dealItemA, dealItemB);
       }
       //   return daySortOrderA - daySortOrderB;

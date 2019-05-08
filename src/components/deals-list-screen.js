@@ -9,7 +9,10 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
+
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import IconFontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
 // import EvilIcons from "react-native-vector-icons/EvilIcons";
 import {
   Container,
@@ -29,7 +32,7 @@ import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
 import { MapFilter } from "./map-screen.js";
 import DealFilterIcons from "./dealfiltericons.js";
 import appColours, { listStyles } from "../styles/appColours.js";
-import { getDayObjForShortDay } from "../constants/general.js";
+// import { getDayObjForShortDay } from "../constants/general.js";
 const { UIManager } = NativeModules;
 
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -72,6 +75,8 @@ export default class DealsListScreen extends Component {
       navigation,
       dayOfWeek,
       dealTypeFilters,
+      dealItemsTowards,
+      toggleDealItemsTowards,
       // selectFilteredDealItemsGroupedByDay,
       dealsGroupedByDay,
       toggleDealTypeFilter
@@ -92,7 +97,22 @@ export default class DealsListScreen extends Component {
               color: appColours.panelTextColor
             }}
           >
-            <Left style={{ flex: 5 }}>
+            <Left style={{ flex: 2 }}>
+              <IconFontAwesome5
+                name={
+                  dealItemsTowards === "finishTime"
+                    ? "sort-amount-down"
+                    : "sort-amount-up"
+                }
+                onPress={toggleDealItemsTowards}
+                style={{
+                  color: appColours.panelTextColor,
+                  fontSize: 25
+                }}
+              />
+            </Left>
+
+            <Body style={{ flex: 3 }}>
               <Title
                 style={{
                   color: appColours.panelTextColor,
@@ -101,8 +121,8 @@ export default class DealsListScreen extends Component {
               >
                 Deals List
               </Title>
-            </Left>
-            <Body style={{ flex: 3 }}>
+            </Body>
+            <Right style={{ flex: 5 }}>
               <TouchableOpacity
                 onPress={this.handleTapMenu}
                 style={{ flexDirection: "row" }}
@@ -116,8 +136,6 @@ export default class DealsListScreen extends Component {
                   }}
                 />
               </TouchableOpacity>
-            </Body>
-            <Right style={{ flex: 1 }}>
               <TouchableOpacity onPress={this.handleTapMenu}>
                 <MaterialCommunityIcons
                   name="filter"
@@ -171,7 +189,7 @@ export default class DealsListScreen extends Component {
                   // alignSelf: "stretch",
                   paddingTop: 5,
                   paddingBottom: 5,
-                  paddingLeft: 5, 
+                  paddingLeft: 5,
                   backgroundColor:
                     index % 2 === 0
                       ? "transparent"

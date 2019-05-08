@@ -1,11 +1,12 @@
-
 export const TOGGLE_DEAL_TYPE_FILTER = "TOGGLE_DEAL_TYPE_FILTER";
 export const FETCH_SETTINGS_SUCCESS = "FETCH_SETTINGS_SUCCESS";
 export const LOAD_SETTINGS_NOW = "LOAD_SETTINGS_NOW";
 export const SET_DAY_OF_WEEK = "SET_DAY_OF_WEEK";
+export const TOGGLE_SORT_DEALITEMS_TOWARDS = "TOGGLE_SORT_DEALITEMS_TOWARDS";
 
 const defaultState = {
   dealTypeFilters: ["beer", "wine", "cocktails", "food"],
+  sortDealItemsTowards: "startTime",
   dayOfWeek: "all"
 };
 
@@ -31,15 +32,23 @@ const settingsReducer = (state = defaultState, action) => {
         };
       }
 
-      return { ...state };
     case FETCH_SETTINGS_SUCCESS: {
-      const newState = {...state, ...payload};
+      const newState = { ...state, ...payload };
       // console.log("newState:");
       // console.log(newState);
       return newState;
     }
     case SET_DAY_OF_WEEK: {
       return { ...state, dayOfWeek: payload };
+    }
+    case TOGGLE_SORT_DEALITEMS_TOWARDS: {
+      return {
+        ...state,
+        sortDealItemsTowards:
+          state.sortDealItemsTowards === "finishTime"
+            ? "startTime"
+            : "finishTime"
+      };
     }
     default:
       return state;
@@ -61,11 +70,18 @@ export const setDayOfWeek = dayOfWeek => ({
   payload: dayOfWeek
 });
 
+export const toggleDealItemsTowards = () => ({
+  type: TOGGLE_SORT_DEALITEMS_TOWARDS,
+  payload: ""
+});
+
 export const loadSettingsNow = () => ({ type: LOAD_SETTINGS_NOW });
 
 // Getters
 export const getDealTypeFilters = state => state.settingsState.dealTypeFilters;
 export const getDayOfWeek = state => state.settingsState.dayOfWeek;
+// export const sortDealItemsTowards = state =>
+// state.settingsState.sortDealItemsTowards;  // moved to selectors.js
 
 export const getPersistedSettings = state => {
   // We persist everything except dayOfWeekd
