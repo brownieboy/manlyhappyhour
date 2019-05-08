@@ -23,6 +23,45 @@ const getVenueId = (state, venueId) => venueId;
 const getFilterDay = (state, filterDay) => filterDay;
 const getDayOfWeek = state => state.settingsState.dayOfWeek;
 
+const calculateDealTimeSortByFirstStart = (dealA, dealB) => {
+  // We'll assume that day sorting has been done before we've
+  // reached this point or will be don in the day grouping phase.
+  // All we're doing here is returning a number to indicate the
+  // sort priority of the two items.
+
+  // First we sort by the earliest start time.
+  const startTimeA = new Date(`01 Jan 1970 ${dealA.start}`).getTime();
+  const startTimeB = new Date(`01 Jan 1970 ${dealB.start}`).getTime();
+  if (startTimeA === startTimeB) {
+    // console.log("Start times match, looking to end times");
+    // If start times match, then latest finish time comes last
+    const finishTimeA = new Date(`01 Jan 1970 ${dealA.finish}`).getTime();
+    const finishTimeB = new Date(`01 Jan 1970 ${dealB.finish}`).getTime();
+    return finishTimeA - finishTimeB;
+  }
+  return startTimeA - startTimeB;
+};
+
+const calculateDealTimeSortByLastFinish = (dealA, dealB) => {
+  // We'll assume that day sorting has been done before we've
+  // reached this point or will be don in the day grouping phase.
+  // All we're doing here is returning a number to indicate the
+  // sort priority of the two items.
+
+  // First we sort by the latest finish time.
+  const finishTimeA = new Date(`01 Jan 1970 ${dealA.finish}`).getTime();
+  const finishTimeB = new Date(`01 Jan 1970 ${dealB.finish}`).getTime();
+
+  if (finishTimeA === finishTimeB) {
+    // console.log("Start times match, looking to end times");
+    // If finish times match, then earliest start time comes first
+    const startTimeA = new Date(`01 Jan 1970 ${dealA.start}`).getTime();
+    const startTimeB = new Date(`01 Jan 1970 ${dealB.start}`).getTime();
+    return startTimeA - startTimeB;
+  }
+  return finishTimeA - finishTimeB;
+};
+
 export const selectDealTypeFilters = createSelector(
   [getDealTypeFilters],
   dealTypeFilters => dealTypeFilters
@@ -41,12 +80,20 @@ const selectDealsSortedByDayAndTime = createSelector(
       const lowDayNumberA = getLowestDayNumberFromDealDays(dealA.days);
       const lowDayNumberB = getLowestDayNumberFromDealDays(dealB.days);
 
-      // If the days match, then we need to look at the two deal's start times.
       if (lowDayNumberA === lowDayNumberB) {
+        // If the days match, then we need to look at the two deal's start times.
         // Make it a proper date, although we're only comapring the time part
-        const startTimeA = new Date(`01 Jan 1970 ${dealA.start}`);
-        const startTimeB = new Date(`01 Jan 1970 ${dealB.start}`);
-        return startTimeA - startTimeB;
+        // const startTimeA = new Date(`01 Jan 1970 ${dealA.start}`);
+        // const startTimeB = new Date(`01 Jan 1970 ${dealB.start}`);
+        // if (startTimeA === startTimeB) {
+        //   // If days and start times match, then look at the end time
+        //   const finishTimeA = new Date(`01 Jan 1970 ${dealA.finish}`);
+        //   const finishTimeB = new Date(`01 Jan 1970 ${dealB.finish}`);
+        //   // In this case, we return the deal that's finishing later, not earlier!
+        //   return finishTimeB - finishTimeA;
+        // }
+        // return startTimeA - startTimeB;
+        return calculateDealTimeSortByFirstStart(dealA, dealB);
       }
       return lowDayNumberA - lowDayNumberB;
     });
@@ -58,7 +105,8 @@ const selectDealItems = createSelector(
   [getDeals, getVenues],
   (dealsList, venuesList) => {
     const dealItemsListItemsArray = [];
-
+    // We need to split deals (muli-day) into dealItems (only
+    // one day).
     for (let deal of dealsList) {
       for (let dealDay of deal.days) {
         dealItemsListItemsArray.push({
@@ -78,9 +126,16 @@ const selectDealItemsSortedByStartTime = createSelector(
   [selectDealItems],
   dealItemsList =>
     [...dealItemsList].sort(
-      (dealItemA, dealItemB) =>
-        new Date(`01 Jan 1970 ${dealItemA.start}`) -
-        new Date(`01 Jan 1970 ${dealItemB.start}`)
+      (dealItemA, dealItemB) => {
+        // const daySortOrderA = getDayObjForDay(dealItemA.day);
+        // const daySortOrderB = getDayObjForDay(dealItemB.day);
+
+        // if (daySortOrderA === daySortOrderB) {
+        return calculateDealTimeSortByLastFinish(dealItemA, dealItemB);  
+        // return calculateDealTimeSortByFirstStart(dealItemA, dealItemB);
+      }
+      //   return daySortOrderA - daySortOrderB;
+      // }
     )
 );
 
@@ -97,15 +152,13 @@ export const selectFilteredDealItemsByType = createCachedSelector(
     const filteredDealsArray = dealItemsList.filter(dealItem => {
       // console.log("dMember:");
       // console.log(dMember);
-      return (
-        dealTypeFilters.some(
-          dealType => dealItem.types && dealItem.types.includes(dealType)
-        )
+      return dealTypeFilters.some(
+        dealType => dealItem.types && dealItem.types.includes(dealType)
       );
     });
     return filteredDealsArray;
   }
-)((state) => {
+)(state => {
   // console.log("selectFilteredDealItemsByDayAndDealType resolution:");
   // console.log(state);
   // const dealFilters = selectDealTypeFilters(state);
@@ -117,7 +170,7 @@ export const selectFilteredDealItemsByType = createCachedSelector(
   return cacheKey;
 });
 
-
+/*
 export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
   [selectDealItemsSortedByStartTime, getFilterDay, selectDealTypeFilters],
   (dealItemsList, filterDay, dealTypeFilters) => {
@@ -152,6 +205,7 @@ export const selectFilteredDealItemsByDayAndDealType = createCachedSelector(
   // console.log("selectFilteredDealItemsByDayAndDealType: cacheKey: " + cacheKey);
   return cacheKey;
 });
+*/
 
 export const selectFilteredDealItemsGroupedByDay = createSelector(
   [selectFilteredDealItemsByType],
@@ -197,11 +251,11 @@ export const selectVenueDeals = createCachedSelector(
 export const selectFilteredDealsByDayAndDealType = createCachedSelector(
   [selectDealsSortedByDayAndTime, getDayOfWeek, selectDealTypeFilters],
   (dealsList, filterDay, dealTypeFilters) => {
-    console.log("selectFilteredDealsByDayAndDealType:");
-    console.log(dealsList);
-    console.log("filterDay:");
-    console.log(filterDay);
-    console.log(dealTypeFilters);
+    // console.log("selectFilteredDealsByDayAndDealType:");
+    // console.log(dealsList);
+    // console.log("filterDay:");
+    // console.log(filterDay);
+    // console.log(dealTypeFilters);
 
     const filteredDealsArray = dealsList.filter(deal => {
       // console.log("dMember:");
@@ -226,7 +280,7 @@ export const selectFilteredDealsByDayAndDealType = createCachedSelector(
   // console.log(dealTypeFilters);
 
   const cacheKey = `${filterDay}~${selectDealTypeFilters(state).join("~")}`;
-  console.log("cacheKey: " + cacheKey);
+  // console.log("cacheKey: " + cacheKey);
   return cacheKey;
 });
 
@@ -234,13 +288,13 @@ export const selectFilteredDealsByDayAndDealType = createCachedSelector(
 export const selectFilteredVenueDealsForVenueId = createCachedSelector(
   [selectFilteredDealsByDayAndDealType, getVenueId],
   (dealsList, id) => {
-    console.log("selectFilteredVenueDealsForVenueId:");
-    console.log(dealsList);
-    console.log("Venue id: " + id);
+    // console.log("selectFilteredVenueDealsForVenueId:");
+    // console.log(dealsList);
+    // console.log("Venue id: " + id);
     return dealsList.filter(dealMember => dealMember.venueId === id); // Mutliple deals, so return them all
   }
 )((state, venueId) => {
-  console.log("selectFilteredVenueDealsForVenueId resolution:");
+  // console.log("selectFilteredVenueDealsForVenueId resolution:");
   // console.log(state);
   // const dealFilters = selectDealTypeFilters(state);
   // console.log(filterDay);
