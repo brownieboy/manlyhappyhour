@@ -107,12 +107,13 @@ export default class DealsListScreen extends Component {
                 onPress={toggleDealItemsTowards}
                 style={{
                   color: appColours.panelTextColor,
-                  fontSize: 25
+                  fontSize: 25,
+                  marginLeft: 5
                 }}
               />
             </Left>
 
-            <Body style={{ flex: 3 }}>
+            <Body style={{ flex: 6 }}>
               <Title
                 style={{
                   color: appColours.panelTextColor,
@@ -140,7 +141,7 @@ export default class DealsListScreen extends Component {
                 <MaterialCommunityIcons
                   name="filter"
                   size={25}
-                  style={{ color: appColours.panelTextColor }}
+                  style={{ color: appColours.panelTextColor, marginLeft: 10 }}
                 />
               </TouchableOpacity>
             </Right>
