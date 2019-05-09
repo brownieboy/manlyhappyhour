@@ -78,7 +78,7 @@ class VenueScreen extends Component {
             paddingBottom: 10,
             paddingLeft: 5,
             paddingRight: 5,
-            borderBottomWidth: 1,
+            borderBottomWidth: x === dealsArray.length ? 0 : 1,
             borderColor: "lightgrey",
             // justifyContent: "center",
             // alignItems: "center",

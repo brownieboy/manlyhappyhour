@@ -320,62 +320,6 @@ export class MapFilter extends Component {
   }
 }
 
-/*
-class CalloutWrapper extends Component {
-  render() {
-    const { venue, dealsTextItems, navigate } = this.props;
-    if (Platform.OS === "android") {
-      return (
-        <Callout
-          onPress={() => {
-            navigate("VenueScreen", {
-              id: venue.id,
-              parentList: "map"
-            });
-          }}
-          style={styles.plainView}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between"
-            }}
-          >
-            <Text style={{ fontWeight: "bold", flex: 1 }}>{venue.name}</Text>
-            <Icon name="arrow-forward" style={{ fontSize: 18 }} />
-          </View>
-          <View>{dealsTextItems}</View>
-        </Callout>
-      );
-    }
-    // iOS
-    return (
-      <Callout style={styles.plainView}>
-        <TouchableOpacity
-          onPress={() => {
-            navigate("VenueScreen", {
-              id: venue.id,
-              parentList: "map"
-            });
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between"
-            }}
-          >
-            <Text style={{ fontWeight: "bold", flex: 1 }}>{venue.name}</Text>
-            <Icon name="arrow-forward" style={{ fontSize: 18 }} />
-          </View>
-          <View>{dealsTextItems}</View>
-        </TouchableOpacity>
-      </Callout>
-    );
-  }
-}
-*/
-
 class MapScreen extends Component {
   constructor(props) {
     super(props);
@@ -427,7 +371,7 @@ class MapScreen extends Component {
             flexDirection: "column",
             paddingTop: 3,
             paddingBottom: 3,
-            borderBottomWidth: 1,
+            borderBottomWidth: x === dealsArray.length -1 ? 0 : 1,
             borderColor: "lightgrey",
             justifyContent: "center",
             alignItems: "center",
@@ -643,7 +587,7 @@ class MapScreen extends Component {
               Deals and Venues Map
             </Title>
           </Body>
-          <Right style={{ flex: 8, alignItems: "center"}}>
+          <Right style={{ flex: 8, alignItems: "center" }}>
             <TouchableOpacity
               onPress={this.handleTapMenu}
               style={{ flexDirection: "row" }}
