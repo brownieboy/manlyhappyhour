@@ -62,18 +62,20 @@ class HomeScreen extends Component {
               Manly Happy Hour
             </Title>
           </Body>
-          <Right  />
+          <Right />
         </Header>
-        <View>
-          <Image
-            source={manlyFerry}
-            style={{ width: Dimensions.width, height: 230 }}
-          />
-        </View>
         <Content>
+          <View>
+            <Image
+              source={manlyFerry}
+              style={{ width: Dimensions.width, height: 230 }}
+            />
+          </View>
           <CardItem>
             <ParsedTextFormatted>
-              {homeData.blurb ? homeData.blurb : "Please wait, getting latest updates..."}
+              {homeData.blurb
+                ? homeData.blurb
+                : "Please wait, getting latest updates..."}
             </ParsedTextFormatted>
           </CardItem>
         </Content>
