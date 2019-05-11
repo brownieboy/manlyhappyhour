@@ -86,11 +86,13 @@ function* loadDataGen() {
       const dealsArray = dataNormalised.deals;
       const homeUpdate = dataNormalised.homeUpdates[0] || {};
       const aboutUpdate = dataNormalised.aboutUpdates[0] || {};
+      const imageUrls = dataNormalised.imageUrls || [];
 
-      let imageUrls = [];
-      venuesArray.forEach(venue => {
-        imageUrls.push(venue.cardFullUrl, venue.thumbFullUrl);
-      });
+      // Calculated on server as its own property now.
+      // let imageUrls = [];
+      // venuesArray.forEach(venue => {
+      //   imageUrls.push(venue.cardFullUrl, venue.thumbFullUrl);
+      // });
       // console.log("imageUrls:");
       // console.log(imageUrls);
 
