@@ -14,6 +14,7 @@ const homeReducer = (
   action
 ) => {
   switch (action.type) {
+    case LOAD_HOME_NOW: // Deliberate fallthrough
     case FETCH_HOME_REQUEST:
       return { ...state, fetchStatus: "loading" };
     case FETCH_HOME_SUCCESS:

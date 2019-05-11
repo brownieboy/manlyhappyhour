@@ -11,10 +11,10 @@ import {
 } from "../dux/venuesReducer.js";
 // import { selectVenues } from "../dux/selectors.js";
 import { loadSettingsNow } from "../dux/settingsReducer.js";
-import { homeSelector } from "../dux/homeReducer.js";
+import { homeSelector, loadHomeNow } from "../dux/homeReducer.js";
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ loadVenuesNow, loadSettingsNow }, dispatch);
+  bindActionCreators({ loadHomeNow, loadVenuesNow, loadSettingsNow }, dispatch);
 
 const mapStateToProps = state => ({
   homeData: homeSelector(state)
