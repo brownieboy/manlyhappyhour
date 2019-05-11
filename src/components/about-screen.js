@@ -27,6 +27,7 @@ import IconFontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import appColours from "../styles/appColours.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
 import { handleOnLayout } from "../helper-functions/lifecycleextras.js";
+import { renderTextImageElements } from "../helper-functions/render-text-elements.js";
 
 let segmentIconColourSelected = "white";
 let segmentIconColourNotSelected = "#A8A8A8"; // Shades lighter than grey
@@ -49,6 +50,26 @@ class AboutScreen extends Component {
     };
     this.handleOnLayout = handleOnLayout.bind(this);
   }
+
+  getTextContent = (richText, richTextParsedArray) => {
+    // Keep this as local method for now, since it may vary between components
+    if (
+      typeof richTextParsedArray !== "undefined" &&
+      richTextParsedArray.length > 0
+    ) {
+      return (
+        <Content>
+          {renderTextImageElements(richTextParsedArray, { padderText: true })}
+        </Content>
+      );
+    }
+    return (
+      <Content padder>
+        <ParsedTextFormatted>{richText}</ParsedTextFormatted>
+      </Content>
+    );
+  };
+
   // componentDidMount() {
   //   const { loadVenuesNow } = this.props;
   //   loadVenuesNow();
@@ -120,9 +141,13 @@ class AboutScreen extends Component {
                   style={{ width: Dimensions.width, height: 230 }}
                 />
               </View>
-              <Content padder>
+              {/* <Content padder>
                 <ParsedTextFormatted>{aboutData.helpBlurb}</ParsedTextFormatted>
-              </Content>
+              </Content> */}
+              {this.getTextContent(
+                aboutData.helpBlurb,
+                aboutData.helpBlurbArray || []
+              )}
             </Content>
           </Tab>
           <Tab
@@ -161,9 +186,13 @@ class AboutScreen extends Component {
                   style={{ width: Dimensions.width, height: 230 }}
                 />
               </View>
-              <Content padder>
+              {/* <Content padder>
                 <ParsedTextFormatted>{aboutData.blurb}</ParsedTextFormatted>
-              </Content>
+              </Content> */}
+              {this.getTextContent(
+                aboutData.blurb,
+                aboutData.blurbArray || []
+              )}
               <View style={{ marginTop: 50, marginBottom: 50, marginLeft: 15 }}>
                 <Text style={{ fontSize: 11 }}>
                   {DeviceInfo.getApplicationName()} version{" "}
