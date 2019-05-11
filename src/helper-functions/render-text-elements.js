@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Dimensions, Text } from "react-native";
+import { Dimensions, Text, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { Body, Content, Item, Left, ListItem, Right } from "native-base";
 
@@ -26,6 +26,9 @@ export const renderTextImageElements = (
     // marginTop: 0,
     // marginBottom: 0
   };
+
+  console.log("elementsDataArray:");
+  console.log(elementsDataArray);
 
   const returnElements = elementsDataArray.map(item => {
     key++;
@@ -80,6 +83,23 @@ export const renderTextImageElements = (
         case "card": // Deliberate fall through here
         case "":
         default:
+          if (item.data.title && item.data.title !== "") {
+            return (
+              <View key={key}>
+                <FastImage
+                  source={{ uri: item.data.imageUrl }}
+                  style={{
+                    width: imageWidth,
+                    height: imageHeight,
+                    alignSelf: "center"
+                  }}
+                />
+                <Text style={{ alignSelf: "center", fontSize: 12 }}>
+                  {item.data.title}
+                </Text>
+              </View>
+            );
+          }
           return (
             <FastImage
               key={key}
