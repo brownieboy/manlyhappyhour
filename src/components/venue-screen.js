@@ -21,6 +21,7 @@ import {
 
 // import { parseTextFieldToDataTypesArray } from "../helper-functions/textfield-processing.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
+import { renderTextImageElements } from "../helper-functions/render-text-elements.js";
 import HeaderBackArrow from "./header-back-arrow.js";
 import appColours, { listStyles } from "../styles/appColours.js";
 import {
@@ -63,6 +64,25 @@ class VenueScreen extends Component {
   //   });
   //   return dealTextItems;
   // };
+
+  getTextContent = (richText, richTextParsedArray) => {
+    // Keep this as local method for now, since it may vary between components
+    if (
+      typeof richTextParsedArray !== "undefined" &&
+      richTextParsedArray.length > 0
+    ) {
+      return (
+        <Content>
+          {renderTextImageElements(richTextParsedArray, { padderText: true })}
+        </Content>
+      );
+    }
+    return (
+      <Content padder>
+        <ParsedTextFormatted>{richText}</ParsedTextFormatted>
+      </Content>
+    );
+  };
 
   getDealsTextItems = dealsArray => {
     let x = 0;
@@ -254,16 +274,23 @@ class VenueScreen extends Component {
               </Text>
             </View>
           </CardItem>
-          <CardItem padder>
+          {/* <CardItem padder>
             <ParsedTextFormatted>
               {venueDetails.description
                 ? venueDetails.description
                 : "Venue description"}
             </ParsedTextFormatted>
-          </CardItem>
+          </CardItem> */}
+          {this.getTextContent(
+            venueDetails.description,
+            venueDetails.descriptionArray || []
+          )}
+
           <CardItem style={{ flexDirection: "column" }} padder>
-            <Text style={{ fontWeight: "bold", alignSelf: "flex-start" }}>Deals:</Text>
-            <View style={{alignSelf: "stretch"}}>{dealsTextItems}</View>
+            <Text style={{ fontWeight: "bold", alignSelf: "flex-start" }}>
+              Deals:
+            </Text>
+            <View style={{ alignSelf: "stretch" }}>{dealsTextItems}</View>
           </CardItem>
           <View
             onLayout={() => {
