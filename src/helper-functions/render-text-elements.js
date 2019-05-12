@@ -113,25 +113,34 @@ export const renderTextImageElements = (
           );
       }
     } else if (item.type === "nav") {
-      console.log("options:");
-      console.log(options);
-      console.log("item:");
-      console.log(item);
+      // console.log("options:");
+      // console.log(options);
+      // console.log("item:");
+      // console.log(item);
       if (typeof options.navCallbackObj === "object") {
         return (
-          <TouchableOpacity
-            key={key}
+          // <TouchableOpacity
+          //   key={key}
+          //   onPress={() =>
+          //     options.navCallbackObj.navigate("VenueScreen", {
+          //       id: item.data.navId,
+          //       parentList: "VenuesList"
+          //     })
+          //   }
+          // >
+          <Text
+            key={{ key }}
             onPress={() =>
               options.navCallbackObj.navigate("VenueScreen", {
                 id: item.data.navId,
                 parentList: "VenuesList"
               })
             }
+            style={{ color: "blue" }}
           >
-            <Text style={{ color: "blue" }}>
-              {item.data.title ? item.data.title : "no title"}
-            </Text>
-          </TouchableOpacity>
+            {item.data.title ? item.data.title : "no title"}
+          </Text>
+          // </TouchableOpacity>
         );
       }
       return (

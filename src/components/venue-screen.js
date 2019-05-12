@@ -72,9 +72,14 @@ class VenueScreen extends Component {
       typeof richTextParsedArray !== "undefined" &&
       richTextParsedArray.length > 0
     ) {
+      const elementsToRender = renderTextImageElements(richTextParsedArray, {
+        padderText: false,
+        navCallbackObj: navigation
+      });
+
       return (
         <Content>
-          {renderTextImageElements(richTextParsedArray, { padderText: true, navCallbackObj: navigation  })}
+          <Text>{elementsToRender}</Text>
         </Content>
       );
     }
