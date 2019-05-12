@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Dimensions, Text, View } from "react-native";
 import FastImage from "react-native-fast-image";
 // import Emoji from "react-native-emoji";
-import nodeEmoji from "node-emoji";
+// import nodeEmoji from "node-emoji";
 
 import {
   CardItem,
@@ -73,15 +73,11 @@ class VenueScreen extends Component {
       richTextParsedArray.length > 0
     ) {
       const elementsToRender = renderTextImageElements(richTextParsedArray, {
-        padderText: false,
+        padderText: true,
         navCallbackObj: navigation
       });
 
-      return (
-        <Content>
-          <Text>{elementsToRender}</Text>
-        </Content>
-      );
+      return <Content>{elementsToRender}</Content>;
     }
     return (
       <Content padder>

@@ -65,8 +65,8 @@ class HomeScreen extends Component {
 
   render() {
     const { homeData } = this.props;
-    console.log("homeData:");
-    console.log(homeData);
+    // console.log("homeData:");
+    // console.log(homeData);
     return (
       <Container>
         <Header
@@ -128,6 +128,7 @@ class HomeScreen extends Component {
 }
 
 HomeScreen.propTypes = {
+  loadHomeNow: PropTypes.func.isRequired,
   loadVenuesNow: PropTypes.func.isRequired,
   loadSettingsNow: PropTypes.func.isRequired
 };

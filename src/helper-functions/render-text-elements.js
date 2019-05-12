@@ -130,36 +130,26 @@ export const renderTextImageElements = (
       // console.log("item:");
       // console.log(item);
       if (typeof options.navCallbackObj === "object") {
-        return (
-          // <TouchableOpacity
-          //   key={key}
-          //   onPress={() =>
-          //     options.navCallbackObj.navigate("VenueScreen", {
-          //       id: item.data.navId,
-          //       parentList: "VenuesList"
-          //     })
-          //   }
-          // >
-          {
-            jsx: (
-              <Text
-                key={{ key }}
-                onPress={() =>
-                  options.navCallbackObj.navigate("VenueScreen", {
-                    id: item.data.navId,
-                    parentList: "VenuesList"
-                  })
-                }
-                style={{ color: "blue" }}
-              >
-                {item.data.title ? item.data.title : "no title"}
-              </Text>
-            ),
-            type: "nav"
-          }
-          // </TouchableOpacity>
-        );
+        return {
+          jsx: (
+            <Text
+              key={{ key }}
+              onPress={() =>
+                options.navCallbackObj.navigate("VenueScreen", {
+                  id: item.data.navId,
+                  parentList: "VenuesList"
+                })
+              }
+              style={{ color: "blue" }}
+            >
+              {item.data.title ? item.data.title : "no title"}
+            </Text>
+          ),
+          type: "nav"
+        };
       }
+
+      // Nav with no callback specified is just rendered as text
       return {
         jsx: (
           <Text key={key}>
@@ -170,22 +160,15 @@ export const renderTextImageElements = (
       };
     }
 
-    const textParsed = {
+    return {
       jsx: <ParsedTextFormatted key={key}>{item.data}</ParsedTextFormatted>,
       type: "text"
     };
-    return options.padderText
-      ? {
-          jsx: (
-            <Content key={key} padder>
-              {textParsed}
-            </Content>
-          ),
-          type: "text"
-        }
-      : textParsed;
+
   });
 
+  // console.log("returnElements:");
+  // console.log(returnElements);
   // const returnElementsProcessed = returnElements.map(element => element.jsx);
   const returnElementsLength = returnElements.length;
 
@@ -193,11 +176,11 @@ export const renderTextImageElements = (
   let elementsForTextArrayWrapper = [];
 
   let isTextWrapperElementOpen = false;
-  let currentObj, nextObj, prevObj;
+  let currentObj;
   for (let x = 0; x < returnElementsLength; x++) {
     currentObj = returnElements[x];
-    console.log("currentObj:");
-    console.log(currentObj);
+    // console.log("currentObj:");
+    // console.log(currentObj);
     if (currentObj.type === "text" || currentObj.type === "nav") {
       if (isTextWrapperElementOpen) {
         elementsForTextArrayWrapper.push(currentObj.jsx);
@@ -207,23 +190,33 @@ export const renderTextImageElements = (
         elementsForTextArrayWrapper.push(currentObj.jsx);
       }
     }
-    
-    if (currentObj.type === "image" || x === (returnElementsLength -1)) {
+
+    if (currentObj.type === "image" || x === returnElementsLength - 1) {
       // Image
       if (isTextWrapperElementOpen) {
-        console.log("Pushing elementsForTextArrayWrapper:");
-        console.log(elementsForTextArrayWrapper);
+        // console.log("Pushing elementsForTextArrayWrapper:");
+        // console.log(elementsForTextArrayWrapper);
         isTextWrapperElementOpen = false;
         returnElementsProcessed.push(
-          <Text>{[...elementsForTextArrayWrapper]}</Text>
+          options.padderText ? (
+            <Content padder key={`textWrapper${x}`}>
+              <Text>{[...elementsForTextArrayWrapper]}</Text>
+            </Content>
+          ) : (
+            <Text key={`textWrapper${x}`}>
+              {[...elementsForTextArrayWrapper]}
+            </Text>
+          )
         );
       }
-      returnElementsProcessed.push(currentObj.jsx);
+      if (currentObj.type === "image") {
+        returnElementsProcessed.push(currentObj.jsx);
+      }
     }
   }
 
-  console.log("returnElementsProcessed:");
-  console.log(returnElementsProcessed);
+  // console.log("returnElementsProcessed:");
+  // console.log(returnElementsProcessed);
 
   // Final processing to put all adjacent text and nav elements inside another
   // <Text></Text> element.  This was the only way I could find to ensure that
