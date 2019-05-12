@@ -188,22 +188,42 @@ export const renderTextImageElements = (
 
   // const returnElementsProcessed = returnElements.map(element => element.jsx);
   const returnElementsLength = returnElements.length;
-  
+
   const returnElementsProcessed = [];
-  const elementsForTextArrayWrapper = [];
-  
+  let elementsForTextArrayWrapper = [];
+
   let isTextWrapperElementOpen = false;
   let currentObj, nextObj, prevObj;
   for (let x = 0; x < returnElementsLength; x++) {
     currentObj = returnElements[x];
-    if (currentObj.type !== "image") {
-      if(isTextWrapperElementOpen) {
+    console.log("currentObj:");
+    console.log(currentObj);
+    if (currentObj.type === "text" || currentObj.type === "nav") {
+      if (isTextWrapperElementOpen) {
+        elementsForTextArrayWrapper.push(currentObj.jsx);
+      } else {
+        isTextWrapperElementOpen = true;
+        elementsForTextArrayWrapper = [];
         elementsForTextArrayWrapper.push(currentObj.jsx);
       }
     }
-
-
+    
+    if (currentObj.type === "image" || x === (returnElementsLength -1)) {
+      // Image
+      if (isTextWrapperElementOpen) {
+        console.log("Pushing elementsForTextArrayWrapper:");
+        console.log(elementsForTextArrayWrapper);
+        isTextWrapperElementOpen = false;
+        returnElementsProcessed.push(
+          <Text>{[...elementsForTextArrayWrapper]}</Text>
+        );
+      }
+      returnElementsProcessed.push(currentObj.jsx);
+    }
   }
+
+  console.log("returnElementsProcessed:");
+  console.log(returnElementsProcessed);
 
   // Final processing to put all adjacent text and nav elements inside another
   // <Text></Text> element.  This was the only way I could find to ensure that
