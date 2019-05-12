@@ -112,7 +112,14 @@ export const renderTextImageElements = (
             />
           );
       }
+    } else if (item.type === "nav") {
+      return (
+        <Text key={key} style={{ color: "blue" }}>
+          {item.data.title ? item.data.title : "no title"}
+        </Text>
+      );
     }
+
     const textParsed = (
       <ParsedTextFormatted key={key}>{item.data}</ParsedTextFormatted>
     );
