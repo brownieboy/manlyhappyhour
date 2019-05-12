@@ -50,67 +50,79 @@ export const renderTextImageElements = (
       // Yes, a second switch on the same variable!
       switch (item.data.type) {
         case "listitem":
-          return (
-            <ListItem key={key} style={ListItemStyle}>
-              <Left style={{ flex: 2 }}>
-                <FastImage
-                  source={{ uri: item.data.imageUrl }}
-                  style={thumbnailStyle}
-                />
-              </Left>
-              <Body style={{ flex: 6 }}>
-                <Text>{item.data.title}</Text>
-              </Body>
-            </ListItem>
-          );
+          return {
+            jsx: (
+              <ListItem key={key} style={ListItemStyle}>
+                <Left style={{ flex: 2 }}>
+                  <FastImage
+                    source={{ uri: item.data.imageUrl }}
+                    style={thumbnailStyle}
+                  />
+                </Left>
+                <Body style={{ flex: 6 }}>
+                  <Text>{item.data.title}</Text>
+                </Body>
+              </ListItem>
+            ),
+            type: "image"
+          };
 
         case "listitemreverse":
-          return (
-            <ListItem key={key} style={ListItemStyle}>
-              <Body style={{ flex: 6 }}>
-                <Text>{item.data.title}</Text>
-              </Body>
-              <Right style={{ flex: 2 }}>
-                <FastImage
-                  source={{ uri: item.data.imageUrl }}
-                  style={thumbnailStyle}
-                />
-              </Right>
-            </ListItem>
-          );
+          return {
+            jsx: (
+              <ListItem key={key} style={ListItemStyle}>
+                <Body style={{ flex: 6 }}>
+                  <Text>{item.data.title}</Text>
+                </Body>
+                <Right style={{ flex: 2 }}>
+                  <FastImage
+                    source={{ uri: item.data.imageUrl }}
+                    style={thumbnailStyle}
+                  />
+                </Right>
+              </ListItem>
+            ),
+            type: "image"
+          };
 
         case "fullcard": // Deliberate, quadruple fall through!
         case "card": // Deliberate fall through here
         case "":
         default:
           if (item.data.title && item.data.title !== "") {
-            return (
-              <View key={key}>
-                <FastImage
-                  source={{ uri: item.data.imageUrl }}
-                  style={{
-                    width: imageWidth,
-                    height: imageHeight,
-                    alignSelf: "center"
-                  }}
-                />
-                <Text style={{ alignSelf: "center", fontSize: 12 }}>
-                  {item.data.title}
-                </Text>
-              </View>
-            );
+            return {
+              jsx: (
+                <View key={key}>
+                  <FastImage
+                    source={{ uri: item.data.imageUrl }}
+                    style={{
+                      width: imageWidth,
+                      height: imageHeight,
+                      alignSelf: "center"
+                    }}
+                  />
+                  <Text style={{ alignSelf: "center", fontSize: 12 }}>
+                    {item.data.title}
+                  </Text>
+                </View>
+              ),
+              type: "image"
+            };
           }
-          return (
-            <FastImage
-              key={key}
-              source={{ uri: item.data.imageUrl }}
-              style={{
-                width: imageWidth,
-                height: imageHeight,
-                alignSelf: "center"
-              }}
-            />
-          );
+          return {
+            jsx: (
+              <FastImage
+                key={key}
+                source={{ uri: item.data.imageUrl }}
+                style={{
+                  width: imageWidth,
+                  height: imageHeight,
+                  alignSelf: "center"
+                }}
+              />
+            ),
+            type: "image"
+          };
       }
     } else if (item.type === "nav") {
       // console.log("options:");
@@ -128,40 +140,53 @@ export const renderTextImageElements = (
           //     })
           //   }
           // >
-          <Text
-            key={{ key }}
-            onPress={() =>
-              options.navCallbackObj.navigate("VenueScreen", {
-                id: item.data.navId,
-                parentList: "VenuesList"
-              })
-            }
-            style={{ color: "blue" }}
-          >
-            {item.data.title ? item.data.title : "no title"}
-          </Text>
+          {
+            jsx: (
+              <Text
+                key={{ key }}
+                onPress={() =>
+                  options.navCallbackObj.navigate("VenueScreen", {
+                    id: item.data.navId,
+                    parentList: "VenuesList"
+                  })
+                }
+                style={{ color: "blue" }}
+              >
+                {item.data.title ? item.data.title : "no title"}
+              </Text>
+            ),
+            type: "nav"
+          }
           // </TouchableOpacity>
         );
       }
-      return (
-        <Text key={key}>{item.data.title ? item.data.title : "no title"}</Text>
-      );
+      return {
+        jsx: (
+          <Text key={key}>
+            {item.data.title ? item.data.title : "no title"}
+          </Text>
+        ),
+        type: "text"
+      };
     }
 
-    const textParsed = (
-      <ParsedTextFormatted key={key}>{item.data}</ParsedTextFormatted>
-    );
-    return options.padderText ? (
-      <Content key={key} padder>
-        {textParsed}
-      </Content>
-    ) : (
-      textParsed
-    );
+    const textParsed = {
+      jsx: <ParsedTextFormatted key={key}>{item.data}</ParsedTextFormatted>,
+      type: "text"
+    };
+    return options.padderText
+      ? {
+          jsx: (
+            <Content key={key} padder>
+              {textParsed}
+            </Content>
+          ),
+          type: "text"
+        }
+      : textParsed;
   });
-
-
-  return <Fragment>{returnElements}</Fragment>;
+  const returnElementsProcessed = returnElements.map(element => element.jsx);
+  return <Fragment>{returnElementsProcessed}</Fragment>;
 };
 
 /*

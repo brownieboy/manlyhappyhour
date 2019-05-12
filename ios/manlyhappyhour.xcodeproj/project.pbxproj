@@ -1475,7 +1475,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1486,7 +1486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
