@@ -185,7 +185,32 @@ export const renderTextImageElements = (
         }
       : textParsed;
   });
-  const returnElementsProcessed = returnElements.map(element => element.jsx);
+
+  // const returnElementsProcessed = returnElements.map(element => element.jsx);
+  const returnElementsLength = returnElements.length;
+  
+  const returnElementsProcessed = [];
+  const elementsForTextArrayWrapper = [];
+  
+  let isTextWrapperElementOpen = false;
+  let currentObj, nextObj, prevObj;
+  for (let x = 0; x < returnElementsLength; x++) {
+    currentObj = returnElements[x];
+    if (currentObj.type !== "image") {
+      if(isTextWrapperElementOpen) {
+        elementsForTextArrayWrapper.push(currentObj.jsx);
+      }
+    }
+
+
+  }
+
+  // Final processing to put all adjacent text and nav elements inside another
+  // <Text></Text> element.  This was the only way I could find to ensure that
+  // they display adjacently rather then in their own block.  Images cannot
+  // display inside a Text element (red screen), nor can we use
+  // TouchableOpacity for the same reason.
+
   return <Fragment>{returnElementsProcessed}</Fragment>;
 };
 
