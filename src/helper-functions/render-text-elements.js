@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions, Text, TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { Body, Content, Item, Left, ListItem, Right } from "native-base";
 
@@ -113,10 +113,29 @@ export const renderTextImageElements = (
           );
       }
     } else if (item.type === "nav") {
+      console.log("options:");
+      console.log(options);
+      console.log("item:");
+      console.log(item);
+      if (typeof options.navCallbackObj === "object") {
+        return (
+          <TouchableOpacity
+            key={key}
+            onPress={() =>
+              options.navCallbackObj.navigate("VenueScreen", {
+                id: item.data.navId,
+                parentList: "VenuesList"
+              })
+            }
+          >
+            <Text style={{ color: "blue" }}>
+              {item.data.title ? item.data.title : "no title"}
+            </Text>
+          </TouchableOpacity>
+        );
+      }
       return (
-        <Text key={key} style={{ color: "blue" }}>
-          {item.data.title ? item.data.title : "no title"}
-        </Text>
+        <Text key={key}>{item.data.title ? item.data.title : "no title"}</Text>
       );
     }
 

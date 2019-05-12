@@ -67,13 +67,14 @@ class VenueScreen extends Component {
 
   getTextContent = (richText, richTextParsedArray) => {
     // Keep this as local method for now, since it may vary between components
+    const { navigation } = this.props;
     if (
       typeof richTextParsedArray !== "undefined" &&
       richTextParsedArray.length > 0
     ) {
       return (
         <Content>
-          {renderTextImageElements(richTextParsedArray, { padderText: true })}
+          {renderTextImageElements(richTextParsedArray, { padderText: true, navCallbackObj: navigation  })}
         </Content>
       );
     }
