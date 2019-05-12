@@ -27,8 +27,8 @@ export const renderTextImageElements = (
     // marginBottom: 0
   };
 
-  console.log("elementsDataArray:");
-  console.log(elementsDataArray);
+  // console.log("elementsDataArray:");
+  // console.log(elementsDataArray);
 
   const returnElements = elementsDataArray.map(item => {
     key++;
@@ -159,6 +159,8 @@ export const renderTextImageElements = (
       textParsed
     );
   });
+
+
   return <Fragment>{returnElements}</Fragment>;
 };
 
