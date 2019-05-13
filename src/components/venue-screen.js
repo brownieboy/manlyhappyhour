@@ -74,6 +74,10 @@ class VenueScreen extends Component {
     ) {
       const elementsToRender = renderTextImageElements(richTextParsedArray, {
         padderText: true,
+        navTextStyle: {
+          fontSize: 16
+          //  fontWeight: "bold"
+        },
         navCallbackObj: navigation
       });
 

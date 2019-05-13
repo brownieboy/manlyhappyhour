@@ -130,17 +130,22 @@ export const renderTextImageElements = (
       // console.log("item:");
       // console.log(item);
       if (typeof options.navCallbackObj === "object") {
+        const fixedNavTextStyle = { color: "blue" };
+        const navTextStyle = options.navTextStyle
+          ? { ...options.navTextStyle, ...fixedNavTextStyle }
+          : fixedNavTextStyle;
+
         return {
           jsx: (
             <Text
-              key={{ key }}
+              key={key}
               onPress={() =>
                 options.navCallbackObj.navigate("VenueScreen", {
                   id: item.data.navId,
                   parentList: "VenuesList"
                 })
               }
-              style={{ color: "blue" }}
+              style={navTextStyle}
             >
               {item.data.title ? item.data.title : "no title"}
             </Text>
@@ -164,7 +169,6 @@ export const renderTextImageElements = (
       jsx: <ParsedTextFormatted key={key}>{item.data}</ParsedTextFormatted>,
       type: "text"
     };
-
   });
 
   // console.log("returnElements:");
