@@ -1,3 +1,5 @@
+import format from "date-fns/format";
+
 export const daysArray = [
   { name: "Saturday", shortName: "Sat", sortOrder: 0 },
   { name: "Sunday", shortName: "Sun", sortOrder: 1 },
@@ -24,6 +26,8 @@ export const getDayObjForShortDay = shortDay =>
 
 export const getDayObjForDay = day =>
   daysArray.filter(dayObj => dayObj.name === day)[0];
+
+export const getShortDayToday = () => format(new Date(), "ddd");
 
 // export const getFullDayForShortDay = shortDay =>
 //   daysArray.filter(dayObj => dayObj.shortName === shortDay).name;

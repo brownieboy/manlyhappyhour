@@ -40,7 +40,7 @@ import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
 import DealFilterIcons from "./dealfiltericons.js";
 import { daysPicker } from "../constants/general.js";
-import { getDayObjForShortDay } from "../constants/general.js";
+import { getDayObjForShortDay, getShortDayToday } from "../constants/general.js";
 
 import {
   // getDealTextObjArray,
@@ -349,6 +349,8 @@ class MapScreen extends Component {
   };
 
   componentDidMount() {
+    const {setDayOfWeek} = this.props;
+    setDayOfWeek(getShortDayToday());
     if (Platform.OS === "android") {
       setTimeout(() => {
         // console.log("MapScreen..componentDidMount(), calling extra setState()");
