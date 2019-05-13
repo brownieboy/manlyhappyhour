@@ -501,9 +501,6 @@ class MapScreen extends Component {
                 marginTop: -6
               }}
             >
-              {/* <Text style={{ fontSize: 11 }}>{`${venue.name}${
-              filteredDealsArray.length > 0 ? " (X)" : ""
-            }`}</Text> */}
               <Text style={{ fontSize: 11 }}>{venue.name}</Text>
             </View>
             <Callout
