@@ -40,7 +40,10 @@ import mapStyles from "../styles/map-styles.js";
 import mapIcons from "../constants/map-icons.js";
 import DealFilterIcons from "./dealfiltericons.js";
 import { daysPicker } from "../constants/general.js";
-import { getDayObjForShortDay, getShortDayToday } from "../constants/general.js";
+import {
+  getDayObjForShortDay,
+  getShortDayToday
+} from "../constants/general.js";
 
 import {
   // getDealTextObjArray,
@@ -80,9 +83,7 @@ const MapBadge = ({ dealsCount, styles, children }) => {
     );
   }
   return (
-    <Badge warning style={styles}>
-      {children}
-    </Badge>
+    <Badge style={{ ...styles, backgroundColor: "grey" }}>{children}</Badge>
   );
 };
 
@@ -181,7 +182,7 @@ export class MapFilter extends Component {
                     <Body>
                       <RNPickerSelect
                         placeholder={placeholder}
-                        useNativeAndroidPickerStyle={false}
+                        useNativeAndroidPickerStyle={true}
                         items={daysPicker}
                         value={filterDay}
                         // ref={pickerSelect => (this._pickerSelect = pickerSelect)}
@@ -189,8 +190,8 @@ export class MapFilter extends Component {
                           handleDayChange(value);
                         }}
                         style={{
-                          borderWidth: 1,
-                          borderColor: "red",
+                          // borderWidth: 1,
+                          // borderColor: "red",
                           width: 70
                         }}
                       />
@@ -349,7 +350,7 @@ class MapScreen extends Component {
   };
 
   componentDidMount() {
-    const {setDayOfWeek} = this.props;
+    const { setDayOfWeek } = this.props;
     setDayOfWeek(getShortDayToday());
     if (Platform.OS === "android") {
       setTimeout(() => {
@@ -373,7 +374,7 @@ class MapScreen extends Component {
             flexDirection: "column",
             paddingTop: 3,
             paddingBottom: 3,
-            borderBottomWidth: x === dealsArray.length -1 ? 0 : 1,
+            borderBottomWidth: x === dealsArray.length - 1 ? 0 : 1,
             borderColor: "lightgrey",
             justifyContent: "center",
             alignItems: "center",
@@ -393,7 +394,23 @@ class MapScreen extends Component {
               </Text>
             )}
           </View>
-          <Text style={{ fontSize: 12 }}>{dealObj.desc}</Text>
+          <Text>
+            {dealObj.restricted && dealObj.restricted.includes("membership") && (
+              <Fragment>
+                <FontAwesome5Icons
+                  name="user-lock"
+                  style={{
+                    // color: appColours.panelTextColor,
+                    //  marginLeft: 6,
+                    // marginRight: 5,
+                    fontSize: 10
+                  }}
+                />
+                <Text>{"  "}</Text>
+              </Fragment>
+            )}
+            <Text style={{ fontSize: 12 }}>{dealObj.desc}</Text>
+          </Text>
         </View>
       );
     });

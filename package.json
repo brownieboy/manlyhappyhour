@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "metro": "react-native start -- --reset-cache",
-    "fullupdate": "yarn && cd ios && pod install && cd ..",
+    "iosupdate": "yarn && cd ios && pod install && cd ..",
+    "iosupdaterun": "yarn iosupdate && react-native run-ios",
     "test": "jest",
     "lint": "eslint ."
   },

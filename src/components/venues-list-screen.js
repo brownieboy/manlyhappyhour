@@ -18,6 +18,8 @@ import {
   // Thumbnail
 } from "native-base";
 
+import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
+
 import appColours, { listStyles } from "../styles/appColours.js";
 
 class VenuesScreen extends Component {
@@ -64,7 +66,7 @@ class VenuesScreen extends Component {
                   })
                 }
                 style={{
-                     backgroundColor:
+                  backgroundColor:
                     index % 2 === 0
                       ? "transparent"
                       : listStyles.alternateRowColour,
@@ -82,22 +84,41 @@ class VenuesScreen extends Component {
                   <View style={{ flex: 3 }}>
                     <FastImage
                       source={{ uri: item.thumbFullUrl }}
-                      style={{ width: 50 , height: 50, borderRadius: 25 }}
+                      style={{ width: 50, height: 50, borderRadius: 25 }}
                     />
                   </View>
                 )}
                 <View style={{ flex: 11 }}>
-                  <Text
+                  <View
                     style={{
-                      fontSize: 16,
-                      color: appColours.venueListFontColor
+                      flexDirection: "row",
+                      flexGrow: 1,
+                      // borderColor: "red",
+                      // borderWidth: 1,
+                      alignItems: "center"
                     }}
                   >
-                    {item.name ? item.name : "Venue name"}
-                  </Text>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: appColours.venueListFontColor
+                      }}
+                    >
+                      {item.name ? item.name : "Venue name"}
+                    </Text>
+                    {item.restricted && item.restricted.includes("membership") && (
+                      <FontAwesome5Icons
+                        name="user-lock"
+                        style={{
+                          color: appColours.venueListFontColor,
+                          marginLeft: 5
+                        }}
+                      />
+                    )}
+                  </View>
                   <Text
-                    numberOfLines={2}
-                    note
+                    // numberOfLines={2}
+                    // note
                     style={{ fontSize: 13, color: "#696969" }}
                   >
                     {/* {item.styles.join(", ")} */}

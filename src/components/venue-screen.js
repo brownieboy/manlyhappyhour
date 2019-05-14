@@ -19,6 +19,8 @@ import {
   // Thumbnail
 } from "native-base";
 
+import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
+
 // import { parseTextFieldToDataTypesArray } from "../helper-functions/textfield-processing.js";
 import ParsedTextFormatted from "./parsed-text-formatted.js";
 import { renderTextImageElements } from "../helper-functions/render-text-elements.js";
@@ -124,7 +126,19 @@ class VenueScreen extends Component {
               </Text>
             )}
           </View>
-          <Text style={{ fontSize: 14 }}>{dealObj.desc}</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {dealObj.restricted && dealObj.restricted.includes("membership") && (
+              <FontAwesome5Icons
+                name="user-lock"
+                style={{
+                  // color: appColours.panelTextColor,
+                  // marginLeft: 3,
+                  marginRight: 5
+                }}
+              />
+            )}
+            <Text style={{ fontSize: 14 }}>{dealObj.desc}</Text>
+          </View>
         </View>
       );
     });
@@ -221,20 +235,40 @@ class VenueScreen extends Component {
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "space-between",
-                  width: "100%"
+                  justifyContent: "space-between"
                 }}
               >
-                <Text
+                <View
                   style={{
-                    color: appColours.panelTextColor,
-                    fontSize: 18,
-                    fontWeight: "bold",
-                    flex: 1
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    flexGrow: 1
                   }}
                 >
-                  {venueDetails.name ? venueDetails.name : "Venue name"}
-                </Text>
+                  <Text
+                    style={{
+                      color: appColours.panelTextColor,
+                      fontSize: 16,
+                      fontWeight: "bold",
+                      flexWrap: "nowrap"
+                      // flex: 1
+                    }}
+                  >
+                    {venueDetails.name ? `${venueDetails.name} ` : "Venue name"}
+                  </Text>
+                  {venueDetails.restricted &&
+                    venueDetails.restricted.includes("membership") && (
+                      <FontAwesome5Icons
+                        name="user-lock"
+                        style={{
+                          color: appColours.panelTextColor,
+                          marginLeft: 3,
+                          marginRight: 3
+                        }}
+                      />
+                    )}
+                </View>
                 <Text
                   style={{
                     color: appColours.panelTextColor,

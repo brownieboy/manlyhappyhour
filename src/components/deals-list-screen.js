@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import {
   Dimensions,
@@ -205,9 +205,25 @@ export default class DealsListScreen extends Component {
                   </Text>
                 </Left>
                 <Body style={{ flex: 12 }}>
-                  <Text style={{ fontSize: 13 }}>
-                    {/* {orientation === "landscape" ? item.desc : item.desc} */}
-                    {item.desc}
+                  <Text>
+                    {item.restricted && item.restricted.includes("membership") && (
+                      <Fragment>
+                        <IconFontAwesome5
+                          name="user-lock"
+                          style={{
+                            // color: appColours.panelTextColor,
+                            marginLeft: 6,
+                            // marginRight: 5,
+                            fontSize: 10
+                          }}
+                        />
+                        <Text>{"  "}</Text>
+                      </Fragment>
+                    )}
+                    <Text style={{ fontSize: 13 }}>
+                      {/* {orientation === "landscape" ? item.desc : item.desc} */}
+                      {item.desc}
+                    </Text>
                   </Text>
                   <View
                     style={{

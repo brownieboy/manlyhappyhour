@@ -1475,7 +1475,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1486,7 +1486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-manlyhappyhour/Pods-manlyhappyhour-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
@@ -1633,7 +1633,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2BC153CD26CD99D82334841D /* Pods-manlyhappyhour.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1662,7 +1662,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2AB905E286C61D9937637226 /* Pods-manlyhappyhour.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P646GJR7QN;
