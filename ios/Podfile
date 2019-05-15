@@ -44,6 +44,8 @@ target 'manlyhappyhour' do
 
     pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
+    pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   end
   
   post_install do |installer|
