@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
+import SplashScreen from "react-native-splash-screen";
 
 import MainNavigator from "./src/nav/main-nav.js";
 import configureStore from "./src/store/configureStore.js";
@@ -16,7 +17,7 @@ class App extends Component {
     // After having done stuff (such as async tasks) hide the splash screen for Android.
     // We'll stick with Storyboard for iOS.
     // if (Platform.OS === "android") {
-    //   SplashScreen.hide();
+    SplashScreen.hide();
     // }
   }
 
